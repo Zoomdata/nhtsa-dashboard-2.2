@@ -1,4 +1,4 @@
-import { SET_DASHBOARD_PROPS, SET_MAKE_WRAPPER_PROPS, SET_OVERLAY_SPLAT_PROPS } from '../actions';
+import * as actions from '../actions';
 
 const initialState = {
     dashboardProps: {
@@ -22,7 +22,13 @@ const initialState = {
 };
 export default function layout(state = initialState, action) {
     switch (action.type) {
-        case SET_DASHBOARD_PROPS:
+        case actions.SET_NHTSA_DIMENSIONS:
+            return Object.assign({}, state, {
+                nhtsaDimensions: {
+                    height: action.height
+                }
+            })
+        case actions.SET_DASHBOARD_PROPS:
             return Object.assign({}, state, {
                 dashboardProps: {
                     width: action.width,
@@ -30,7 +36,7 @@ export default function layout(state = initialState, action) {
                     offsetLeft: action.offsetLeft
                 }
             });
-        case SET_MAKE_WRAPPER_PROPS:
+        case actions.SET_MAKE_WRAPPER_PROPS:
             return Object.assign({}, state, {
                 makeWrapperProps: {
                     width: action.width,
@@ -39,7 +45,7 @@ export default function layout(state = initialState, action) {
                     offsetLeft: action.offsetLeft
                 }
             });
-        case SET_OVERLAY_SPLAT_PROPS:
+        case actions.SET_OVERLAY_SPLAT_PROPS:
             return Object.assign({}, state, {
                 overlaySplatProps: {
                     offsetWidth: action.offsetWidth,
