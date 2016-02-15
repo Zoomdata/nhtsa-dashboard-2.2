@@ -1,4 +1,4 @@
-import { take, put, call, fork } from 'redux-saga';
+import { take, put, call, fork } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as makeData from '../config/queries/makeData';
 import { createClient } from '../config';
