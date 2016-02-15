@@ -1,0 +1,47 @@
+{
+  "name": "nhtsa-dashboard",
+  "version": "0.1.0",
+  "description": "NHTSA Dashboard using Zoomdata JS Client 2.2",
+  "main": "index.js",
+  "scripts": {
+    "stats": "webpack --profile --json > stats.json",
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psumstr/react-template.git"
+  },
+  "author": "Jonathan Avila <jonathan.avila@me.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/psumstr/react-template/issues"
+  },
+  "homepage": "https://github.com/psumstr/react-template#readme",
+  "devDependencies": {
+    "babel-core": "^5.8.34",
+    "babel-loader": "^5.4.0",
+    "babel-plugin-react-transform": "^1.1.1",
+    "clean-webpack-plugin": "^0.1.4",
+    "css-loader": "^0.23.0",
+    "extract-text-webpack-plugin": "^0.9.1",
+    "file-loader": "^0.8.5",
+    "html-webpack-plugin": "^1.7.0",
+    "react-transform-hmr": "^1.0.1",
+    "style-loader": "^0.13.0",
+    "url-loader": "^0.5.7",
+    "webpack": "^1.12.9",
+    "webpack-dev-server": "^1.14.0",
+    "webpack-merge": "^0.3.2"
+  },
+  "dependencies": {
+    "d3": "^3.5.14",
+    "normalize.css": "^3.0.3",
+    "react": "^0.14.3",
+    "react-dom": "^0.14.3",
+    "react-redux": "^4.0.0",
+    "redux": "^3.0.4",
+    "redux-responsive": "^1.0.3",
+    "redux-saga": "^0.7.0"
+  }
+}
