@@ -1,6 +1,6 @@
 import normalize from 'normalize.css'
 
-import 'babel-core/polyfill';
+import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';

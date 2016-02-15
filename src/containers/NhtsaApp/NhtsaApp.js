@@ -7,7 +7,6 @@ import Dashboard from '../../components/Dashboard/Dashboard';
 import ButtonContainer from '../../components/ButtonContainer/ButtonContainer';
 import { verticalScrollThreshold } from '../../config/app-constants';
 
-@connect(mapStateToProps)
 export default class NhtsaApp extends Component {
     render() {
         const { browser } = this.props;
@@ -90,4 +89,4 @@ function mapStateToProps(state) {
 }
 
 // Wrap the component to inject dispatch and state into it
-export default NhtsaApp
+export default connect(mapStateToProps)(NhtsaApp)

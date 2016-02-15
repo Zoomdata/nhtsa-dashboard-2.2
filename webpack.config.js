@@ -34,7 +34,7 @@ var common = {
             },
             {
                 test: /\.jsx?$/,
-                loaders: ['babel'],
+                loaders: ['babel?cacheDirectory'],
                 include: PATHS.app
             }
         ]
