@@ -18,21 +18,16 @@ export default class DashboardForeground extends Component {
         const aboutVisibility = this.props.aboutVisibility;
         const chartData = this.props.chartData;
         return <div className={styles.root}>
-            <AboutBlock aboutVisibility={aboutVisibility}
-                        onSetAboutVisibilityOption={this.props.onSetAboutVisibilityOption} />
+            <AboutBlock aboutVisibility={aboutVisibility} />
             <BackgroundImage />
-            <YearTrendWrapper aboutVisibility={aboutVisibility}
-                              onSetAboutVisibilityOption={this.props.onSetAboutVisibilityOption} />
-            <MakeWrapper onSetMakeWrapperProps={this.props.onSetMakeWrapperProps}
-                         chartData={chartData}
-                         onChangeMakeDataQuery={this.props.onChangeMakeDataQuery} />
+            <YearTrendWrapper aboutVisibility={aboutVisibility} />
+            <MakeWrapper chartData={chartData} />
             <OverlayInstructions />
             <Connector />
             <Header />
             <ModelWrapper />
             <Gauges />
-            <Tabs tab={this.props.tab}
-                  onSetActiveTab={this.props.onSetActiveTab} />
+            <Tabs tab={this.props.tab} />
             <Annotation />
         </div>
     }

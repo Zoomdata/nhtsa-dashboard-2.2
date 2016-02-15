@@ -7,8 +7,7 @@ export default class MakeBarChart extends Component {
     render() {
         const chartData = this.props.chartData;
         return <div className={styles.root}>
-            <BarChart chartData={chartData}
-                                   onChangeMakeDataQuery={this.props.onChangeMakeDataQuery} />
+            <BarChart chartData={chartData} />
         </div>
     }
 }

@@ -1,6 +1,6 @@
-export const SET_DASHBOARD_PROPS = 'SET_DASHBOARD_PROPS';
-export const SET_MAKE_WRAPPER_PROPS = 'SET_MAKE_WRAPPER_PROPS';
-export const SET_OVERLAY_SPLAT_PROPS = 'SET_OVERLAY_SPLAT_PROPS';
+export const SET_DASHBOARD_DIMENSIONS = 'SET_DASHBOARD_DIMENSIONS';
+export const SET_MAKE_WRAPPER_DIMENSIONS = 'SET_MAKE_WRAPPER_DIMENSIONS';
+export const SET_OVERLAY_SPLAT_DIMENSIONS = 'SET_OVERLAY_SPLAT_DIMENSIONS';
 
 export const SET_ACTIVE_TAB = 'SET_ACTIVE_TAB';
 export const ActiveTabs = {
@@ -22,20 +22,19 @@ export const AboutVisibilityOptions = {
 
 export const REQUEST_MAKE_DATA = 'REQUEST_MAKE_DATA';
 export const RECEIVE_MAKE_DATA = 'RECEIVE_MAKE_DATA';
-export const CHANGE_MAKE_DATA_QUERY = 'CHANGE_MAKE_DATA_QUERY';
 
-export function setDashboardProps(width, height, offsetLeft) {
+export function setDashboardDimensions(width, height, offsetLeft) {
     return {
-        type: SET_DASHBOARD_PROPS,
+        type: SET_DASHBOARD_DIMENSIONS,
         width,
         height,
         offsetLeft
     }
 }
 
-export function setMakeWrapperProps(width, height, offsetTop, offsetLeft) {
+export function setMakeWrapperDimensions(width, height, offsetTop, offsetLeft) {
     return {
-        type: SET_MAKE_WRAPPER_PROPS,
+        type: SET_MAKE_WRAPPER_DIMENSIONS,
         width,
         height,
         offsetTop,
@@ -43,14 +42,10 @@ export function setMakeWrapperProps(width, height, offsetTop, offsetLeft) {
     }
 }
 
-export function setOverlaySplatProps(offsetWidth, paddingLeft, paddingRight, borderLeft, borderRight) {
+export function setOverlaySplatDimensions(width) {
     return {
-        type: SET_OVERLAY_SPLAT_PROPS,
-        offsetWidth,
-        paddingLeft,
-        paddingRight,
-        borderLeft,
-        borderRight
+        type: SET_OVERLAY_SPLAT_DIMENSIONS,
+        width
     }
 }
 
@@ -89,8 +84,3 @@ export function receiveMakeData(data) {
     }
 }
 
-export function changeMakeDataQuery() {
-    return {
-        type: CHANGE_MAKE_DATA_QUERY
-    }
-}

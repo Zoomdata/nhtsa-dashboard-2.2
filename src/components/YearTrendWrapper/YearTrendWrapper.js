@@ -11,8 +11,7 @@ export default class YearTrendWrapper extends Component {
         return <div className={styles.root}>
             <TrendHeader />
             <Trend />
-            <AboutButton aboutVisibility={aboutVisbility}
-                         onSetAboutVisibilityOption={this.props.onSetAboutVisibilityOption} />
+            <AboutButton aboutVisibility={aboutVisbility} />
         </div>
     }
 }

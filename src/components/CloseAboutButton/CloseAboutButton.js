@@ -1,14 +1,37 @@
 import styles from './CloseAboutButton.css';
 
 import React, { Component } from 'react';
+import { setAboutVisibilityOption } from '../../actions';
 
 export default class CloseAboutButton extends Component {
+    componentDidMount() {
+        const { store } = this.context;
+        this.unsubscribe = store.subscribe(() => {
+            this.forceUpdate();
+        })
+    }
+    componentWillUnmount() {
+        this.unsubscribe();
+    }
     render() {
-        return <div className={styles.root}
-                    onClick={(e)=>this.setAboutVisibilityOption(e)}>Return</div>
+        const { store } = this.context;
+        return (
+            <div
+                className={
+                    styles.root
+                }
+                onClick={
+                    (e) => {
+                        e.stopPropagation();
+                        store.dispatch(setAboutVisibilityOption('CLOSE_ABOUT'));
+                    }
+                }
+            >Return
+            </div>
+        )
     }
-    setAboutVisibilityOption(e) {
-        e.stopPropagation();
-        this.props.onSetAboutVisibilityOption('CLOSE_ABOUT');
-    }
+}
+
+CloseAboutButton.contextTypes = {
+    store: React.PropTypes.object
 }

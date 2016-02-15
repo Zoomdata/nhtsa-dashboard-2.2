@@ -44,13 +44,13 @@ function* fetchMakeData (client, source, queryConfig) {
     yield put(actions.receiveMakeData(data));
 }
 
-function* changeMakeDataQuery(getState) {
-    while(true) {
-        const source = getState().chartData.makeData.source;
-        yield take(actions.CHANGE_MAKE_DATA_QUERY);
-        yield fork(fetchMakeData, MakeDataThread);
-    }
-}
+//function* changeMakeDataQuery(getState) {
+//    while(true) {
+//        const source = getState().chartData.makeData.source;
+//        yield take(actions.CHANGE_MAKE_DATA_QUERY);
+//        yield fork(fetchMakeData, MakeDataThread);
+//    }
+//}
 
 function* startup(client) {
     yield fork(fetchMakeData, client, makeData.source, makeData.queryConfig);
@@ -60,7 +60,7 @@ export default function* root(getState) {
     const client = yield call(createClient);
     ZoomdataClient = client;
     yield fork(startup, ZoomdataClient);
-    yield fork(changeMakeDataQuery, getState);
+    //yield fork(changeMakeDataQuery, getState);
 
 }
 export let ZoomdataClient = undefined;

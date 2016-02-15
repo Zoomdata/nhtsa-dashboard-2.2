@@ -6,13 +6,27 @@ import OverlayTitle from '../OverlayTitle/OverlayTitle';
 
 export default class Overlay extends Component {
     render() {
-        const makeWrapperProps = this.props.makeWrapperProps;
-        const overlaySplatProps = this.props.overlaySplatProps;
-        return <div className={styles.root}>
-            <OverlaySplat makeWrapperProps={makeWrapperProps}
-                          overlaySplatProps={overlaySplatProps}
-                          onSetOverlaySplatProps={this.props.onSetOverlaySplatProps} />
-            <OverlayTitle makeWrapperProps={makeWrapperProps} />
-        </div>
+        const { makeWrapperDimensions, overlaySplatDimensions } = this.props
+
+        return (
+            <div
+                className={
+                    styles.root
+                }>
+                <OverlaySplat
+                    makeWrapperDimensions={
+                        makeWrapperDimensions
+                    }
+                    overlaySplatDimensions={
+                        overlaySplatDimensions
+                    }
+                />
+                <OverlayTitle
+                    makeWrapperDimensions={
+                        makeWrapperDimensions
+                    }
+                />
+            </div>
+        )
     }
 }

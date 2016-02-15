@@ -15,8 +15,7 @@ export default class AboutBlock extends Component {
             <a target="_blank" href="http://zoomdata.com">
                 <ZDWebsiteButton />
             </a>
-            <CloseAboutButton aboutVisibility={aboutVisibility}
-                              onSetAboutVisibilityOption={this.props.onSetAboutVisibilityOption} />
+            <CloseAboutButton aboutVisibility={aboutVisibility} />
         </div>
     }
 }
