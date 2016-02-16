@@ -21,7 +21,7 @@ export default class DashboardForeground extends Component {
             <AboutBlock aboutVisibility={aboutVisibility} />
             <BackgroundImage />
             <YearTrendWrapper aboutVisibility={aboutVisibility} />
-            <MakeWrapper chartData={chartData} />
+            <MakeWrapper />
             <OverlayInstructions />
             <Connector />
             <Header />

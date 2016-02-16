@@ -15,13 +15,17 @@ const mapStateToProps = (state) => {
         layout: state.layout,
         activeTab: state.activeTab,
         hoodAction: state.hoodAction,
-        aboutVisibility: state.aboutVisibility,
-        chartData: state.chartData
+        aboutVisibility: state.aboutVisibility
     }
 }
 
-export default function NhtsaApp (state) {
-    const { browser, layout, activeTab, hoodAction, aboutVisibility, chartData } = state;
+export default function NhtsaApp ({
+    browser,
+    layout,
+    activeTab,
+    hoodAction,
+    aboutVisibility
+}) {
     const { dashboardDimensions, makeWrapperDimensions, overlaySplatDimensions } = layout;
     let newBackgroundX = (dashboardDimensions.offsetLeft + dashboardDimensions.width) - 465;
     let newBackgroundY;
@@ -41,31 +45,16 @@ export default function NhtsaApp (state) {
     };
     return (
         <div
-            className={
-                styles.root
-            }
-            style={
-                nhtsaAppStyle
-            }
+            className={styles.root}
+            style={nhtsaAppStyle}
         >
             <Overlay
-                makeWrapperDimensions={
-                    makeWrapperDimensions
-                }
-                overlaySplatDimensions={
-                    overlaySplatDimensions
-                }
+                makeWrapperDimensions={makeWrapperDimensions}
+                overlaySplatDimensions={overlaySplatDimensions}
             />
             <Dashboard
-                tab={
-                    activeTab
-                }
-                aboutVisibility={
-                    aboutVisibility
-                }
-                chartData={
-                    chartData
-                }
+                tab={activeTab}
+                aboutVisibility={aboutVisibility}
             />
             <footer>
                 © 2014 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc. <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>

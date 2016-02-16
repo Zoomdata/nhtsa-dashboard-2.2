@@ -51,11 +51,11 @@ export default class BarChart extends Component {
             });
 
         this.updateChart = function(nextProps) {
-            if (!nextProps.chartData.makeData.data) {
+            if (!nextProps.data) {
                 return;
             }
 
-            const data = nextProps.chartData.makeData.data;
+            const data = nextProps.data;
             if (data.length > 0) {
                 let dataset = data.map(function(d) {
                     d.group = d.group[0];
