@@ -51,21 +51,15 @@ export default class BarChart extends Component {
             });
 
         this.updateChart = function(nextProps) {
-            if (!nextProps.data) {
-                return;
-            }
-
-            const data = nextProps.data;
-            if (data.length > 0) {
-                let dataset = data.map(function(d) {
-                    d.group = d.group[0];
-                    return d;
-                });
-                datasetLength = data.length;
-                d3.select(chartElement)
-                    .datum(dataset)
-                    .call(this.chart);
-            }
+            const data = nextProps.data || [];
+            let dataset = data.map(function(d) {
+                d.group = d.group[0];
+                return d;
+            });
+            datasetLength = data.length;
+            d3.select(chartElement)
+                .datum(dataset)
+                .call(this.chart);
         }
 
         function barChart() {
