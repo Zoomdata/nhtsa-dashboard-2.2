@@ -28,8 +28,7 @@ export default class Dashboard extends Component {
         const aboutVisibility = this.props.aboutVisibility;
         const chartData = this.props.chartData;
         return <div className={styles.root} ref="dashboard">
-            <DashboardForeground tab={this.props.tab}
-                                 aboutVisibility={aboutVisibility} />
+            <DashboardForeground tab={this.props.tab} />
         </div>
     }
 }

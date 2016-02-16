@@ -1,7 +1,7 @@
 import styles from './DashboardForeground.css';
 
 import React, { Component } from 'react';
-import AboutBlock from '../AboutBlock/AboutBlock';
+import { AboutBlockContainer } from '../../containers/AboutBlock/AboutBlock';
 import BackgroundImage from '../BackgroundImage/BackgroundImage';
 import YearTrendWrapper from '../YearTrendWrapper/YearTrendWrapper';
 import MakeWrapper from '../MakeWrapper/MakeWrapper';
@@ -18,7 +18,7 @@ export default class DashboardForeground extends Component {
         const aboutVisibility = this.props.aboutVisibility;
         const chartData = this.props.chartData;
         return <div className={styles.root}>
-            <AboutBlock aboutVisibility={aboutVisibility} />
+            <AboutBlockContainer />
             <BackgroundImage />
             <YearTrendWrapper />
             <MakeWrapper />

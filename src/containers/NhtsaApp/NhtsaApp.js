@@ -23,8 +23,6 @@ export default function NhtsaApp ({
     browser,
     layout,
     activeTab,
-    hoodAction,
-    aboutVisibility
 }) {
     const { dashboardDimensions, makeWrapperDimensions, overlaySplatDimensions } = layout;
     let newBackgroundX = (dashboardDimensions.offsetLeft + dashboardDimensions.width) - 465;
@@ -54,7 +52,6 @@ export default function NhtsaApp ({
             />
             <Dashboard
                 tab={activeTab}
-                aboutVisibility={aboutVisibility}
             />
             <footer>
                 © 2014 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc. <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>
