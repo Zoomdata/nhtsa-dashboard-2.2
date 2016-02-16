@@ -20,7 +20,7 @@ export default class DashboardForeground extends Component {
         return <div className={styles.root}>
             <AboutBlock aboutVisibility={aboutVisibility} />
             <BackgroundImage />
-            <YearTrendWrapper aboutVisibility={aboutVisibility} />
+            <YearTrendWrapper />
             <MakeWrapper />
             <OverlayInstructions />
             <Connector />
