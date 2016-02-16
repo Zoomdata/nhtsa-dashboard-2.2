@@ -2,36 +2,23 @@ import styles from './CloseAboutButton.css';
 
 import React, { Component } from 'react';
 import { setAboutVisibilityOption } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class CloseAboutButton extends Component {
-    componentDidMount() {
-        const { store } = this.context;
-        this.unsubscribe = store.subscribe(() => {
-            this.forceUpdate();
-        })
-    }
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-    render() {
-        const { store } = this.context;
-        return (
-            <div
-                className={
-                    styles.root
+export let CloseAboutButton = ({dispatch}) => {
+    return (
+        <div
+            className={
+                styles.root
+            }
+            onClick={
+                (e) => {
+                    e.stopPropagation();
+                    dispatch(setAboutVisibilityOption('CLOSE_ABOUT'));
                 }
-                onClick={
-                    (e) => {
-                        e.stopPropagation();
-                        store.dispatch(setAboutVisibilityOption('CLOSE_ABOUT'));
-                    }
-                }
-            >Return
-            </div>
-        )
-    }
+            }
+        >Return
+        </div>
+    )
 }
 
-CloseAboutButton.contextTypes = {
-    store: React.PropTypes.object
-}
+CloseAboutButton = connect()(CloseAboutButton);
