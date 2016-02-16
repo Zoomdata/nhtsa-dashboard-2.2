@@ -3,12 +3,9 @@ import styles from './ShowData.css';
 import React from 'react';
 
 export default function ShowData(
-    props,
-    { store }
+    props
 ) {
-    const state = store.getState();
-    const { hoodAction } = state;
-
+    const { hoodAction } = props;
     return (
         <img
             className={
@@ -20,8 +17,4 @@ export default function ShowData(
             height="77"
             src="src/images/show-data.png" />
     )
-}
-
-ShowData.contextTypes = {
-    store: React.PropTypes.object
 }

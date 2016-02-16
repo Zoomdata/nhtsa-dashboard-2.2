@@ -9,6 +9,7 @@ import Cover from '../Cover/Cover';
 
 export default function ButtonContainer({
     dashboardDimensions,
+    hoodAction,
     onClick
 }) {
     const newTop = dashboardDimensions.height - 67;
@@ -32,8 +33,8 @@ export default function ButtonContainer({
             }
         >
             <Top />
-            <ShowData />
-            <ArrowBottom />
+            <ShowData hoodAction={hoodAction} />
+            <ArrowBottom hoodAction={hoodAction}/>
             <Bottom />
             <Cover />
         </div>
