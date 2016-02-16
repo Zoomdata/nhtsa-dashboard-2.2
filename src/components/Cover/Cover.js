@@ -1,9 +1,10 @@
 import styles from './Cover.css';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Cover extends Component {
-    render() {
-        return <div className={styles.root}></div>
-    }
+export default function Cover() {
+    return (
+        <div
+            className={styles.root}></div>
+    )
 }
