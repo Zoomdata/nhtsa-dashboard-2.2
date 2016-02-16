@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Overlay from '../../components/Overlay/Overlay';
 import Dashboard from '../../components/Dashboard/Dashboard';
-import { Hood } from '../../containers/Hood/Hood';
+import { ButtonContainerContainer } from '../../containers/ButtonContainer/ButtonContainer';
 import { verticalScrollThreshold } from '../../config/app-constants';
 
 // Which props do we want to inject, given the global state?
@@ -59,7 +59,7 @@ export default function NhtsaApp ({
             <footer>
                 © 2014 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc. <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>
             </footer>
-            <Hood />
+            <ButtonContainerContainer />
         </div>
     )
 }

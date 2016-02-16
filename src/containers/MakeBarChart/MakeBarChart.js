@@ -7,4 +7,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export const MakeBars = connect(mapStateToProps)(MakeBarChart);
+export const MakeBarChartContainer = connect(mapStateToProps)(MakeBarChart);

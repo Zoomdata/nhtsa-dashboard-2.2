@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export const Hood = connect(
+export const ButtonContainerContainer = connect(
     mapStateToProps,
     mapDispatchToProps
 )(ButtonContainer);

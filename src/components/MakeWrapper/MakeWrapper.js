@@ -2,7 +2,7 @@ import styles from './MakeWrapper.css';
 
 import React , { Component } from 'react';
 import MakeHeader from '../MakeHeader/MakeHeader';
-import { MakeBars } from '../../containers/MakeBars/MakeBars';
+import { MakeBarChartContainer } from '../../containers/MakeBarChart/MakeBarChart';
 import { getWidth, getHeight } from '../../utilities';
 import { setMakeWrapperDimensions } from '../../actions';
 
@@ -35,7 +35,7 @@ export default class MakeWrapper extends Component {
                 }
                 ref="makeWrapper">
                 <MakeHeader />
-                <MakeBars />
+                <MakeBarChartContainer />
             </div>
         )
     }

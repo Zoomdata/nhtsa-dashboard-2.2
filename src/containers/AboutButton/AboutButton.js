@@ -10,4 +10,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-export const About = connect(null, mapDispatchToProps)(AboutButton);
+export const AboutButtonContainer = connect(null, mapDispatchToProps)(AboutButton);
