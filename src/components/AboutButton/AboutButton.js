@@ -1,10 +1,10 @@
 import styles from './AboutButton.css';
 
 import React from 'react';
+import { setAboutVisibilityOption } from '../../actions';
+import { connect } from 'react-redux';
 
-export default function AboutButton({
-    onClick
-}) {
+export let AboutButton = ({dispatch}) => {
     return (
         <img
             className={
@@ -16,9 +16,11 @@ export default function AboutButton({
             onClick={
                 (e) => {
                     e.stopPropagation();
-                    onClick();
+                    dispatch(setAboutVisibilityOption('OPEN_ABOUT'));
                 }
             }
         />
     )
 }
+
+AboutButton = connect()(AboutButton);
