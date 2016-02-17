@@ -4,6 +4,7 @@ var webpack = require('webpack');
 var merge = require('webpack-merge');
 var Clean = require('clean-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var autoprefixer = require('autoprefixer');
 
 var pkg = require('./package.json');
 
@@ -38,6 +39,9 @@ var common = {
                 include: PATHS.app
             }
         ]
+    },
+    postcss: function () {
+        return [autoprefixer({ browsers: ['last 2 versions'] })];
     },
     plugins: [
         new HtmlwebpackPlugin({
