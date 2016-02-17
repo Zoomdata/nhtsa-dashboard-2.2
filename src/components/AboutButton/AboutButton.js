@@ -4,7 +4,7 @@ import React from 'react';
 import { setAboutVisibilityOption } from '../../actions';
 import { connect } from 'react-redux';
 
-export let AboutButton = ({dispatch}) => {
+const AboutButton = ({dispatch}) => {
     return (
         <img
             className={
@@ -21,6 +21,6 @@ export let AboutButton = ({dispatch}) => {
             }
         />
     )
-}
+};
 
-AboutButton = connect()(AboutButton);
+export default connect()(AboutButton);

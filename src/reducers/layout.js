@@ -16,7 +16,7 @@ const initialState = {
         width: null
     }
 };
-export default function layout(state = initialState, action) {
+const layout = (state = initialState, action) => {
     switch (action.type) {
         case actions.SET_DASHBOARD_DIMENSIONS:
             return Object.assign({}, state, {
@@ -44,4 +44,6 @@ export default function layout(state = initialState, action) {
         default:
             return state;
     }
-}
+};
+
+export default layout;

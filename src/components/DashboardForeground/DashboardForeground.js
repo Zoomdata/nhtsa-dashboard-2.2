@@ -1,6 +1,6 @@
 import styles from './DashboardForeground.css';
 
-import React, { Component } from 'react';
+import React from 'react';
 import { AboutBlockContainer } from '../../containers/AboutBlock/AboutBlock';
 import BackgroundImage from '../BackgroundImage/BackgroundImage';
 import YearTrendWrapper from '../YearTrendWrapper/YearTrendWrapper';
@@ -13,11 +13,10 @@ import Gauges from '../Gauges/Gauges';
 import Tabs from '../Tabs/Tabs';
 import Annotation from '../Annotation/Annotation';
 
-export default class DashboardForeground extends Component {
-    render() {
-        const aboutVisibility = this.props.aboutVisibility;
-        const chartData = this.props.chartData;
-        return <div className={styles.root}>
+const DashboardForeground = () => {
+    return (
+        <div
+            className={styles.root}>
             <AboutBlockContainer />
             <BackgroundImage />
             <YearTrendWrapper />
@@ -27,8 +26,10 @@ export default class DashboardForeground extends Component {
             <Header />
             <ModelWrapper />
             <Gauges />
-            <Tabs tab={this.props.tab} />
+            <Tabs />
             <Annotation />
         </div>
-    }
+    )
 }
+
+export default DashboardForeground;

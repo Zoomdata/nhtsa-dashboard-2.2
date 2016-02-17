@@ -2,9 +2,7 @@ import styles from './ArrowBottom.css';
 
 import React from 'react';
 
-export default function ArrowBottom(
-    props
-) {
+const ArrowBottom = (props) => {
     const { hoodAction } = props;
     return (
         <div
@@ -16,4 +14,6 @@ export default function ArrowBottom(
         >
         </div>
     )
-}
+};
+
+export default ArrowBottom;

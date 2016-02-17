@@ -4,13 +4,11 @@ import React, { Component } from 'react';
 import DashboardForeground from '../DashboardForeground/DashboardForeground';
 import { getWidth, getHeight } from '../../utilities';
 import { setDashboardDimensions } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
     componentDidMount() {
-        const { store } = this.context;
-        this.unsubscribe = store.subscribe(() => {
-            this.forceUpdate();
-        });
+        const { dispatch } = this.props;
         const el = this.refs.dashboard;
         const rect = el.getBoundingClientRect();
         const dashboardDimensions = {
@@ -19,20 +17,18 @@ export default class Dashboard extends Component {
             offsetLeft: rect.left + document.body.scrollLeft
         }
         const { width, height, offsetLeft } = dashboardDimensions;
-        store.dispatch(setDashboardDimensions(width, height, offsetLeft))
+        dispatch(setDashboardDimensions(width, height, offsetLeft))
     }
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
+
     render() {
-        const aboutVisibility = this.props.aboutVisibility;
-        const chartData = this.props.chartData;
-        return <div className={styles.root} ref="dashboard">
-            <DashboardForeground tab={this.props.tab} />
-        </div>
+        return (
+            <div
+                className={styles.root}
+                ref="dashboard">
+                <DashboardForeground />
+            </div>
+        )
     }
 }
 
-Dashboard.contextTypes = {
-    store: React.PropTypes.object
-}
+export default connect()(Dashboard);

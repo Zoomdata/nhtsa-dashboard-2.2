@@ -4,9 +4,9 @@ import React from 'react';
 import AboutHeader from '../AboutHeader/AboutHeader';
 import AboutDescription from '../AboutDescription/AboutDescription';
 import ZDWebsiteButton from '../ZDWebsiteButton/ZDWebsiteButton';
-import { CloseAboutButton } from '../CloseAboutButton/CloseAboutButton';
+import CloseAboutButton from '../CloseAboutButton/CloseAboutButton';
 
-export default function AboutBlock({aboutVisibility}) {
+const AboutBlock = ({aboutVisibility}) => {
     return (
         <div
             className={
@@ -24,4 +24,6 @@ export default function AboutBlock({aboutVisibility}) {
             <CloseAboutButton />
         </div>
     )
-}
+};
+
+export default AboutBlock;

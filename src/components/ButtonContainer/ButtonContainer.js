@@ -7,23 +7,19 @@ import ArrowBottom from '../ArrowBottom/ArrowBottom';
 import Bottom from '../Bottom/Bottom';
 import Cover from '../Cover/Cover';
 
-export default function ButtonContainer({
+const ButtonContainer = ({
     dashboardDimensions,
     hoodAction,
     onClick
-}) {
+}) => {
     const newTop = dashboardDimensions.height - 67;
     const buttonContainerStyle = {
         top: newTop
     }
     return (
         <div
-            className={
-                styles.root
-            }
-            style={
-                buttonContainerStyle
-            }
+            className={styles.root}
+            style={buttonContainerStyle}
             onClick={
                 (e) => {
                     e.stopPropagation();
@@ -39,4 +35,6 @@ export default function ButtonContainer({
             <Cover />
         </div>
     )
-}
+};
+
+export default ButtonContainer;

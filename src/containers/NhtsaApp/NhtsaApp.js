@@ -12,19 +12,14 @@ import { verticalScrollThreshold } from '../../config/app-constants';
 const mapStateToProps = (state) => {
     return {
         browser: state.browser,
-        layout: state.layout,
-        activeTab: state.activeTab,
-        hoodAction: state.hoodAction,
-        aboutVisibility: state.aboutVisibility
+        dashboardDimensions: state.layout.dashboardDimensions
     }
 }
 
-export default function NhtsaApp ({
+const NhtsaApp = ({
     browser,
-    layout,
-    activeTab,
-}) {
-    const { dashboardDimensions, makeWrapperDimensions, overlaySplatDimensions } = layout;
+    dashboardDimensions
+}) => {
     let newBackgroundX = (dashboardDimensions.offsetLeft + dashboardDimensions.width) - 465;
     let newBackgroundY;
     let newOverflowY = 'hidden';
@@ -46,13 +41,8 @@ export default function NhtsaApp ({
             className={styles.root}
             style={nhtsaAppStyle}
         >
-            <Overlay
-                makeWrapperDimensions={makeWrapperDimensions}
-                overlaySplatDimensions={overlaySplatDimensions}
-            />
-            <Dashboard
-                tab={activeTab}
-            />
+            <Overlay />
+            <Dashboard />
             <footer>
                 © 2014 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc. <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>
             </footer>

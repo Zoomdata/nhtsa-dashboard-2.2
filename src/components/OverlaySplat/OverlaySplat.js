@@ -3,25 +3,16 @@ import styles from './OverlaySplat.css'
 import React, { Component } from 'react';
 import { getWidth } from '../../utilities';
 import { setOverlaySplatDimensions } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class OverlaySplat extends Component {
-    componentDidMount() {
-        const { store } = this.context;
-        this.unsubscribe = store.subscribe(() => {
-            this.forceUpdate();
-        })
-    }
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
+class OverlaySplat extends Component {
     componentWillUpdate() {
-        const { store } = this.context;
         setTimeout(function() {
             const el = this.refs.overlaySplat;
             const width = getWidth(el);
-            const { overlaySplatDimensions } = this.props;
+            const { overlaySplatDimensions, dispatch } = this.props;
             if (overlaySplatDimensions.width !== width) {
-                store.dispatch(setOverlaySplatDimensions(width));
+                dispatch(setOverlaySplatDimensions(width));
             }
         }.bind(this), 0);
     }
@@ -35,12 +26,8 @@ export default class OverlaySplat extends Component {
         };
         return (
             <img
-                src={
-                    image
-                }
-                className={
-                    styles.root
-                }
+                src={image}
+                className={styles.root}
                 style={
                     overlaySplatDimensions.width !== null ||
                     overlaySplatDimensions.width > 0 ?
@@ -53,6 +40,4 @@ export default class OverlaySplat extends Component {
     }
 }
 
-OverlaySplat.contextTypes = {
-    store: React.PropTypes.object
-}
+export default connect()(OverlaySplat);

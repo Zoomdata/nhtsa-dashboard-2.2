@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { setAboutVisibilityOption } from '../../actions';
 import { connect } from 'react-redux';
 
-export let CloseAboutButton = ({dispatch}) => {
+const CloseAboutButton = ({dispatch}) => {
     return (
         <div
             className={
@@ -19,6 +19,6 @@ export let CloseAboutButton = ({dispatch}) => {
         >Return
         </div>
     )
-}
+};
 
-CloseAboutButton = connect()(CloseAboutButton);
+export default connect()(CloseAboutButton);

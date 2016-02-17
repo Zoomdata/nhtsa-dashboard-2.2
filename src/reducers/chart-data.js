@@ -5,7 +5,7 @@ const initialState = {
         isFetching: false
     }
 }
-export default function data(state = initialState, action) {
+const data = (state = initialState, action) => {
     switch (action.type) {
         case REQUEST_MAKE_DATA:
             return {
@@ -26,4 +26,6 @@ export default function data(state = initialState, action) {
         default:
             return state
     }
-}
+};
+
+export default data;

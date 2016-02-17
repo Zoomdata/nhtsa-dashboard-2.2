@@ -2,9 +2,12 @@ import styles from './Cover.css';
 
 import React from 'react';
 
-export default function Cover() {
+const Cover = () => {
     return (
         <div
-            className={styles.root}></div>
+            className={styles.root}>
+        </div>
     )
-}
+};
+
+export default Cover;
