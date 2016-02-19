@@ -1,11 +1,24 @@
 import styles from './MakeHeader.css';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class MakeHeader extends Component {
-    render() {
-        return <div className={styles.root}>
+const MakeHeader = ({hideOverlay}) => {
+    const makeHeaderStyle = {
+        zIndex: 1
+    };
+
+    return (
+        <div
+            className={styles.root}
+            style={
+                hideOverlay ?
+                makeHeaderStyle :
+                null
+            }
+        >
             Complaints <br /> by <b>Make</b>
         </div>
-    }
-}
+    )
+};
+
+export default MakeHeader;

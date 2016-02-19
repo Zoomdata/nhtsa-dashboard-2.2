@@ -69,7 +69,24 @@
 }
 
 .barGroupActive {
-    composes: barGroup;
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    -webkit-transition: -webkit-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -moz-transition: -moz-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -ms-transition: -ms-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -o-transition: -o-transform 1s ease-in-out, opacity .1s ease-in-out;
+    transition: transform 1s ease-in-out, opacity .1s ease-in-out;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 0;
+    border-left-width: 1px;
+    border-style: solid;
+    border-color: #979797 rgba(151, 151, 151, 0.5);
+    letter-spacing: normal;
     opacity: 1;
 }
 

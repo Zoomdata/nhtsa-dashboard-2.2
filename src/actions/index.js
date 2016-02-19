@@ -20,6 +20,9 @@ export const AboutVisibilityOptions = {
     CLOSE_ABOUT: 'CLOSE_ABOUT'
 }
 
+export const SET_MAKE = 'SET_MAKE';
+export const SET_HIDE_OVERLAY = 'SET_HIDE_OVERLAY';
+
 export const REQUEST_MAKE_DATA = 'REQUEST_MAKE_DATA';
 export const RECEIVE_MAKE_DATA = 'RECEIVE_MAKE_DATA';
 
@@ -83,4 +86,19 @@ export function receiveMakeData(data) {
         data
     }
 }
+
+export function setMake(make) {
+    return {
+        type: SET_MAKE,
+        make
+    }
+}
+
+export function setHideOverlay() {
+    return {
+        type: SET_HIDE_OVERLAY
+    }
+}
+
+
 

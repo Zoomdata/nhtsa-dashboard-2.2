@@ -32,6 +32,8 @@ export default class BarChart extends Component {
     }
 
     createChart() {
+        let make;
+        let onClick;
         const chartElement = this.refs.barChart;
         const duration = 1000;
         const vendorPrefix = getVendorPrefix();
@@ -51,9 +53,13 @@ export default class BarChart extends Component {
             });
 
         this.updateChart = function(nextProps) {
+            make = nextProps.make;
+            onClick = nextProps.onClick;
             const data = nextProps.data || [];
             let dataset = data.map(function(d) {
-                d.group = d.group[0];
+                if (d.group && d.group.constructor === Array) {
+                    d.group = d.group[0];
+                }
                 return d;
             });
             datasetLength = data.length;
@@ -185,6 +191,16 @@ export default class BarChart extends Component {
                         .style(vendorPrefix + "transform", function(d) {
                             return "translate3d(0, " + yScale(d.group) + "px, 0)";
                         })
+                        .on('click', function(d) {
+                            if (make === d.group) {
+                                return;
+                            }
+                            const active = d3.select(`div.${styles.barGroupActive}`);
+                            const hideOverlay = active.empty() ? true : false;
+                            active.classed(styles.barGroupActive, false);
+                            d3.select(this).classed(styles.barGroupActive, true);
+                            onClick(d.group, hideOverlay);
+                        })
 
                     bars.select(`div.${styles.bar}`)
                         .style("height", "100%")
@@ -193,6 +209,15 @@ export default class BarChart extends Component {
                         .style("width", function(d) {
                             return xScale(d.current.count) + "px";
                         });
+
+                    bars.select(`div.${styles.label}`)
+                        .text(groupKey);
+
+                    bars.select(`div.${styles.value}`)
+                        .text(function(d) {
+                            return addCommas(d.current.count);
+                        });
+
 
                     // Remove any unnecessary bar groups
                     bars.exit()

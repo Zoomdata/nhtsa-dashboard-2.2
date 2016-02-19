@@ -2,16 +2,20 @@ import styles from './MakeWrapper.css';
 
 import React , { Component } from 'react';
 import MakeHeader from '../MakeHeader/MakeHeader';
-import { MakeBarChartContainer } from '../../containers/MakeBarChart/MakeBarChart';
+import MakeBarChart from '../MakeBarChart/MakeBarChart';
 import { getWidth, getHeight } from '../../utilities';
 import { setMakeWrapperDimensions } from '../../actions';
+import { connect } from 'react-redux';
 
-export default class MakeWrapper extends Component {
+const mapStateToProps = (state) => {
+    return {
+        hideOverlay: state.hideOverlay
+    }
+}
+
+class MakeWrapper extends Component {
     componentDidMount() {
-        const { store } = this.context;
-        this.unsubscribe = store.subscribe(() => {
-            this.forceUpdate();
-        });
+        const { dispatch } = this.props;
         const el = this.refs.makeWrapper;
         const rect = el.getBoundingClientRect();
         const makeWrapperDimensions = {
@@ -21,26 +25,19 @@ export default class MakeWrapper extends Component {
             offsetLeft: rect.left + document.body.scrollLeft
         }
         const { width, height, offsetTop, offsetLeft } = makeWrapperDimensions;
-        store.dispatch(setMakeWrapperDimensions(width, height, offsetTop, offsetLeft));
-    }
-    componentWillUnmount() {
-        this.unsubscribe();
+        dispatch(setMakeWrapperDimensions(width, height, offsetTop, offsetLeft));
     }
     render() {
-        const chartData = this.props.chartData;
+        const { hideOverlay } = this.props;
         return (
             <div
-                className={
-                    styles.root
-                }
+                className={styles.root}
                 ref="makeWrapper">
-                <MakeHeader />
-                <MakeBarChartContainer />
+                <MakeHeader hideOverlay={hideOverlay} />
+                <MakeBarChart hideOverlay={hideOverlay} />
             </div>
         )
     }
 }
 
-MakeWrapper.contextTypes = {
-    store: React.PropTypes.object
-}
+export default connect(mapStateToProps)(MakeWrapper);
