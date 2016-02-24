@@ -14,7 +14,7 @@ const AboutBlock = ({aboutVisibility}) => {
             animation: {
                 opacity: 0
             },
-            display: 'auto'
+            display: 'none'
         }
     } else {
         animationProps = {
