@@ -6,24 +6,44 @@ import { setOverlaySplatDimensions } from '../../actions';
 import { connect } from 'react-redux';
 
 class OverlaySplat extends Component {
-    componentWillUpdate() {
-        setTimeout(function() {
-            const el = this.refs.overlaySplat;
-            const width = getWidth(el);
-            const { overlaySplatDimensions, dispatch } = this.props;
-            if (overlaySplatDimensions.width !== width) {
-                dispatch(setOverlaySplatDimensions(width));
+    setDimensions(comp) {
+            if (comp !== null) {
+                const el = comp;
+                const width = getWidth(el);
+                const { overlaySplatDimensions, dispatch } = this.props;
+
+                if (overlaySplatDimensions.width !== width) {
+                    dispatch(setOverlaySplatDimensions(width));
+                }
             }
-        }.bind(this), 0);
     }
     render() {
         const image = 'src/images/overlay_splat4.gif';
-        const { makeWrapperDimensions, overlaySplatDimensions } = this.props;
+        const { makeWrapperDimensions, overlaySplatDimensions, aboutVisibility, hideOverlay } = this.props;
         const overlaySplatStyle = {
             width: (makeWrapperDimensions.width * 3) + 'px',
             height: (makeWrapperDimensions.height + 200) + 'px',
             left: (((makeWrapperDimensions.width / 2) + makeWrapperDimensions.offsetLeft) - (overlaySplatDimensions.width / 2)) + 'px'
         };
+
+        if (hideOverlay) {
+            if (aboutVisibility === 'OPEN_ABOUT') {
+                this.overlaySplatStyle = {
+                    width: (makeWrapperDimensions.width * 3) + 'px',
+                    height: (makeWrapperDimensions.height + 200) + 'px',
+                    left: (((makeWrapperDimensions.width / 2) + makeWrapperDimensions.offsetLeft) - (overlaySplatDimensions.width / 2)) + 'px',
+                    display: 'none'
+                };
+            }
+        } else {
+            this.overlaySplatStyle = {
+                width: (makeWrapperDimensions.width * 3) + 'px',
+                height: (makeWrapperDimensions.height + 200) + 'px',
+                left: (((makeWrapperDimensions.width / 2) + makeWrapperDimensions.offsetLeft) - (overlaySplatDimensions.width / 2)) + 'px',
+                display: 'block'
+            }
+        }
+
         return (
             <img
                 src={image}
@@ -31,10 +51,14 @@ class OverlaySplat extends Component {
                 style={
                     overlaySplatDimensions.width !== null ||
                     overlaySplatDimensions.width > 0 ?
-                    overlaySplatStyle :
-                    {}
+                        (this.overlaySplatStyle ?
+                            this.overlaySplatStyle :
+                            overlaySplatStyle) :
+                        {}
                 }
-                ref="overlaySplat"
+                ref={
+                    comp => this.setDimensions(comp)
+                }
             />
         )
     }
