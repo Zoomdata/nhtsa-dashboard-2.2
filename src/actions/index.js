@@ -32,6 +32,9 @@ export const ArrowVisibilityOptions = {
 export const REQUEST_MAKE_DATA = 'REQUEST_MAKE_DATA';
 export const RECEIVE_MAKE_DATA = 'RECEIVE_MAKE_DATA';
 
+export const REQUEST_YEAR_DATA = 'REQUEST_YEAR_DATA';
+export const RECEIVE_YEAR_DATA = 'RECEIVE_YEAR_DATA';
+
 export function setDashboardDimensions(width, height, offsetLeft) {
     return {
         type: SET_DASHBOARD_DIMENSIONS,
@@ -96,6 +99,20 @@ export function requestMakeData(source) {
 export function receiveMakeData(data) {
     return {
         type: RECEIVE_MAKE_DATA,
+        data
+    }
+}
+
+export function requestYearData(source) {
+    return {
+        type: REQUEST_YEAR_DATA,
+        source
+    }
+}
+
+export function receiveYearData(data) {
+    return {
+        type: RECEIVE_YEAR_DATA,
         data
     }
 }

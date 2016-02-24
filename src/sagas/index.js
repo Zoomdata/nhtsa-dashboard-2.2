@@ -1,6 +1,7 @@
 import { take, put, call, fork } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as makeData from '../config/queries/makeData';
+import * as yearData from '../config/queries/yearData';
 import { createClient } from '../config';
 
 let queryData = [];
@@ -44,6 +45,20 @@ function* fetchMakeData (client, source, queryConfig) {
     yield put(actions.receiveMakeData(data));
 }
 
+function* fetchYearData (client, source, queryConfig) {
+    if (!YearDataQuery) {
+        const query = yield call(getQuery, client, source, queryConfig);
+        YearDataQuery = query;
+    }
+    yield put(actions.requestYearData(yearData.source));
+    if (!YearDataThread) {
+        const thread = yield call(getThread, client, YearDataQuery);
+        YearDataThread = thread;
+    }
+    const data = yield call(fetchDataApi, YearDataThread);
+    yield put(actions.receiveYearData(data));
+}
+
 //function* changeMakeDataQuery(getState) {
 //    while(true) {
 //        const source = getState().chartData.makeData.source;
@@ -53,6 +68,7 @@ function* fetchMakeData (client, source, queryConfig) {
 //}
 
 function* startup(client) {
+    yield fork(fetchYearData, client, yearData.source, yearData.queryConfig);
     yield fork(fetchMakeData, client, makeData.source, makeData.queryConfig);
 }
 
@@ -66,3 +82,5 @@ export default function* root(getState) {
 export let ZoomdataClient = undefined;
 export let MakeDataQuery = undefined;
 export let MakeDataThread = undefined;
+export let YearDataQuery = undefined;
+export let YearDataThread = undefined;

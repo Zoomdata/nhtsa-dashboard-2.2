@@ -1,26 +1,45 @@
-import { REQUEST_MAKE_DATA, RECEIVE_MAKE_DATA, CHANGE_MAKE_DATA_QUERY } from '../actions';
+import * as actions from '../actions';
 
 const initialState = {
     makeData: {
+        isFetching: false
+    },
+    yearData: {
         isFetching: false
     }
 }
 const data = (state = initialState, action) => {
     switch (action.type) {
-        case REQUEST_MAKE_DATA:
+        case actions.REQUEST_MAKE_DATA:
             return {
                 ...state, makeData: {
                     source: action.source,
                     isFetching: true
                 }
             }
-        case RECEIVE_MAKE_DATA:
-        case CHANGE_MAKE_DATA_QUERY:
+        case actions.RECEIVE_MAKE_DATA:
+        case actions.CHANGE_MAKE_DATA_QUERY:
             return Object.assign({}, state, {
                 makeData: {
                     source: state.makeData.source,
                     isFetching: false,
                     data: action.data || state.makeData.data
+                }
+            });
+        case actions.REQUEST_YEAR_DATA:
+            return {
+                ...state, yearData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_YEAR_DATA:
+        case actions.CHANGE_MAKE_DATA_QUERY:
+            return Object.assign({}, state, {
+                yearData: {
+                    source: state.yearData.source,
+                    isFetching: false,
+                    data: action.data || state.yearData.data
                 }
             });
         default:

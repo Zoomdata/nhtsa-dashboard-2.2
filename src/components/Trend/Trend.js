@@ -1,11 +1,25 @@
 import styles from './Trend.css';
 
-import React, { Component } from 'react';
+import React from 'react';
+import TrendChart from '../TrendChart/TrendChart';
+import { connect } from 'react-redux';
 
-export default class Trend extends Component {
-    render() {
-        return <div className={styles.root}>
-
-        </div>
+const mapStateToProps = (state) => {
+    return {
+        data: state.chartData.yearData.data
     }
-}
+};
+
+const Trend = ({data}) => {
+    return (
+        <div
+            className={styles.root}
+        >
+            <TrendChart
+                data={data}
+            />
+        </div>
+    )
+};
+
+export default connect(mapStateToProps)(Trend);
