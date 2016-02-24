@@ -38,10 +38,6 @@ export default class BarChart extends Component {
         const duration = 1000;
         const vendorPrefix = getVendorPrefix();
         let datasetLength = 0;
-        const isStopped = false;
-        const linearScale = d3.scale.linear();
-        const quantileScale = d3.scale.quantile();
-        let colorScale;
         this.chart = barChart()
             .width(getWidth(chartElement))
             .height(getHeight(chartElement))
@@ -71,7 +67,7 @@ export default class BarChart extends Component {
             d3.select(chartElement)
                 .datum(dataset)
                 .call(this.chart);
-        }
+        };
 
         function barChart() {
             let svg = null;
@@ -163,8 +159,7 @@ export default class BarChart extends Component {
                     let barsEnterGroup = bars.enter()
                         .append("div")
                         .attr("class", function(d, i) {
-                            let klass = (i % 2) === 0 ? styles.barGroupEven : styles.barGroupOdd;
-                            return klass;
+                            return (i % 2) === 0 ? styles.barGroupEven : styles.barGroupOdd;
                         })
                         .style(vendorPrefix + "transform", function(d) {
                             return "translate3d(0, " + (yScale(d.group) - 1) + "px, 0)";
@@ -192,7 +187,7 @@ export default class BarChart extends Component {
 
                     // Update Bar Group Positions
                     if (make) {
-                        const changeToActive = bars.filter(function(d) {
+                        const changeToActive = bars.filter(function() {
                             return d3.select(this).datum().group === make;
                         });
                         changeToActive.classed(styles.barGroupActive, true);
@@ -215,7 +210,7 @@ export default class BarChart extends Component {
                             active.classed(styles.barGroupActive, false);
                             d3.select(this).classed(styles.barGroupActive, true);
                             onClick(d.group, hideOverlay);
-                        })
+                        });
 
                     bars.select(`div.${styles.bar}`)
                         .style("height", "100%")
