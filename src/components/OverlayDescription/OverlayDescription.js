@@ -16,7 +16,6 @@ class OverlayDescription extends Component {
         let animationProps;
         if (hideOverlay) {
             animationProps = {
-                duration: 1000,
                 animation: {
                     opacity: 0
                 },
@@ -24,7 +23,6 @@ class OverlayDescription extends Component {
             }
         } else {
             animationProps = {
-                duration: 1000,
                 animation: {
                     opacity: 1
                 },

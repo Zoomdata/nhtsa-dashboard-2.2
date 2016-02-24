@@ -11,7 +11,6 @@ const AboutBlock = ({aboutVisibility}) => {
     let animationProps;
     if (aboutVisibility === 'CLOSE_ABOUT') {
         animationProps = {
-            duration: 1000,
             animation: {
                 opacity: 0
             },
@@ -19,7 +18,6 @@ const AboutBlock = ({aboutVisibility}) => {
         }
     } else {
         animationProps = {
-            duration: 1000,
             animation: {
                 opacity: 1
             },
