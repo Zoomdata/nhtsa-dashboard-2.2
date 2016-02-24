@@ -1,15 +1,49 @@
 import styles from './OverlayDescription.css';
 
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { VelocityComponent } from 'velocity-react';
 
-export default class OverlayDescription extends Component {
+const mapStateToProps = (state) => {
+    return {
+        hideOverlay: state.hideOverlay
+    }
+};
+
+class OverlayDescription extends Component {
     render() {
+        const { hideOverlay } = this.props;
+        let animationProps;
+        if (hideOverlay) {
+            animationProps = {
+                duration: 1000,
+                animation: {
+                    opacity: 0
+                },
+                display: 'none'
+            }
+        } else {
+            animationProps = {
+                duration: 1000,
+                animation: {
+                    opacity: 1
+                },
+                display: 'auto'
+            }
+        }
+
         return (
-            <div className={styles.root}>
-                WE used the Zoomdata API to create an app that
-                <br />
-                visualizes a <b>quarter-million</b> records in real time.
-            </div>
+            <VelocityComponent {...animationProps}>
+                <div
+                    className={styles.root}
+                >
+                    WE used the Zoomdata API to create an app that
+                    <br />
+                    visualizes a <b>quarter-million</b> records in real time.
+                </div>
+            </VelocityComponent>
         )
     }
-}
+};
+
+export default connect(mapStateToProps)(OverlayDescription);
