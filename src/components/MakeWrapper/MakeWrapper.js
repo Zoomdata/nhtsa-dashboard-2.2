@@ -9,32 +9,37 @@ import { connect } from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        hideOverlay: state.hideOverlay
+        browser: state.browser
     }
-}
+};
 
 class MakeWrapper extends Component {
-    componentDidMount() {
-        const { dispatch } = this.props;
-        const el = this.refs.makeWrapper;
-        const rect = el.getBoundingClientRect();
-        const makeWrapperDimensions = {
-            width: getWidth(el),
-            height: getHeight(el),
-            offsetTop: rect.top + document.body.scrollTop,
-            offsetLeft: rect.left + document.body.scrollLeft
+    setDimensions(comp) {
+        if (comp !== null) {
+            const { dispatch } = this.props;
+            const el = comp;
+            const rect = el.getBoundingClientRect();
+            const makeWrapperDimensions = {
+                width: getWidth(el),
+                height: getHeight(el),
+                offsetTop: rect.top + document.body.scrollTop,
+                offsetLeft: rect.left + document.body.scrollLeft
+            }
+            const { width, height, offsetTop, offsetLeft } = makeWrapperDimensions;
+            dispatch(setMakeWrapperDimensions(width, height, offsetTop, offsetLeft));
         }
-        const { width, height, offsetTop, offsetLeft } = makeWrapperDimensions;
-        dispatch(setMakeWrapperDimensions(width, height, offsetTop, offsetLeft));
     }
     render() {
         const { hideOverlay } = this.props;
         return (
             <div
                 className={styles.root}
-                ref="makeWrapper">
-                <MakeHeader hideOverlay={hideOverlay} />
-                <MakeBarChart hideOverlay={hideOverlay} />
+                ref={comp => {
+                    this.setDimensions(comp)
+                }}
+            >
+                <MakeHeader />
+                <MakeBarChart />
             </div>
         )
     }
