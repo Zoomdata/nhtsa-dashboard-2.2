@@ -63,6 +63,11 @@ export default class BarChart extends Component {
                 return d;
             });
             datasetLength = data.length;
+
+            this.chart
+                .width(getWidth(chartElement))
+                .height(getHeight(chartElement));
+
             d3.select(chartElement)
                 .datum(dataset)
                 .call(this.chart);
@@ -186,6 +191,16 @@ export default class BarChart extends Component {
                         });
 
                     // Update Bar Group Positions
+                    if (make) {
+                        const changeToActive = bars.filter(function(d) {
+                            return d3.select(this).datum().group === make;
+                        });
+                        changeToActive.classed(styles.barGroupActive, true);
+                    } else {
+                        const active = d3.select(`div.${styles.barGroupActive}`);
+                        active.classed(styles.barGroupActive, false);
+                    }
+
                     bars
                         .style("height", (yScale.rangeBand() - currentBarPadding) + "px")
                         .style(vendorPrefix + "transform", function(d) {
