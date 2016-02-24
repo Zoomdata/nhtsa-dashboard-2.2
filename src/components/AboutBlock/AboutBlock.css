@@ -1,4 +1,4 @@
-.normal {
+.root {
     margin-top: 36px;
     color: white;
     width: 580px;
@@ -8,8 +8,6 @@
     display: none;
 }
 
-.active {
-    composes: normal;
-    display: block;
+.root a:visited {
+    color: #fff
 }
-
