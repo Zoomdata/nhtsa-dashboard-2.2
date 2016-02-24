@@ -8,7 +8,9 @@ import { setMake, setHideOverlay } from '../../actions';
 const mapStateToProps = (state) => {
     return {
         data: state.chartData.makeData.data,
-        make: state.chartFilters.make
+        make: state.chartFilters.make,
+        hideOverlay: state.hideOverlay,
+        browser: state.browser
     }
 };
 
@@ -34,9 +36,7 @@ const MakeBarChart = ({
         <div
             className={styles.root}
             style={
-                hideOverlay ?
-                makeBarChartStyle :
-                null
+                hideOverlay ? makeBarChartStyle : null
             }
         >
             <BarChart
