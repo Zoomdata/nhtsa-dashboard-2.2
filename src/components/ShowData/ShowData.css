@@ -17,6 +17,7 @@
 }
 
 .active {
+    composes: normal;
     animation: tab-rotate 2s normal;
     animation-fill-mode: forwards;
     -webkit-filter: none;
