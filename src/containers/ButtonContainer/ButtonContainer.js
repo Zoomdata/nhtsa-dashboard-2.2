@@ -5,14 +5,17 @@ import ButtonContainer from '../../components/ButtonContainer/ButtonContainer';
 const mapStateToProps = (state) => {
     return {
         dashboardDimensions: state.layout.dashboardDimensions,
-        hoodAction: state.hoodAction
+        hoodAction: state.hoodAction,
+        arrowVisibility: state.arrowVisibility
     }
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: () => {
-            dispatch(setHoodAction('OPEN_HOOD'));
+        onClick: (hoodAction) => {
+            hoodAction === 'CLOSE_HOOD' ?
+                dispatch(setHoodAction('OPEN_HOOD')) :
+                dispatch(setHoodAction('CLOSE_HOOD'));
         }
     }
 };

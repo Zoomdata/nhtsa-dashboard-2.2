@@ -10,6 +10,7 @@ import Cover from '../Cover/Cover';
 const ButtonContainer = ({
     dashboardDimensions,
     hoodAction,
+    arrowVisibility,
     onClick
 }) => {
     const newTop = dashboardDimensions.height - 67;
@@ -23,14 +24,20 @@ const ButtonContainer = ({
             onClick={
                 (e) => {
                     e.stopPropagation();
-                    onClick();
+                    onClick(hoodAction);
                 }
 
             }
         >
             <Top />
-            <ShowData hoodAction={hoodAction} />
-            <ArrowBottom hoodAction={hoodAction}/>
+            <ShowData
+                hoodAction={hoodAction}
+                arrowVisibility={arrowVisibility}
+            />
+            <ArrowBottom
+                hoodAction={hoodAction}
+                arrowVisibility={arrowVisibility}
+            />
             <Bottom />
             <Cover />
         </div>

@@ -2,14 +2,25 @@ import styles from './ShowData.css';
 
 import React from 'react';
 
-const ShowData = (props) => {
-    const { hoodAction } = props;
+const ShowData = ({
+    hoodAction,
+    arrowVisibility
+}) => {
+    const showDataStyles = {
+        display: 'none'
+    };
+
     return (
         <img
             className={
                 hoodAction === 'OPEN_HOOD' ?
                 styles.active :
                 styles.normal
+            }
+            style={
+                arrowVisibility === 'HIDE_ARROW' ?
+                    showDataStyles :
+                    null
             }
             width="104"
             height="77"

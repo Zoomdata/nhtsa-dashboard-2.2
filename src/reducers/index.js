@@ -3,6 +3,7 @@ import layout from './layout';
 import activeTab from './active-tab';
 import hoodAction from './hood-action';
 import aboutVisibility from './about-visibility';
+import arrowVisibility from './arrow-visibility';
 import hideOverlay from './hide-overlay';
 import chartData from './chart-data';
 import chartFilters from './chart-filters';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
     activeTab,
     hoodAction,
     aboutVisibility,
+    arrowVisibility,
     hideOverlay,
     chartData,
     chartFilters

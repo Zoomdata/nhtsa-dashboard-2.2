@@ -23,6 +23,12 @@ export const AboutVisibilityOptions = {
 export const SET_MAKE = 'SET_MAKE';
 export const SET_HIDE_OVERLAY = 'SET_HIDE_OVERLAY';
 
+export const SET_ARROW_VISIBILITY_OPTION = 'SET_ARROW_VISIBILITY_OPTION';
+export const ArrowVisibilityOptions = {
+    SHOW_ARROW: 'SHOW_ARROW',
+    HIDE_ARROW: 'HIDE_ARROW'
+}
+
 export const REQUEST_MAKE_DATA = 'REQUEST_MAKE_DATA';
 export const RECEIVE_MAKE_DATA = 'RECEIVE_MAKE_DATA';
 
@@ -69,6 +75,13 @@ export function setHoodAction(action) {
 export function setAboutVisibilityOption(option) {
     return {
         type: SET_ABOUT_VISIBILITY_OPTION,
+        option
+    }
+}
+
+export function setArrowVisibilityOption(option) {
+    return {
+        type: SET_ARROW_VISIBILITY_OPTION,
         option
     }
 }
