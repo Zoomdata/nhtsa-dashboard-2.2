@@ -43,6 +43,7 @@
     "babel-polyfill": "^6.5.0",
     "d3": "^3.5.15",
     "normalize.css": "^3.0.3",
+    "oauth2-implicit": "^0.7.0-0",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
     "react-redux": "^4.4.0",

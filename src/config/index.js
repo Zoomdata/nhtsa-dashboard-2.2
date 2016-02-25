@@ -1,21 +1,47 @@
-import JSO from 'JSO';
+import { start as oauthStart, parseCredentials } from 'oauth2-implicit'
+import { tapValue, clearLocationHash } from 'oauth2-implicit/build/utils';
 import ZoomdataSDK from 'ZoomdataSDK';
 import { localhost } from './zoomdata-connections/localhost';
 
 const {credentials, application} = localhost;
 
-let jso = new JSO({
-    providerID: "zoomdata",
+const oauthOptions = {
     client_id: "bmh0c2FfY2xpZW50MTQ1Mzk5MzY3OTM3MjJiODVjNTUyLWZmZjgtNGEzZi1hYjlmLWU0NzQ1NjUzNTQ1NA==",
     redirect_uri: "http://localhost:3000/index.html",
-    authorization: "http://localhost:8080/zoomdata/oauth/authorize",
-    scope: 'read'
-});
+    auth_uri: "http://localhost:8080/zoomdata/oauth/authorize",
+    scope: ['read']
+};
 
-jso.callback();
-jso.getToken(function(token) {
-    credentials.access_token = token.access_token;
-});
+const oauthFinish = () => {
+    // isOauthRedirect :: String -> Bool
+    const isOauthRedirect = (hashString) => (
+        hashString.indexOf('#access_token') !== -1
+    );
+
+    /* This function mutates location to remove
+     the retrieved credentials */
+    // extractCredentials :: String -> {} || null
+    const extractCredentials = (hash) => (
+        tapValue(
+            parseCredentials(hash),
+            clearLocationHash
+        )
+    );
+
+    if (isOauthRedirect(location.hash)) {
+        const oauthCredentials = extractCredentials(location.hash.slice(1));
+        credentials.access_token = oauthCredentials.accessToken;
+        return oauthCredentials;
+    } else {
+        return null;
+    }
+};
+
+const oauthInit = (options) => {
+    oauthFinish() || oauthStart(options);
+};
+
+oauthInit(oauthOptions);
 
 function initClient() {
     return ZoomdataSDK.createClient({

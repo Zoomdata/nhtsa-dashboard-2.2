@@ -23,7 +23,6 @@ var common = {
         extensions: ['', '.js', '.jsx']
     },
     externals: {
-        "JSO": "JSO",
         "ZoomdataSDK": "ZoomdataSDK"
     },
     module: {
