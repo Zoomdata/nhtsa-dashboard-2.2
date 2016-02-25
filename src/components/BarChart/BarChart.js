@@ -32,7 +32,7 @@ export default class BarChart extends Component {
     }
 
     createChart() {
-        let make;
+        let active;
         let onClick;
         const chartElement = this.refs.barChart;
         const duration = 1000;
@@ -49,7 +49,7 @@ export default class BarChart extends Component {
             });
 
         this.updateChart = function(nextProps) {
-            make = nextProps.make;
+            active = nextProps.active;
             onClick = nextProps.onClick;
             const data = nextProps.data || [];
             let dataset = data.map(function(d) {
@@ -186,9 +186,9 @@ export default class BarChart extends Component {
                         });
 
                     // Update Bar Group Positions
-                    if (make) {
+                    if (active) {
                         const changeToActive = bars.filter(function() {
-                            return d3.select(this).datum().group === make;
+                            return d3.select(this).datum().group === active;
                         });
                         changeToActive.classed(styles.barGroupActive, true);
                     } else {
@@ -202,7 +202,7 @@ export default class BarChart extends Component {
                             return "translate3d(0, " + yScale(d.group) + "px, 0)";
                         })
                         .on('click', function(d) {
-                            if (make === d.group) {
+                            if (active === d.group) {
                                 return;
                             }
                             const active = d3.select(`div.${styles.barGroupActive}`);

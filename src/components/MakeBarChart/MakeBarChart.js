@@ -41,7 +41,7 @@ const MakeBarChart = ({
         >
             <BarChart
                 data={data}
-                make={make}
+                active={make}
                 onClick={onClick}
             />
         </div>
