@@ -43,6 +43,9 @@ export const RECEIVE_MAKE_DATA = 'RECEIVE_MAKE_DATA';
 export const REQUEST_YEAR_DATA = 'REQUEST_YEAR_DATA';
 export const RECEIVE_YEAR_DATA = 'RECEIVE_YEAR_DATA';
 
+export const REQUEST_MODEL_DATA = 'REQUEST_MODEL_DATA';
+export const RECEIVE_MODEL_DATA = 'RECEIVE_MODEL_DATA';
+
 export function setDashboardDimensions(width, height, offsetLeft) {
     return {
         type: SET_DASHBOARD_DIMENSIONS,
@@ -135,6 +138,20 @@ export function requestYearData(source) {
 export function receiveYearData(data) {
     return {
         type: RECEIVE_YEAR_DATA,
+        data
+    }
+}
+
+export function requestModelData(source) {
+    return {
+        type: REQUEST_MODEL_DATA,
+        source
+    }
+}
+
+export function receiveModelData(data) {
+    return {
+        type: RECEIVE_MODEL_DATA,
         data
     }
 }

@@ -6,6 +6,9 @@ const initialState = {
     },
     yearData: {
         isFetching: false
+    },
+    modelData: {
+        isFetching: false
     }
 }
 const data = (state = initialState, action) => {
@@ -18,7 +21,6 @@ const data = (state = initialState, action) => {
                 }
             }
         case actions.RECEIVE_MAKE_DATA:
-        case actions.CHANGE_MAKE_DATA_QUERY:
             return Object.assign({}, state, {
                 makeData: {
                     source: state.makeData.source,
@@ -34,12 +36,26 @@ const data = (state = initialState, action) => {
                 }
             }
         case actions.RECEIVE_YEAR_DATA:
-        case actions.CHANGE_MAKE_DATA_QUERY:
             return Object.assign({}, state, {
                 yearData: {
                     source: state.yearData.source,
                     isFetching: false,
                     data: action.data || state.yearData.data
+                }
+            });
+        case actions.REQUEST_MODEL_DATA:
+            return {
+                ...state, modelData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_MODEL_DATA:
+            return Object.assign({}, state, {
+                modelData: {
+                    source: state.modelData.source,
+                    isFetching: false,
+                    data: action.data || state.modelData.data
                 }
             });
         default:

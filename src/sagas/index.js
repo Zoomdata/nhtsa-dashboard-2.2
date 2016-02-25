@@ -2,6 +2,7 @@ import { take, put, call, fork } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as makeData from '../config/queries/makeData';
 import * as yearData from '../config/queries/yearData';
+import * as modelData from '../config/queries/modelData';
 import { createClient } from '../config';
 
 let queryData = [];
@@ -59,6 +60,20 @@ function* fetchYearData (client, source, queryConfig) {
     yield put(actions.receiveYearData(data));
 }
 
+function* fetchModelData (client, source, queryConfig) {
+    if (!ModelDataQuery) {
+        const query = yield call(getQuery, client, source, queryConfig);
+        ModelDataQuery = query;
+    }
+    yield put(actions.requestModelData(modelData.source));
+    if (!ModelDataThread) {
+        const thread = yield call(getThread, client, ModelDataQuery);
+        ModelDataThread = thread;
+    }
+    const data = yield call(fetchDataApi, ModelDataThread);
+    yield put(actions.receiveModelData(data));
+}
+
 //function* changeMakeDataQuery(getState) {
 //    while(true) {
 //        const source = getState().chartData.makeData.source;
@@ -70,6 +85,7 @@ function* fetchYearData (client, source, queryConfig) {
 function* startup(client) {
     yield fork(fetchYearData, client, yearData.source, yearData.queryConfig);
     yield fork(fetchMakeData, client, makeData.source, makeData.queryConfig);
+    yield fork(fetchModelData, client, modelData.source, modelData.queryConfig);
 }
 
 export default function* root(getState) {
@@ -84,3 +100,5 @@ export let MakeDataQuery = undefined;
 export let MakeDataThread = undefined;
 export let YearDataQuery = undefined;
 export let YearDataThread = undefined;
+export let ModelDataQuery = undefined;
+export let ModelDataThread = undefined;
