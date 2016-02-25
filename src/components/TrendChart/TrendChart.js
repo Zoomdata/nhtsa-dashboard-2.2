@@ -24,6 +24,8 @@ export default class TrendChart extends Component {
     }
 
     createChart() {
+        let onBrushEnd;
+        let filterStatus;
         const chartElement = this.refs.trendChart;
         const duration = 1000;
         this.chart = trendChart()
@@ -31,6 +33,8 @@ export default class TrendChart extends Component {
             .height(getHeight(chartElement));
 
         this.updateChart = function(nextProps) {
+            filterStatus = nextProps.filterStatus;
+            onBrushEnd = nextProps.onBrushEnd;
             const data = nextProps.data || [];
             let dataset = data.map(function(d) {
                 if (d.group && d.group.constructor === Array) {
@@ -50,10 +54,10 @@ export default class TrendChart extends Component {
 
         function trendChart() {
             let svg = null;
+            let brushExtent = [90, 360];
             let bars = null;
             let widgetHeight = 500;
             let widgetWidth = 500;
-            let widgetSize = 'large';
             let barWidth = 30;
             let margin = {top: 0, right: 0, bottom: 0, left: 45};
             let width = widgetWidth - margin.left - margin.right;
@@ -63,10 +67,8 @@ export default class TrendChart extends Component {
             let yValue = function(d) { return d; };
             let currentBarPadding = 0.1;
             let currentOuterPadding = 0;
-            let ease = 'cubic-in-out';
             let brush = d3.svg.brush()
                 .x(xScale)
-                //.on('brushstart', brushstart)
                 .on('brush', brushmove)
                 .on('brushend', brushend);
             let groupKey = function(d) {
@@ -78,6 +80,12 @@ export default class TrendChart extends Component {
                     if(!data) {
                         return;
                     }
+                    if (filterStatus === 'FILTERS_RESET') {
+                        d3.select(this).select(`.${styles.brush}`)
+                            .transition()
+                            .call(brush.extent(brushExtent))
+                            .call(brush.event);
+                    };
                     width = data.length * barWidth;
                     height = widgetHeight - margin.top - margin.bottom;
 
@@ -202,7 +210,7 @@ export default class TrendChart extends Component {
 
                     setTimeout(function() {
                         brushEnter
-                            .call(brush.extent([0, 600]))
+                            .call(brush.extent(brushExtent))
                             .call(brush.event);
                     }, 500);
                 })
@@ -266,9 +274,14 @@ export default class TrendChart extends Component {
                         .call(brush.extent([snappedWidth + buffer, snappedWidth + barWidth - buffer]))
                         .call(brush.event);
                 } else {
-                    const selectedYears = bars.filter('.selected').data().map(function(d) {
+                    const selectedYears = bars.filter(`.${styles.selected}`).data().map(function(d) {
                         return d.group;
                     });
+
+                    const changeFilterStatus = (brush.extent()[0] === brushExtent[0]) && (brush.extent()[1] === brushExtent[1]) ?
+                        false :
+                        true
+                    onBrushEnd(selectedYears, changeFilterStatus);
                 }
             }
 

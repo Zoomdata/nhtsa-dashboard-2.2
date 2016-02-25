@@ -21,7 +21,15 @@ export const AboutVisibilityOptions = {
 }
 
 export const SET_MAKE = 'SET_MAKE';
+export const SET_YEAR = 'SET_YEAR';
 export const SET_HIDE_OVERLAY = 'SET_HIDE_OVERLAY';
+
+export const SET_FILTERS = 'SET_FILTERS';
+export const RESET_FILTERS = 'RESET_FILTERS';
+export const FilterStatuses = {
+    FILTERS_APPLIED: 'FILTERS_APPLIED',
+    FILTERS_RESET: 'FILTERS_RESET'
+}
 
 export const SET_ARROW_VISIBILITY_OPTION = 'SET_ARROW_VISIBILITY_OPTION';
 export const ArrowVisibilityOptions = {
@@ -82,6 +90,20 @@ export function setAboutVisibilityOption(option) {
     }
 }
 
+export function setFilterStatus(status) {
+    if (status === FilterStatuses.FILTERS_APPLIED) {
+        return {
+            type: SET_FILTERS,
+            status
+        }
+    } else {
+        return {
+            type: RESET_FILTERS,
+            status
+        }
+    }
+}
+
 export function setArrowVisibilityOption(option) {
     return {
         type: SET_ARROW_VISIBILITY_OPTION,
@@ -121,6 +143,13 @@ export function setMake(make) {
     return {
         type: SET_MAKE,
         make
+    }
+}
+
+export function setYear(year) {
+    return {
+        type: SET_YEAR,
+        year
     }
 }
 
