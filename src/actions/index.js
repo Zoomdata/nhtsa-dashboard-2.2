@@ -22,6 +22,7 @@ export const AboutVisibilityOptions = {
 
 export const SET_MAKE = 'SET_MAKE';
 export const SET_YEAR = 'SET_YEAR';
+export const SET_MODEL = 'SET_MODEL';
 export const SET_HIDE_OVERLAY = 'SET_HIDE_OVERLAY';
 
 export const SET_FILTERS = 'SET_FILTERS';
@@ -167,6 +168,13 @@ export function setYear(year) {
     return {
         type: SET_YEAR,
         year
+    }
+}
+
+export function setModel(model) {
+    return {
+        type: SET_MODEL,
+        model
     }
 }
 
