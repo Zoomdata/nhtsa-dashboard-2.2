@@ -9,6 +9,9 @@ const initialState = {
     },
     modelData: {
         isFetching: false
+    },
+    componentData: {
+        isFetching: false
     }
 }
 const data = (state = initialState, action) => {
@@ -56,6 +59,21 @@ const data = (state = initialState, action) => {
                     source: state.modelData.source,
                     isFetching: false,
                     data: action.data || state.modelData.data
+                }
+            });
+        case actions.REQUEST_COMPONENT_DATA:
+            return {
+                ...state, componentData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_COMPONENT_DATA:
+            return Object.assign({}, state, {
+                componentData: {
+                    source: state.componentData.source,
+                    isFetching: false,
+                    data: action.data || state.componentData.data
                 }
             });
         default:

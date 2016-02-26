@@ -1,7 +1,7 @@
 import styles from './Tab.css';
 
 import React from 'react';
-import Scatterplot from '../Scatterplot/Scatterplot';
+import ComponentScatterplot from '../ComponentScatterplot/ComponentScatterplot';
 import Map from '../Map/Map';
 
 const Tab = ({
@@ -15,7 +15,7 @@ const Tab = ({
                 tab === chart ?
                 styles.active :
                 styles.normal
-            }>{chart === 'scatterplot' ? <Scatterplot /> : <Map />}
+            }>{chart === 'scatterplot' ? <ComponentScatterplot /> : <Map />}
         </div>
     )
 };

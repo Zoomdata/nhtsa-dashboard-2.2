@@ -3,6 +3,7 @@ import * as actions from '../actions';
 import * as makeData from '../config/queries/makeData';
 import * as yearData from '../config/queries/yearData';
 import * as modelData from '../config/queries/modelData';
+import * as componentData from '../config/queries/componentData';
 import { createClient } from '../config';
 
 let queryData = [];
@@ -82,10 +83,33 @@ function* changeModelDataQuery(getState) {
     }
 }
 
+function* fetchComponentData (client, source, queryConfig) {
+    if (!ComponentDataQuery) {
+        const query = yield call(getQuery, client, source, queryConfig);
+        ComponentDataQuery = query;
+    }
+    yield put(actions.requestComponentData(componentData.source));
+    if (!ComponentDataThread) {
+        const thread = yield call(getThread, client, ComponentDataQuery);
+        ComponentDataThread = thread;
+    }
+    const data = yield call(fetchDataApi, ComponentDataThread);
+    yield put(actions.receiveComponentData(data));
+}
+
+function* changeComponentDataQuery(getState) {
+    while(true) {
+        const source = getState().chartData.componentData.source;
+        yield take(actions.CHANGE_COMPONENT_DATA_QUERY);
+        yield fork(fetchComponentData, ComponentDataThread);
+    }
+}
+
 function* startup(client) {
-    yield fork(fetchYearData, client, yearData.source, yearData.queryConfig);
     yield fork(fetchMakeData, client, makeData.source, makeData.queryConfig);
+    yield fork(fetchYearData, client, yearData.source, yearData.queryConfig);
     yield fork(fetchModelData, client, modelData.source, modelData.queryConfig);
+    yield fork(fetchComponentData, client, componentData.source, componentData.queryConfig);
 }
 
 export default function* root(getState) {
@@ -102,3 +126,5 @@ export let YearDataQuery = undefined;
 export let YearDataThread = undefined;
 export let ModelDataQuery = undefined;
 export let ModelDataThread = undefined;
+export let ComponentDataQuery = undefined;
+export let ComponentDataThread = undefined;

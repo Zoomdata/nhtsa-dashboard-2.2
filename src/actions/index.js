@@ -48,6 +48,10 @@ export const REQUEST_MODEL_DATA = 'REQUEST_MODEL_DATA';
 export const RECEIVE_MODEL_DATA = 'RECEIVE_MODEL_DATA';
 export const CHANGE_MODEL_DATA_QUERY = 'CHANGE_MODEL_DATA_QUERY';
 
+export const REQUEST_COMPONENT_DATA = 'REQUEST_COMPONENT_DATA';
+export const RECEIVE_COMPONENT_DATA = 'RECEIVE_COMPONENT_DATA';
+export const CHANGE_COMPONENT_DATA_QUERY = 'CHANGE_COMPONENT_DATA_QUERY';
+
 export function setDashboardDimensions(width, height, offsetLeft) {
     return {
         type: SET_DASHBOARD_DIMENSIONS,
@@ -161,6 +165,26 @@ export function receiveModelData(data) {
 export function changeModelDataQuery() {
     return {
         type: CHANGE_MODEL_DATA_QUERY
+    }
+}
+
+export function requestComponentData(source) {
+    return {
+        type: REQUEST_COMPONENT_DATA,
+        source
+    }
+}
+
+export function receiveComponentData(data) {
+    return {
+        type: RECEIVE_COMPONENT_DATA,
+        data
+    }
+}
+
+export function changeComponentDataQuery() {
+    return {
+        type: CHANGE_COMPONENT_DATA_QUERY
     }
 }
 
