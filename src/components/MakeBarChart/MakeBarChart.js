@@ -3,7 +3,8 @@ import styles from './MakeBarChart.css';
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { connect } from 'react-redux';
-import { setMake, setHideOverlay } from '../../actions';
+import { setMake, changeModelDataQuery, setHideOverlay } from '../../actions';
+import { ModelDataQuery } from '../../sagas';
 
 const mapStateToProps = (state) => {
     return {
@@ -17,7 +18,14 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onClick: (make, hideOverlay) => {
+            const filter = {
+                path: 'make',
+                operation: 'IN',
+                value: [make]
+            };
             dispatch(setMake(make));
+            ModelDataQuery.filters.add(filter);
+            dispatch(changeModelDataQuery());
             hideOverlay ? dispatch(setHideOverlay()) : null;
         }
     }
@@ -41,7 +49,7 @@ const MakeBarChart = ({
         >
             <BarChart
                 data={data}
-                active={make}
+                activeBar={make}
                 onClick={onClick}
             />
         </div>

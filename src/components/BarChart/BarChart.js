@@ -17,6 +17,9 @@ export default class BarChart extends Component {
         return false;
     }
     componentWillReceiveProps(nextProps) {
+        if (!nextProps.data) {
+            return;
+        }
         this.updateChart(nextProps);
     }
     componentDidMount() {
@@ -32,7 +35,7 @@ export default class BarChart extends Component {
     }
 
     createChart() {
-        let active;
+        let activeBar;
         let onClick;
         const chartElement = this.refs.barChart;
         const duration = 1000;
@@ -49,7 +52,7 @@ export default class BarChart extends Component {
             });
 
         this.updateChart = function(nextProps) {
-            active = nextProps.active;
+            activeBar = nextProps.activeBar;
             onClick = nextProps.onClick;
             const data = nextProps.data || [];
             let dataset = data.map(function(d) {
@@ -186,13 +189,13 @@ export default class BarChart extends Component {
                         });
 
                     // Update Bar Group Positions
-                    if (active) {
+                    if (activeBar) {
                         const changeToActive = bars.filter(function() {
-                            return d3.select(this).datum().group === active;
+                            return d3.select(this).datum().group === activeBar;
                         });
                         changeToActive.classed(styles.barGroupActive, true);
                     } else {
-                        const active = d3.select(`div.${styles.barGroupActive}`);
+                        const active = d3.select(this).select(`div.${styles.barGroupActive}`);
                         active.classed(styles.barGroupActive, false);
                     }
 
@@ -202,10 +205,10 @@ export default class BarChart extends Component {
                             return "translate3d(0, " + yScale(d.group) + "px, 0)";
                         })
                         .on('click', function(d) {
-                            if (active === d.group) {
+                            if (activeBar === d.group) {
                                 return;
                             }
-                            const active = d3.select(`div.${styles.barGroupActive}`);
+                            const active = d3.select(chartElement).select(`div.${styles.barGroupActive}`);
                             const hideOverlay = active.empty() ? true : false;
                             active.classed(styles.barGroupActive, false);
                             d3.select(this).classed(styles.barGroupActive, true);

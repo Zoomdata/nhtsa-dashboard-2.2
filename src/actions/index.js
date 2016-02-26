@@ -46,6 +46,7 @@ export const RECEIVE_YEAR_DATA = 'RECEIVE_YEAR_DATA';
 
 export const REQUEST_MODEL_DATA = 'REQUEST_MODEL_DATA';
 export const RECEIVE_MODEL_DATA = 'RECEIVE_MODEL_DATA';
+export const CHANGE_MODEL_DATA_QUERY = 'CHANGE_MODEL_DATA_QUERY';
 
 export function setDashboardDimensions(width, height, offsetLeft) {
     return {
@@ -154,6 +155,12 @@ export function receiveModelData(data) {
     return {
         type: RECEIVE_MODEL_DATA,
         data
+    }
+}
+
+export function changeModelDataQuery() {
+    return {
+        type: CHANGE_MODEL_DATA_QUERY
     }
 }
 

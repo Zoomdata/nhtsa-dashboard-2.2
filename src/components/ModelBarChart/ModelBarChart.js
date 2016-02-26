@@ -32,7 +32,7 @@ const ModelBarChart = ({
         >
             <BarChart
                 data={data}
-                active={model}
+                activeBar={model}
                 onClick={onClick}
             />
         </div>

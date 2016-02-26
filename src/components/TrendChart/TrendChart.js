@@ -9,6 +9,9 @@ export default class TrendChart extends Component {
         return false;
     }
     componentWillReceiveProps(nextProps) {
+        if (!nextProps.data) {
+            return;
+        }
         this.updateChart(nextProps);
     }
     componentDidMount() {
