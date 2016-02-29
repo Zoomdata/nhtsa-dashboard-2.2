@@ -6,7 +6,8 @@ import Foreground from '../Foreground/Foreground';
 
 export default class LED extends Component {
     render() {
-        return this.props.position === '5' ? this.renderFive() : this.renderSix();
+        const { position } = this.props;
+        return position === '5' ? this.renderFive() : this.renderSix();
     }
     renderFive() {
         return <div className={styles.five}>
