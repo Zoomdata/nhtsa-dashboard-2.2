@@ -3,7 +3,8 @@ import styles from './ModelBarChart.css';
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { connect } from 'react-redux';
-import { setModel } from '../../actions';
+import { setModel, setFilterStatus, changeComponentDataQuery } from '../../actions';
+import { ComponentDataQuery } from '../../sagas';
 
 const mapStateToProps = (state) => {
     return {
@@ -16,7 +17,15 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onClick: (model) => {
+            const filter = {
+                path: 'model',
+                operation: 'IN',
+                value: [model]
+            };
             dispatch(setModel(model));
+            ComponentDataQuery.filters.add(filter);
+            dispatch(changeComponentDataQuery());
+            dispatch(setFilterStatus('FILTERS_APPLIED'))
         }
     }
 };

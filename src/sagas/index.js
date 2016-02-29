@@ -88,6 +88,7 @@ function* fetchComponentData (client, source, queryConfig) {
         const query = yield call(getQuery, client, source, queryConfig);
         ComponentDataQuery = query;
     }
+
     yield put(actions.requestComponentData(componentData.source));
     if (!ComponentDataThread) {
         const thread = yield call(getThread, client, ComponentDataQuery);
@@ -117,7 +118,7 @@ export default function* root(getState) {
     ZoomdataClient = client;
     yield fork(startup, ZoomdataClient);
     yield fork(changeModelDataQuery, getState);
-
+    yield fork(changeComponentDataQuery, getState);
 }
 export let ZoomdataClient = undefined;
 export let MakeDataQuery = undefined;

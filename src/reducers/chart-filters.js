@@ -20,7 +20,7 @@ const chartFilters = (state = {filterStatus: FILTERS_RESET}, action) => {
             }
         case RESET_FILTERS:
             return {
-                ...state, filterStatus: action.status
+                ...state, filterStatus: action.status, model: undefined
             }
         default:
             return state

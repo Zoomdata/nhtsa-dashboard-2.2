@@ -2,7 +2,8 @@ import styles from './Circle.css';
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { setFilterStatus } from '../../actions';
+import { setFilterStatus, changeComponentDataQuery } from '../../actions';
+import { ComponentDataQuery } from '../../sagas';
 
 const mapStateToProps = (state) => {
     return {
@@ -14,6 +15,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onClick: () => {
             dispatch(setFilterStatus('FILTERS_RESET'));
+            ComponentDataQuery.filters.remove('model');
+            dispatch(changeComponentDataQuery());
         }
     }
 };

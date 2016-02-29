@@ -3,8 +3,8 @@ import styles from './MakeBarChart.css';
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { connect } from 'react-redux';
-import { setMake, changeModelDataQuery, setHideOverlay } from '../../actions';
-import { ModelDataQuery } from '../../sagas';
+import { setMake, changeModelDataQuery, changeComponentDataQuery, setHideOverlay } from '../../actions';
+import { ModelDataQuery, ComponentDataQuery } from '../../sagas';
 
 const mapStateToProps = (state) => {
     return {
@@ -26,6 +26,8 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(setMake(make));
             ModelDataQuery.filters.add(filter);
             dispatch(changeModelDataQuery());
+            ComponentDataQuery.filters.add(filter);
+            dispatch(changeComponentDataQuery());
             hideOverlay ? dispatch(setHideOverlay()) : null;
         }
     }
