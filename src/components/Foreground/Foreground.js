@@ -1,9 +1,15 @@
 import styles from './Foreground.css';
 
-import React, { Component } from 'react';
+import React from 'react';
 
-export default class Foreground extends Component {
-    render() {
-        return <div className={styles.root}></div>
-    }
-}
+const Foreground = () => {
+    return (
+        <div
+            className={styles.root}
+        >
+            257001
+        </div>
+    )
+};
+
+export default Foreground;
