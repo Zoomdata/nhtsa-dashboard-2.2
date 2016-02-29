@@ -62,7 +62,6 @@ export default class BarChart extends Component {
                 return d;
             });
             datasetLength = data.length;
-
             this.chart
                 .width(getWidth(chartElement))
                 .height(getHeight(chartElement));
@@ -195,7 +194,7 @@ export default class BarChart extends Component {
                         });
                         changeToActive.classed(styles.barGroupActive, true);
                     } else {
-                        const active = d3.select(this).select(`div.${styles.barGroupActive}`);
+                        const active = d3.select(this).selectAll(`div.${styles.barGroupActive}`);
                         active.classed(styles.barGroupActive, false);
                     }
 
@@ -208,7 +207,7 @@ export default class BarChart extends Component {
                             if (activeBar === d.group) {
                                 return;
                             }
-                            const active = d3.select(chartElement).select(`div.${styles.barGroupActive}`);
+                            const active = d3.select(chartElement).selectAll(`div.${styles.barGroupActive}`);
                             const hideOverlay = active.empty() ? true : false;
                             active.classed(styles.barGroupActive, false);
                             d3.select(this).classed(styles.barGroupActive, true);
