@@ -3,8 +3,8 @@ import styles from './ModelBarChart.css';
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { connect } from 'react-redux';
-import { setModel, setFilterStatus, changeComponentDataQuery } from '../../actions';
-import { ComponentDataQuery } from '../../sagas';
+import { setModel, setFilterStatus, changeComponentDataQuery, changeMetricDataQuery } from '../../actions';
+import { ComponentDataQuery, MetricDataQuery } from '../../sagas';
 
 const mapStateToProps = (state) => {
     return {
@@ -23,8 +23,12 @@ const mapDispatchToProps = (dispatch) => {
                 value: [model]
             };
             dispatch(setModel(model));
+            ComponentDataQuery.filters.remove(filter.path);
             ComponentDataQuery.filters.add(filter);
             dispatch(changeComponentDataQuery());
+            MetricDataQuery.filters.remove(filter.path);
+            MetricDataQuery.filters.add(filter);
+            dispatch(changeMetricDataQuery());
             dispatch(setFilterStatus('FILTERS_APPLIED'))
         }
     }

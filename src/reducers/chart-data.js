@@ -12,6 +12,12 @@ const initialState = {
     },
     componentData: {
         isFetching: false
+    },
+    metricTotalsData: {
+        isFetching: false
+    },
+    metricData: {
+        isFetching: false
     }
 }
 const data = (state = initialState, action) => {
@@ -74,6 +80,36 @@ const data = (state = initialState, action) => {
                     source: state.componentData.source,
                     isFetching: false,
                     data: action.data || state.componentData.data
+                }
+            });
+        case actions.REQUEST_METRIC_TOTALS_DATA:
+            return {
+                ...state, metricTotalsData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_METRIC_TOTALS_DATA:
+            return Object.assign({}, state, {
+                metricTotalsData: {
+                    source: state.metricTotalsData.source,
+                    isFetching: false,
+                    data: action.data || state.metricTotalsData.data
+                }
+            });
+        case actions.REQUEST_METRIC_DATA:
+            return {
+                ...state, metricData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_METRIC_DATA:
+            return Object.assign({}, state, {
+                metricData: {
+                    source: state.metricData.source,
+                    isFetching: false,
+                    data: action.data || state.metricData.data
                 }
             });
         default:

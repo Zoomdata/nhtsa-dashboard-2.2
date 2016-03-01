@@ -3,6 +3,12 @@
  */
 
 (function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.ZoomdataSDK = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+
+},{}],2:[function(require,module,exports){
+arguments[4][1][0].apply(exports,arguments)
+},{"dup":1}],3:[function(require,module,exports){
+arguments[4][1][0].apply(exports,arguments)
+},{"dup":1}],4:[function(require,module,exports){
 var cuid = require('cuid')
 var css = require('css')
 var insert = require('insert-css')
@@ -29,11 +35,11 @@ module.exports = function(scope, style) {
   insert(css.stringify(o))
 }
 
-},{"css":2,"cuid":25,"insert-css":26}],2:[function(require,module,exports){
+},{"css":5,"cuid":28,"insert-css":29}],5:[function(require,module,exports){
 exports.parse = require('./lib/parse');
 exports.stringify = require('./lib/stringify');
 
-},{"./lib/parse":3,"./lib/stringify":7}],3:[function(require,module,exports){
+},{"./lib/parse":6,"./lib/stringify":10}],6:[function(require,module,exports){
 // http://www.w3.org/TR/CSS21/grammar.html
 // https://github.com/visionmedia/css-parse/pull/49#issuecomment-30088027
 var commentre = /\/\*[^*]*\*+([^/*][^*]*\*+)*\//g
@@ -637,7 +643,7 @@ function addParent(obj, parent) {
   return obj;
 }
 
-},{}],4:[function(require,module,exports){
+},{}],7:[function(require,module,exports){
 
 /**
  * Expose `Compiler`.
@@ -689,7 +695,7 @@ Compiler.prototype.mapVisit = function(nodes, delim){
   return buf;
 };
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -890,7 +896,7 @@ Compiler.prototype.declaration = function(node){
 };
 
 
-},{"./compiler":4,"inherits":9}],6:[function(require,module,exports){
+},{"./compiler":7,"inherits":12}],9:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -1146,7 +1152,7 @@ Compiler.prototype.indent = function(level) {
   return Array(this.level).join(this.indentation || '  ');
 };
 
-},{"./compiler":4,"inherits":9}],7:[function(require,module,exports){
+},{"./compiler":7,"inherits":12}],10:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -1195,7 +1201,7 @@ module.exports = function(node, options){
   return code;
 };
 
-},{"./compress":5,"./identity":6,"./source-map-support":8}],8:[function(require,module,exports){
+},{"./compress":8,"./identity":9,"./source-map-support":11}],11:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -1323,7 +1329,7 @@ exports.comment = function(node) {
     return this._comment(node);
 };
 
-},{"fs":32,"path":34,"source-map":13,"source-map-resolve":12,"urix":24}],9:[function(require,module,exports){
+},{"fs":35,"path":37,"source-map":16,"source-map-resolve":15,"urix":27}],12:[function(require,module,exports){
 if (typeof Object.create === 'function') {
   // implementation from standard node.js 'util' module
   module.exports = function inherits(ctor, superCtor) {
@@ -1348,7 +1354,7 @@ if (typeof Object.create === 'function') {
   }
 }
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -1397,7 +1403,7 @@ void (function(root, factory) {
 
 }));
 
-},{}],11:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -1456,7 +1462,7 @@ void (function(root, factory) {
 
 }));
 
-},{}],12:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -1681,7 +1687,7 @@ void (function(root, factory) {
 
 }));
 
-},{"resolve-url":10,"source-map-url":11}],13:[function(require,module,exports){
+},{"resolve-url":13,"source-map-url":14}],16:[function(require,module,exports){
 /*
  * Copyright 2009-2011 Mozilla Foundation and contributors
  * Licensed under the New BSD license. See LICENSE.txt or:
@@ -1691,7 +1697,7 @@ exports.SourceMapGenerator = require('./source-map/source-map-generator').Source
 exports.SourceMapConsumer = require('./source-map/source-map-consumer').SourceMapConsumer;
 exports.SourceNode = require('./source-map/source-node').SourceNode;
 
-},{"./source-map/source-map-consumer":19,"./source-map/source-map-generator":20,"./source-map/source-node":21}],14:[function(require,module,exports){
+},{"./source-map/source-map-consumer":22,"./source-map/source-map-generator":23,"./source-map/source-node":24}],17:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -1790,7 +1796,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":22,"amdefine":23}],15:[function(require,module,exports){
+},{"./util":25,"amdefine":26}],18:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -1934,7 +1940,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./base64":16,"amdefine":23}],16:[function(require,module,exports){
+},{"./base64":19,"amdefine":26}],19:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -1978,7 +1984,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":23}],17:[function(require,module,exports){
+},{"amdefine":26}],20:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -2060,7 +2066,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":23}],18:[function(require,module,exports){
+},{"amdefine":26}],21:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2014 Mozilla Foundation and contributors
@@ -2148,7 +2154,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./util":22,"amdefine":23}],19:[function(require,module,exports){
+},{"./util":25,"amdefine":26}],22:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -2725,7 +2731,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":14,"./base64-vlq":15,"./binary-search":17,"./util":22,"amdefine":23}],20:[function(require,module,exports){
+},{"./array-set":17,"./base64-vlq":18,"./binary-search":20,"./util":25,"amdefine":26}],23:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3127,7 +3133,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./array-set":14,"./base64-vlq":15,"./mapping-list":18,"./util":22,"amdefine":23}],21:[function(require,module,exports){
+},{"./array-set":17,"./base64-vlq":18,"./mapping-list":21,"./util":25,"amdefine":26}],24:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3543,7 +3549,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"./source-map-generator":20,"./util":22,"amdefine":23}],22:[function(require,module,exports){
+},{"./source-map-generator":23,"./util":25,"amdefine":26}],25:[function(require,module,exports){
 /* -*- Mode: js; js-indent-level: 2; -*- */
 /*
  * Copyright 2011 Mozilla Foundation and contributors
@@ -3864,7 +3870,7 @@ define(function (require, exports, module) {
 
 });
 
-},{"amdefine":23}],23:[function(require,module,exports){
+},{"amdefine":26}],26:[function(require,module,exports){
 (function (process,__filename){
 /** vim: et:ts=4:sw=4:sts=4
  * @license amdefine 1.0.0 Copyright (c) 2011-2015, The Dojo Foundation All Rights Reserved.
@@ -4169,7 +4175,7 @@ function amdefine(module, requireFn) {
 module.exports = amdefine;
 
 }).call(this,require('_process'),"/node_modules/apply-css/node_modules/css/node_modules/source-map/node_modules/amdefine/amdefine.js")
-},{"_process":35,"path":34}],24:[function(require,module,exports){
+},{"_process":38,"path":37}],27:[function(require,module,exports){
 // Copyright 2014 Simon Lydell
 // X11 (“MIT”) Licensed. (See LICENSE.)
 
@@ -4188,7 +4194,7 @@ function urix(aPath) {
 
 module.exports = urix
 
-},{"path":34}],25:[function(require,module,exports){
+},{"path":37}],28:[function(require,module,exports){
 /**
  * cuid.js
  * Collision-resistant UID generator for browsers and node.
@@ -4300,7 +4306,7 @@ module.exports = urix
 
 }(this.applitude || this));
 
-},{}],26:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 var inserted = {};
 
 module.exports = function (css, options) {
@@ -4324,7 +4330,7 @@ module.exports = function (css, options) {
     }
 };
 
-},{}],27:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 
 /**
  * @license
@@ -6791,7 +6797,7 @@ module.exports = function (css, options) {
 
 }).call(this);
 
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 // This product includes color specifications and designs developed by Cynthia Brewer (http://colorbrewer.org/).
 // JavaScript specs as packaged in the D3 library (d3js.org). Please see license at http://colorbrewer.org/export/LICENSE.txt
 !function() {
@@ -7108,10 +7114,10 @@ if (typeof define === "function" && define.amd) {
 
 }();
 
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 module.exports = require('./colorbrewer.js');
 
-},{"./colorbrewer.js":28}],30:[function(require,module,exports){
+},{"./colorbrewer.js":31}],33:[function(require,module,exports){
 module.exports = createHash
 
 function createHash(elem) {
@@ -7135,7 +7141,7 @@ function createHash(elem) {
     return hash
 }
 
-},{}],31:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 'use strict';
 
 var createHash = require('./create-hash.js');
@@ -7154,9 +7160,9 @@ function DataSet(elem) {
     return hash;
 }
 
-},{"./create-hash.js":30}],32:[function(require,module,exports){
-
-},{}],33:[function(require,module,exports){
+},{"./create-hash.js":33}],35:[function(require,module,exports){
+arguments[4][1][0].apply(exports,arguments)
+},{"dup":1}],36:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -7459,7 +7465,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],34:[function(require,module,exports){
+},{}],37:[function(require,module,exports){
 (function (process){
 // Copyright Joyent, Inc. and other Node contributors.
 //
@@ -7687,7 +7693,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":35}],35:[function(require,module,exports){
+},{"_process":38}],38:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -7780,7 +7786,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],36:[function(require,module,exports){
+},{}],39:[function(require,module,exports){
 /*!
  * node-inherit
  * Copyright(c) 2011 Dmitry Filatov <dfilatov@yandex-team.ru>
@@ -7789,7 +7795,7 @@ process.umask = function() { return 0; };
 
 module.exports = require('./lib/inherit');
 
-},{"./lib/inherit":37}],37:[function(require,module,exports){
+},{"./lib/inherit":40}],40:[function(require,module,exports){
 /**
  * @module inherit
  * @version 2.2.2
@@ -7979,7 +7985,7 @@ defineAsGlobal && (global.inherit = inherit);
 
 })(this);
 
-},{}],38:[function(require,module,exports){
+},{}],41:[function(require,module,exports){
 (function (global){
 /**
  * @license
@@ -20215,7 +20221,7 @@ defineAsGlobal && (global.inherit = inherit);
 }.call(this));
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],39:[function(require,module,exports){
+},{}],42:[function(require,module,exports){
 (function (global){
 //! moment.js
 //! version : 2.9.0
@@ -23262,7 +23268,7 @@ defineAsGlobal && (global.inherit = inherit);
 }).call(this);
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],40:[function(require,module,exports){
+},{}],43:[function(require,module,exports){
 /*!
  * numeral.js
  * version : 1.5.3
@@ -23943,14 +23949,14 @@ defineAsGlobal && (global.inherit = inherit);
     }
 }).call(this);
 
-},{}],41:[function(require,module,exports){
+},{}],44:[function(require,module,exports){
 'use strict';
 
 module.exports = require('./lib/core.js')
 require('./lib/done.js')
 require('./lib/es6-extensions.js')
 require('./lib/node-extensions.js')
-},{"./lib/core.js":42,"./lib/done.js":43,"./lib/es6-extensions.js":44,"./lib/node-extensions.js":45}],42:[function(require,module,exports){
+},{"./lib/core.js":45,"./lib/done.js":46,"./lib/es6-extensions.js":47,"./lib/node-extensions.js":48}],45:[function(require,module,exports){
 'use strict';
 
 var asap = require('asap')
@@ -24057,7 +24063,7 @@ function doResolve(fn, onFulfilled, onRejected) {
   }
 }
 
-},{"asap":46}],43:[function(require,module,exports){
+},{"asap":49}],46:[function(require,module,exports){
 'use strict';
 
 var Promise = require('./core.js')
@@ -24072,7 +24078,7 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
     })
   })
 }
-},{"./core.js":42,"asap":46}],44:[function(require,module,exports){
+},{"./core.js":45,"asap":49}],47:[function(require,module,exports){
 'use strict';
 
 //This file contains the ES6 extensions to the core Promises/A+ API
@@ -24182,7 +24188,7 @@ Promise.prototype['catch'] = function (onRejected) {
   return this.then(null, onRejected);
 }
 
-},{"./core.js":42,"asap":46}],45:[function(require,module,exports){
+},{"./core.js":45,"asap":49}],48:[function(require,module,exports){
 'use strict';
 
 //This file contains then/promise specific extensions that are only useful for node.js interop
@@ -24247,7 +24253,7 @@ Promise.prototype.nodeify = function (callback, ctx) {
   })
 }
 
-},{"./core.js":42,"asap":46}],46:[function(require,module,exports){
+},{"./core.js":45,"asap":49}],49:[function(require,module,exports){
 (function (process){
 
 // Use the fastest possible means to execute a task in a future turn
@@ -24364,7 +24370,7 @@ module.exports = asap;
 
 
 }).call(this,require('_process'))
-},{"_process":35}],47:[function(require,module,exports){
+},{"_process":38}],50:[function(require,module,exports){
 
 /**
  * Module dependencies.
@@ -24409,7 +24415,7 @@ function ws(uri, protocols, opts) {
 
 if (WebSocket) ws.prototype = WebSocket.prototype;
 
-},{}],48:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 "use strict";
 var window = require("global/window")
 var once = require("once")
@@ -24581,7 +24587,7 @@ function createXHR(options, callback) {
 
 function noop() {}
 
-},{"global/window":49,"once":50,"parse-headers":54}],49:[function(require,module,exports){
+},{"global/window":52,"once":53,"parse-headers":57}],52:[function(require,module,exports){
 (function (global){
 if (typeof window !== "undefined") {
     module.exports = window;
@@ -24594,7 +24600,7 @@ if (typeof window !== "undefined") {
 }
 
 }).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
-},{}],50:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 module.exports = once
 
 once.proto = once(function () {
@@ -24615,7 +24621,7 @@ function once (fn) {
   }
 }
 
-},{}],51:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 var isFunction = require('is-function')
 
 module.exports = forEach
@@ -24663,7 +24669,7 @@ function forEachObject(object, iterator, context) {
     }
 }
 
-},{"is-function":52}],52:[function(require,module,exports){
+},{"is-function":55}],55:[function(require,module,exports){
 module.exports = isFunction
 
 var toString = Object.prototype.toString
@@ -24680,7 +24686,7 @@ function isFunction (fn) {
       fn === window.prompt))
 };
 
-},{}],53:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 
 exports = module.exports = trim;
 
@@ -24696,7 +24702,7 @@ exports.right = function(str){
   return str.replace(/\s*$/, '');
 };
 
-},{}],54:[function(require,module,exports){
+},{}],57:[function(require,module,exports){
 var trim = require('trim')
   , forEach = require('for-each')
   , isArray = function(arg) {
@@ -24728,7 +24734,10 @@ module.exports = function (headers) {
 
   return result
 }
-},{"for-each":51,"trim":53}],55:[function(require,module,exports){
+},{"for-each":54,"trim":56}],58:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by vokob on 9/8/15.
  */
@@ -24827,9 +24836,11 @@ function queryToAccessors(query, accessorsObj) {
             switch (type) {
                 case DataAccessor.TYPES.METRIC:
                 case DataAccessor.TYPES.MULTI_METRIC:
+                case DataAccessor.TYPES.BOX_PLOT_METRIC:
                     accessors.forEach(function(accessor, index) {
                         var metric = metrics[index] || last(metrics);
-                        if (accessor.TYPE === DataAccessor.TYPES.METRIC) {
+                        if (accessor.TYPE === DataAccessor.TYPES.METRIC ||
+                            accessor.TYPE === DataAccessor.TYPES.BOX_PLOT_METRIC) {
                             if (metric) {
                                 accessor.setMetric(metric);
                             }
@@ -25112,17 +25123,19 @@ function destroyListener(listener) {
         .value();
 }
 
-},{"../../../Utilities":153,"../DataAccessor/index":66,"lodash":38}],56:[function(require,module,exports){
+},{"../../../Utilities":156,"../DataAccessor/index":69,"lodash":41}],59:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by vokob on 9/8/15.
  */
 
 module.exports = require('./AccessorController');
-},{"./AccessorController":55}],57:[function(require,module,exports){
+},{"./AccessorController":58}],60:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -25235,17 +25248,15 @@ function initAccessor(dataVariable) {
     return [name, accessor];
 }
 
-},{"../Accessors":59,"../DataAccessorsCollection":68,"lodash":38}],58:[function(require,module,exports){
+},{"../Accessors":62,"../DataAccessorsCollection":71,"lodash":41}],61:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./AccessorParser.js');
-},{"./AccessorParser.js":57}],59:[function(require,module,exports){
+},{"./AccessorParser.js":60}],62:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = {
     DimensionAccessor: require('./DimensionAccessor'),
     GroupAccessor: require('./GroupAccessor'),
@@ -25254,11 +25265,10 @@ module.exports = {
     BoxPlotAccessor: require('./BoxPlotAccessor'),
     FieldsAccessor: require('./FieldsAccessor')
 };
-},{"./BoxPlotAccessor":61,"./DimensionAccessor":70,"./FieldsAccessor":72,"./GroupAccessor":74,"./MetricAccessor":78,"./MultiMetricAccessor":82}],60:[function(require,module,exports){
+},{"./BoxPlotAccessor":64,"./DimensionAccessor":73,"./FieldsAccessor":75,"./GroupAccessor":77,"./MetricAccessor":81,"./MultiMetricAccessor":85}],63:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -25341,6 +25351,11 @@ var BoxPlotAccessor = inherit(
             return [].concat(metric.label);
         },
 
+        getColorName: function() {
+            var metric = this.getMetric();
+            return metric.name + ':' +  metric.func;
+        },
+
         getType: function() {
             var metric = this.getMetric();
             return metric.type || METRIC_TYPES.NUMBER;
@@ -25390,20 +25405,18 @@ function formatter(metric) {
     );
 }
 
-},{"../../Source/Query/Metric":97,"../DataAccessor":66,"../MetricFormatter":80,"inherit":36,"lodash":38}],61:[function(require,module,exports){
+},{"../../Source/Query/Metric":100,"../DataAccessor":69,"../MetricFormatter":83,"inherit":39,"lodash":41}],64:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 module.exports = require('./BoxPlotAccessor');
 
-},{"./BoxPlotAccessor":60}],62:[function(require,module,exports){
+},{"./BoxPlotAccessor":63}],65:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -25428,11 +25441,13 @@ var EVENTS = {
     UPDATE_COLOR_SCALE: 'updateColorScale',
     UPDATE_COLOR_NUMBER: 'updateColorNumber',
     UPDATE_COLOR_SET: 'updateColorSet',
+    UPDATE_COLOR_POSITIONS: 'updateColorPositions',
     UPDATE_COLOR_SCALE_TYPE: 'updateColorScaleType',
     UPDATE_COLOR_RANGE_TYPE: 'updateColorRangeType',
     UPDATE_COLOR_RANGE: 'updateColorRange',
     SHOW_LEGEND: 'showLegend',
-    HIDE_LEGEND: 'hideLegend'
+    HIDE_LEGEND: 'hideLegend',
+    DOMAIN_UPDATED: 'domain:updated'
 };
 var COLOR_SET_NAMES = keys(COLOR_SETS);
 var COLOR_SCALE_TYPES = {
@@ -25450,12 +25465,22 @@ var DEFAULTS = {
     colorSet: COLOR_SET_NAMES[0],
     colorPositions: null,
     colorNumb: 2,
-    colorScale: COLOR_SCALE_TYPES.GRADIENT,
+    colorScaleType: COLOR_SCALE_TYPES.GRADIENT,
     legendType: COLOR_RANGE_TYPES.PALETTE,
     autoColor: true,
     autoShowColorLegend: false,
     savedColors: {}
 };
+
+var COLOR_SET_TYPE = COLOR_SET_NAMES[0];
+
+_.mixin({
+    'findByValues': function(collection, property, values) {
+        return _.filter(collection, function(item) {
+            return _.contains(values, item[property]);
+        });
+    }
+});
 
 var ColorAccessor = inherit(
     Parent,
@@ -25466,7 +25491,7 @@ var ColorAccessor = inherit(
 
             var colorSettings = defaults({}, options.color, DEFAULTS);
 
-            this.isColor = !!options.color;
+            this.isColor = !!(options.color && options.color.colorSet);
             this._domain = [];
             this._colorSettings = {};
             this._colorSettings.customColors = colorSettings.colors;
@@ -25478,67 +25503,90 @@ var ColorAccessor = inherit(
             this._colorSettings.colorPositions = colorSettings.colorPositions;
             this._colorSettings.colorNumber = max([colorSettings.colorNumb, 2]);
             this._colorSettings.colorScaleType =
-                contains(COLOR_SCALE_TYPES, colorSettings.colorScale) ?
-                    colorSettings.colorScale : DEFAULTS.colorScale;
+                contains(COLOR_SCALE_TYPES, colorSettings.colorScaleType) ?
+                    colorSettings.colorScaleType : DEFAULTS.colorScaleType;
             this._colorSettings.colorRangeType =
                 contains(COLOR_RANGE_TYPES, colorSettings.legendType) ?
                 colorSettings.legendType : DEFAULTS.legendType;
             this._colorSettings.autoColor = colorSettings.autoColor;
             this._colorSettings.savedColors = colorSettings.savedColors;
 
+            this._clearColorCache();
             this._initColorScale();
             this._updateColorScale();
         },
 
-        _initColorScale: function() {
-            var colors = this.getColorRange();
+        _populateDefaultColors: function() {
+            this.on(EVENTS.UPDATE_COLOR_NUMBER, this._updateCustomColors.bind(this));
+        },
 
-            this._colorScale = chroma
-                .scale(colors);
+        _updateCustomColors: function() {
+            this.setColorRangeData(this.populateColorRangeData());
+            this.off(EVENTS.UPDATE_COLOR_NUMBER, this._updateCustomColors.bind(this));
+        },
+
+        resetCustomColors: function() {
+            this._colorSettings.customColors = this.populateColorRangeData();
+        },
+
+        _initColorScale: function() {
+            this._colorScale = chroma.scale();
+        },
+
+        _clearColorCache: function() {
+            this._getDistinctColor.cache.__data__ = {};
         },
 
         _updateColorScale: function() {
-            var domain = this._domain;
+            if (this.isColor) {
+                var domain = this._domain;
+                var colors = this.getColorRange();
+
+                this._updateColorScaleDomain(domain);
+                this._updateColorScaleRange(colors);
+                this._updateColorScaleClasses();
+
+                this.trigger(EVENTS.UPDATE_COLOR_SCALE,
+                    clone(this._colorSettings, true));
+            }
+        },
+
+        _updateColorScaleClasses: function() {
             var colorScaleType = this.getColorScaleType();
+            var colorPositions = this.getColorPositions();
+            var colorNumber = this.getColorNumber();
 
-            var colors = this.getColorRange();
-            var colorPositions = this._colorSettings.colorPositions;
-
-            this._updateColorScaleRange(colors, colorPositions);
-            this._updateColorScaleDomain(domain, colorScaleType);
-
-            this.trigger(EVENTS.UPDATE_COLOR_SET);
-            this.trigger(EVENTS.UPDATE_COLOR_SCALE,
-                clone(this._colorSettings, true));
+            if (colorScaleType === COLOR_SCALE_TYPES.DISTINCT) {
+                this._colorScale.classes(colorPositions || colorNumber);
+            }
         },
 
-        _updateColorScaleRange: function(colors, positions) {
-            this._colorScale.range(colors, positions);
+        _updateColorScaleRange: function(colors) {
+            this._colorScale.range(colors);
         },
 
-        _updateColorScaleDomain: function(domain, colorScaleType) {
+        _updateColorScaleDomain: function(domain) {
+            var colorScaleType = this.getColorScaleType();
             //chroma doesn't know how to derive a color for domains with a single value
             if (isArray(domain) && domain.length === 2 &&
                 domain[0] === domain[1]) {
                 domain[1] += 1;
             }
 
-            switch (colorScaleType) {
-                case COLOR_SCALE_TYPES.GRADIENT:
-                    this._initColorScale();
-                    break;
-                case COLOR_SCALE_TYPES.DISTINCT:
-                    this._colorScale.classes(this.getColorNumber());
-                    break;
-
+            if (colorScaleType === COLOR_SCALE_TYPES.GRADIENT) {
+                this._initColorScale();
             }
+
             this._colorScale.domain(domain);
+
+            if (colorScaleType === COLOR_SCALE_TYPES.DISTINCT) {
+                this._colorScale.classes(this.getColorNumber());
+            }
         },
 
         setColorNumber: function(colorNumber) {
             if (colorNumber !== this._colorSettings.colorNumber) {
                 this._colorSettings.colorNumber = max([colorNumber, 2]);
-                this._updateColorScale();
 
                 this.trigger(EVENTS.UPDATE_COLOR_NUMBER, colorNumber);
             }
@@ -25561,16 +25609,7 @@ var ColorAccessor = inherit(
             }
 
             colorSettings.colorPositions = positions;
-
-            this._updateColorScale();
-
-            this.trigger(
-                EVENTS.UPDATE_COLOR_SET,
-                chain({})
-                    .assign({colorSet: colorSet})
-                    .assign(!!positions ? {positions: positions} : {})
-                    .value()
-            );
+            this.setColorRangeData(this.populateColorRangeData());
 
             return this;
         },
@@ -25599,42 +25638,53 @@ var ColorAccessor = inherit(
             return this._colorScale(value).hex();
         },
 
-        _getDistinctColor: function(value) {
+        _getDistinctColor: _.memoize(function(value) {
             var rangeType = this.getColorRangeType();
-            var customColors = this._colorSettings.customColors;
-            var colorSet = this._colorSettings.colorSet;
-            var colorNumber = this._colorSettings.colorNumber;
-            var palette = getColorsFromSet(colorSet, colorNumber);
-            var domain = this.getDomain();
-            var colors = this.getColorRange();
-            var index = domain.indexOf(value);
+            var distinctColor;
 
-            return (rangeType === COLOR_RANGE_TYPES.RANGE ?
-                chain(customColors)
-                    .find({name: value})
-                    .get('color', palette[index % colors.length])
-                    .value() : colors[index % colors.length]);
+            if (rangeType === COLOR_RANGE_TYPES.RANGE) {
+                var customColors = this._colorSettings.customColors;
+                distinctColor = this._fastFind(customColors, 'name', value);
+                distinctColor = (distinctColor) ? distinctColor.color : null;
+            } else {
+                var colorSet = this._colorSettings.colorSet;
+                var colorNumber = this._colorSettings.colorNumber;
+                var domain = this.getDomain();
+                var index = domain.indexOf(value);
+                var colors = getColorsFromSet(colorSet, colorNumber);
+                distinctColor = colors[index % colors.length]
+            }
+
+            return distinctColor;
+        }),
+
+        _fastFind: function(array, variable, goal) {
+            for (var i = 0, l = array.length; i < l; ++i) {
+                var value = array[i][variable];
+                if (goal && goal.indexOf(value) === 0) {
+                    return array[i];
+                }
+            }
         },
 
         color: function(dataItem) {
             var value = this.raw(dataItem);
-            var colors = this.getColorRange();
 
-            return value === null ? colors[0] : this.getColor(value);
+            return value === null ? this.getColorRange()[0] : this.getColor(value);
         },
 
         getColorKeyLabel: function() {
             throw Error('ColorAccessor.getColorKeyLabel has no implementation');
         },
 
-        getColorRange: function() {
+        getColorRange: function(active) {
             var rangeType = this.getColorRangeType();
             var colorSet = this._colorSettings.colorSet;
             var colorNumber = this._colorSettings.colorNumber;
             var isNone = this.hasOwnProperty('_metric') ?
                 this._metric === null : false;
             var colors = (rangeType === COLOR_RANGE_TYPES.RANGE ?
-                map(this.getColorRangeData(), 'color') :
+                map(this.getColorRangeData(active), 'color') :
                 getColorsFromSet(colorSet, colorNumber));
 
             return isNone ? [colors[0]] : colors;
@@ -25648,6 +25698,11 @@ var ColorAccessor = inherit(
             if (contains(COLOR_SCALE_TYPES, scaleType)) {
                 if (scaleType !== this._colorSettings.colorScaleType) {
                     this._colorSettings.colorScaleType = scaleType;
+
+                    if (scaleType === COLOR_SCALE_TYPES.GRADIENT) {
+                        this._initColorScale();
+                    }
+
                     this._updateColorScale();
 
                     this.trigger(EVENTS.UPDATE_COLOR_SCALE_TYPE, scaleType);
@@ -25664,24 +25719,28 @@ var ColorAccessor = inherit(
             var isNone = this.hasOwnProperty('_metric') ?
                 this._metric === null : false;
             var customColors = this._colorSettings.customColors;
-            if (!customColors || customColors.length === 0) {
-                customColors = this.populateColorRangeData();
-            }
+
             return isNone ?
                 [clone(customColors, true)[0]] :
                 clone(customColors, true);
         },
 
         setColorRangeData: function(colorsData) {
+            this._clearColorCache();
             var type = this.getColorRangeType();
+            var colorSetType = this.getColorSet();
             this._colorSettings.customColors = colorsData;
             this._updateColorScale();
 
+            if (colorSetType !== COLOR_SET_TYPE) {
+                this.trigger(EVENTS.UPDATE_COLOR_SET);
+
+                COLOR_SET_TYPE = colorSetType;
+            }
+
             if (type === COLOR_RANGE_TYPES.RANGE) {
-                this.trigger(
-                    EVENTS.UPDATE_COLOR_RANGE,
-                    this.getColorRangeData()
-                );
+                this.trigger(EVENTS.UPDATE_COLOR_RANGE,
+                    colorsData);
             }
         },
 
@@ -25692,9 +25751,8 @@ var ColorAccessor = inherit(
         setColorRangeType: function(rangeType) {
             if (contains(COLOR_RANGE_TYPES, rangeType)) {
                 this._colorSettings.colorRangeType = rangeType;
-                if (!this._colorSettings.customColors) {
-                    this._colorSettings.customColors =
-                        this.populateColorRangeData();
+                if (rangeType === COLOR_RANGE_TYPES.RANGE) {
+                    this.resetCustomColors();
                 }
                 this._updateColorScale();
 
@@ -25719,6 +25777,10 @@ var ColorAccessor = inherit(
             return this._colorSettings.showLegend;
         },
 
+        isLegendDisabled: function() {
+            return this.isNone || !this.getDomain().length;
+        },
+
         colorRange: function() {
             //TODO: Deprecate
             console.warn('ColorAccessor.colorRange is deprecated, use' +
@@ -25739,7 +25801,24 @@ var ColorAccessor = inherit(
             });
         },
 
+        getColorPositions: function() {
+            return clone(this._colorSettings.colorPositions);
+        },
+
+        setColorPositions: function(positions) {
+            this._colorSettings.colorPositions = positions;
+            this._updateColorScale();
+            this.trigger(EVENTS.UPDATE_COLOR_POSITIONS, clone(positions, true));
+        },
+
+        defaultColorPositions: function() {
+            var domain = this.getDomain();
+            var colorNum = this.getColorNumber();
+            return defaultColorPositions(domain, colorNum);
+        },
+
         getColorsFromSet: getColorsFromSet,
+
         DEFAULT_DOMAIN: DEFAULT_DOMAIN,
         COLOR_SETS: COLOR_SETS,
         COLOR_SET_NAMES: COLOR_SET_NAMES,
@@ -25748,6 +25827,8 @@ var ColorAccessor = inherit(
         EVENTS: EVENTS
     }, {
         getColorsFromSet: getColorsFromSet,
+        defaultColorPositions: defaultColorPositions,
+
         DEFAULT_DOMAIN: DEFAULT_DOMAIN,
         COLOR_SETS: COLOR_SETS,
         COLOR_SET_NAMES: COLOR_SET_NAMES,
@@ -25768,11 +25849,23 @@ function getColorsFromSet(setName, number) {
     return number === 1 ? [currentSet[safeNumber][0]] : currentSet[safeNumber];
 }
 
-},{"../DataAccessor/index":66,"./colorLookup":63,"chroma-js":27,"inherit":36,"lodash":38}],63:[function(require,module,exports){
-/*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
- */
+function defaultColorPositions(extent, colorNum) {
+    var step = (extent[1] - extent[0]) / colorNum;
+    var positions = [extent[0]];
 
+    for (var i = 1; i <= colorNum - 1; i++) {
+        positions.push(extent[0] + step * i);
+    }
+
+    positions.push(extent[1]);
+
+    return positions;
+}
+
+},{"../DataAccessor/index":69,"./colorLookup":66,"chroma-js":30,"inherit":39,"lodash":41}],66:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 module.exports = {
     ZoomSequential: {
         2: ["#ffc65f", "#0096b6"],
@@ -26169,17 +26262,15 @@ module.exports = {
     }
 };
 
-},{}],64:[function(require,module,exports){
+},{}],67:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./ColorAccessor');
-},{"./ColorAccessor":62}],65:[function(require,module,exports){
+},{"./ColorAccessor":65}],68:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -26265,15 +26356,14 @@ function strictTrigger(emitter, events, event) {
         throw Error('unsupported event: ' + event);
     }
 }
-},{"events":33,"inherit":36,"lodash":38}],66:[function(require,module,exports){
+},{"events":36,"inherit":39,"lodash":41}],69:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./DataAccessor');
-},{"./DataAccessor":65}],67:[function(require,module,exports){
+},{"./DataAccessor":68}],70:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 'use strict';
 
@@ -26309,7 +26399,7 @@ function getMetricAccessors() {
 function getSelectedMetrics() {
     return chain(this.getMetricAccessors()[0])
         .filter(function(accessor) {
-            return (accessor.TYPE === accessor.TYPES.METRIC_TYPES) ?
+            return (accessor.TYPE === accessor.TYPES.MULTI_METRIC) ?
                 !accessor.isColor :
                 true;
         })
@@ -26321,7 +26411,7 @@ function getSelectedMetrics() {
 }
 
 function partitions(dataAccessors) {
-    var groupTypes = ['GROUP', 'DIMENSION', 'NON_GROUPED'];
+    var groupTypes = ['GROUP', 'DIMENSION', 'FIELDS'];
     return chain(dataAccessors)
         .pairs()
         .partition(function(acc) {
@@ -26341,17 +26431,15 @@ function zipChunks(arr) {
 
 module.exports = DataAccessorsCollection;
 
-},{"lodash":38}],68:[function(require,module,exports){
+},{"lodash":41}],71:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./DataAccessorsCollection');
-},{"./DataAccessorsCollection":67}],69:[function(require,module,exports){
+},{"./DataAccessorsCollection":70}],72:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -26412,7 +26500,7 @@ var DimensionAccessor = inherit(
             this._domain = [];
 
             this._accessors = groups.map(partial(
-                createAccessor, dimension, groupTypes, _, _, options
+                createAccessor, dimension, groupTypes, _, _, _.omit(options, 'color')
             ));
 
             Parent.prototype.__constructor.call(this, options);
@@ -26448,9 +26536,8 @@ var DimensionAccessor = inherit(
             var values = this.raw(dataItem);
             var index = this.getColorGroupIndex();
             var value = values[index];
-            var colors = this.getColorRange();
 
-            return value === null ? colors[0] : this.getColor(value);
+            return value === null ? this.getColorRange()[0] : this.getColor(value);
         },
 
         getColor: function(value) {
@@ -26459,17 +26546,16 @@ var DimensionAccessor = inherit(
 
         updateDomain: function(data) {
             var accessors = this._accessors;
-            var groups = this.getGroups();
             var index = this.getColorGroupIndex();
 
             chain(accessors)
                 .invoke('updateDomain', data)
                 .value();
 
-            if (!isEqual(this._domain, accessors[index].getDomain())) {
+            if (!isEqual(_.sortBy(this._domain),
+                    _.sortBy(accessors[index].getDomain()))) {
                 this._domain = accessors[index].getDomain();
                 this.setColorNumber(this._domain.length);
-
                 this._updateColorScale();
             }
         },
@@ -26517,6 +26603,18 @@ var DimensionAccessor = inherit(
                 .invoke('getLabel')
                 .value();
         },
+
+
+        getColorName: function (index) {
+            var accessor = this._accessors[index];
+            return (accessor ? accessor.getColorName() : null);
+        },
+
+        getColorNames: function() {
+            var accessors = this._accessors;
+            return invoke(accessors, 'getColorName');
+        },
+
 
         getTypes: function() {
             var accessors = this._accessors;
@@ -26566,6 +26664,9 @@ var DimensionAccessor = inherit(
 
                         this.trigger(EVENTS.CHANGE,
                             accessors[index].getGroup(), original, index);
+                        if (this.isColor && index === this.getColorGroupIndex()) {
+                            this._populateDefaultColors();
+                        }
                     }
                 } else {
                     throw Error('invalid group index');
@@ -26588,6 +26689,9 @@ var DimensionAccessor = inherit(
                     dimension, groupTypes, group, accessors.length
                 );
                 accessors.push(accessor);
+                if (this.isColor) {
+                    this._populateDefaultColors();
+                }
 
                 this.trigger(EVENTS.ADD, accessor.getGroup());
             } else {
@@ -26669,13 +26773,15 @@ function createAccessor(dimension, groupTypes, group, index, options) {
     return new GroupAccessor(group, attributeType, dimension, index, options);
 }
 
-},{"../../Source/Query/Group":95,"../ColorAccessor":64,"../GroupAccessor":74,"inherit":36,"lodash":38}],70:[function(require,module,exports){
+},{"../../Source/Query/Group":98,"../ColorAccessor":67,"../GroupAccessor":77,"inherit":39,"lodash":41}],73:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./DimensionAccessor');
-},{"./DimensionAccessor":69}],71:[function(require,module,exports){
+},{"./DimensionAccessor":72}],74:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by vokob on 9/23/15.
  */
@@ -26866,17 +26972,19 @@ function createFormatter(field) {
         new Formatter(field.type) : {format: identity};
 }
 
-},{"../../Source/Query/Field":91,"../ColorAccessor":64,"../MetricFormatter":80,"inherit":36,"lodash":38}],72:[function(require,module,exports){
+},{"../../Source/Query/Field":94,"../ColorAccessor":67,"../MetricFormatter":83,"inherit":39,"lodash":41}],75:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by vokob on 9/23/15.
  */
 
 module.exports = require('./FieldsAccessor.js');
-},{"./FieldsAccessor.js":71}],73:[function(require,module,exports){
+},{"./FieldsAccessor.js":74}],76:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -26969,10 +27077,14 @@ var GroupAccessor = inherit(
                 .uniq()
                 .value();
 
+            var updateColors = !isEqual(_.sortBy(this._domain),
+                        _.sortBy(domain));
             this._domain = domain;
-            this.setColorNumber(domain.length);
 
-            this._updateColorScale();
+            if (this.isColor && updateColors) {
+                this.setColorNumber(domain.length);
+                this._updateColorScale();
+            }
         },
 
         getDomain: function() {
@@ -27015,14 +27127,29 @@ var GroupAccessor = inherit(
 
                 if (!isEqual(prev, group)) {
                     this._group = clone(group, true);
-                    
+                    this._group.sort.name = this.getNewSortName(this._group, prev);
                     this.trigger(EVENTS.CHANGE, this.getGroup(), prev);
-                    this._colorSettings.customColors = null;
+                    if (this.isColor) {
+                        this._populateDefaultColors();
+                    }
                 }
 
             } else {
                 throw Error(validation);
             }
+        },
+
+        /* If sorting was done by group and another group is
+            set - old sorting is no longer valid.
+            Set sorting to new group's name.
+        */
+        getNewSortName: function(newGroup, prevGroup) {
+            var newSortName = newGroup.sort.name;
+            if (prevGroup.name === prevGroup.sort.name &&
+                newGroup.name !== prevGroup.name) {
+                newSortName = newGroup.name;
+            }
+            return newSortName;
         },
 
         getLabel: function() {
@@ -27036,6 +27163,14 @@ var GroupAccessor = inherit(
         getLabels: function() {
             var group = this.getGroup();
             return [].concat(group.label);
+        },
+
+        getColorName: function() {
+            return this.getGroup().name ;
+        },
+
+        getColorNames: function() {
+            return [].concat(this.getColorName());
         },
 
         getType: function() {
@@ -27071,15 +27206,14 @@ var GroupAccessor = inherit(
 
 module.exports = GroupAccessor;
 
-},{"../../Source/Query/Group":95,"../ColorAccessor/index":64,"../GroupFormatter":76,"inherit":36,"lodash":38}],74:[function(require,module,exports){
+},{"../../Source/Query/Group":98,"../ColorAccessor/index":67,"../GroupFormatter":79,"inherit":39,"lodash":41}],77:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./GroupAccessor');
-},{"./GroupAccessor":73}],75:[function(require,module,exports){
+},{"./GroupAccessor":76}],78:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 'use strict';
 
@@ -27109,17 +27243,15 @@ module.exports = function(group, data) {
     return formatted;
 };
 
-},{"lodash":38,"moment":39}],76:[function(require,module,exports){
+},{"lodash":41,"moment":42}],79:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./GroupFormatter');
-},{"./GroupFormatter":75}],77:[function(require,module,exports){
+},{"./GroupFormatter":78}],80:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -27179,7 +27311,7 @@ var MetricAccessor = inherit(
             if (Metric.isSuccess(validation)) {
                 if (!isEqual(metric, prev)) {
                     this._setMetric(metric);
-
+                    this.setColorPositions(null);
                     if (prev) {
                         this.trigger(EVENTS.CHANGE, this.getMetric(), prev);
                     } else {
@@ -27225,6 +27357,15 @@ var MetricAccessor = inherit(
             return [].concat(this.getLabel());
         },
 
+        getColorName: function() {
+            var metric = this.getMetric();
+            return metric.name + ((metric.func) ? ':' +  metric.func : '');
+        },
+
+        getColorNames: function() {
+            return [].concat(this.getColorName());
+        },
+
         getColorKeyLabel: function() {
             return this.getLabel();
         },
@@ -27264,6 +27405,14 @@ var MetricAccessor = inherit(
 
         getDomain: function() {
             return clone(this._domain, true);
+        },
+
+        updateMetric: function(name, metric) {
+            var current = this.getMetric();
+            if (current.name === name) {
+                this.unsetMetric();
+                this.setMetric(assign(current, metric));
+            }
         },
 
         getMetaData: function(metaData, time, selected) {
@@ -27316,15 +27465,14 @@ function extent(data) {
     return (data.length === 0 ? [] :
         [_.min(data), _.max(data)]);
 }
-},{"../../Source/Query/Metric":97,"../ColorAccessor/index":64,"../MetricFormatter":80,"inherit":36,"lodash":38}],78:[function(require,module,exports){
+},{"../../Source/Query/Metric":100,"../ColorAccessor/index":67,"../MetricFormatter":83,"inherit":39,"lodash":41}],81:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./MetricAccessor');
-},{"./MetricAccessor":77}],79:[function(require,module,exports){
+},{"./MetricAccessor":80}],82:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 'use strict';
 
@@ -27492,17 +27640,15 @@ module.exports = function(type, dataResolution, granularity) {
     };
 };
 
-},{"lodash":38,"moment":39,"numeral":40}],80:[function(require,module,exports){
+},{"lodash":41,"moment":42,"numeral":43}],83:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./MetricFormatter');
-},{"./MetricFormatter":79}],81:[function(require,module,exports){
+},{"./MetricFormatter":82}],84:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -27589,6 +27735,7 @@ var MultiMetricAccessor = inherit(
                 .value();
             this.setColorNumber(this._domain.length);
 
+            this._updateDistinctColors();
             this._updateColorScale();
         },
 
@@ -27648,6 +27795,12 @@ var MultiMetricAccessor = inherit(
                 throw Error(validation);
             }
 
+        },
+
+        unsetMetric: function(index) {
+            var accessors = this._accessors;
+            var accessor = accessors[index];
+            return (accessor ? accessor.unsetMetric() : null);
         },
 
         getMetric: function(index) {
@@ -27741,6 +27894,16 @@ var MultiMetricAccessor = inherit(
             return invoke(accessors, 'getLabel');
         },
 
+        getColorName: function (index) {
+            var accessor = this._accessors[index];
+            return (accessor ? accessor.getColorName() : null);
+        },
+
+        getColorNames: function() {
+            var accessors = this._accessors;
+            return invoke(accessors, 'getColorName');
+        },
+
         getTypes: function() {
             var accessors = this._accessors;
             return invoke(accessors, 'getType');
@@ -27753,6 +27916,7 @@ var MultiMetricAccessor = inherit(
         },
 
         populateColorRangeData: function() {
+            var instance = this;
             var domain = this.getDomain();
             var colorSet = this._colorSettings.colorSet;
             var colorNumber = this._colorSettings.colorNumber;
@@ -27761,9 +27925,59 @@ var MultiMetricAccessor = inherit(
             return domain.map(function(value, index) {
                 return {
                     name: value,
+                    label: instance.getLabel(index),
                     color: colors[index % colors.length]
                 };
             });
+        },
+
+        updateMetric: function(name, metric) {
+            var currents = this.getMetrics();
+            currents.forEach(function(current, index) {
+                if (metric.name === name) {
+                    this.unsetMetric(index);
+                    this.setMetric(index, assign(current, metric));
+                }
+            }, this);
+
+        },
+
+        getColorRangeData: function(active) {
+            var isNone = this.hasOwnProperty('_metric') ?
+            this._metric === null : false;
+            var customColors = this._colorSettings.customColors;
+            var domain = this._domain;
+            if (active && customColors && customColors.length > domain.length) {
+                var domainStr = domain.join();
+                customColors = _.filter(customColors, function(color) {
+                    return eval('/(^|,)' + color.name + '([:,]|$)/.test(domainStr)');
+                });
+            }
+
+            return isNone ?
+                [clone(customColors, true)[0]] :
+                clone(customColors, true);
+        },
+
+        _updateDistinctColors: function() {
+            var rangeType = this.getColorRangeType();
+            if (rangeType === this.COLOR_RANGE_TYPES.RANGE) {
+                var customColors = this._colorSettings.customColors;
+                var defaultColors = this.populateColorRangeData();
+                var colors = _.uniq(customColors.concat(defaultColors), 'label');
+                _.forEach(defaultColors, function(color, index){
+                    var i = _.findIndex(colors, {'label': color.label});
+                    if (~i && index !== i) {
+                        var inherit = colors[i];
+                        colors.splice(i, 1);
+                        colors.splice(index, 0, inherit);
+                    }
+                });
+                this._colorSettings.customColors = colors;
+                return colors;
+            } else {
+                this.setColorRangeData(this.populateColorRangeData());
+            }
         },
 
         getMetaData: function(metaData, time, selected) {
@@ -27810,17 +28024,15 @@ function toValue(metric) {
         metric.name);
 }
 
-},{"../../Source/Query/Metric":97,"../ColorAccessor":64,"../MetricAccessor":78,"inherit":36,"lodash":38}],82:[function(require,module,exports){
+},{"../../Source/Query/Metric":100,"../ColorAccessor":67,"../MetricAccessor":81,"inherit":39,"lodash":41}],85:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./MultiMetricAccessor');
-},{"./MultiMetricAccessor":81}],83:[function(require,module,exports){
+},{"./MultiMetricAccessor":84}],86:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var INVALID_OPTIONS_MESSAGE = 'Invalid options:' +
@@ -27839,6 +28051,12 @@ var defaults = _.defaults;
 var difference = _.difference;
 var bindAll = _.bindAll;
 var has = _.has;
+var pluck = _.pluck;
+var includes = _.includes;
+var map = _.map;
+var uniq = _.uniq;
+var flow = _.flow;
+var union = _.union;
 
 var P = require('promise');
 var Data = require('../Data');
@@ -28110,7 +28328,7 @@ Client.prototype = {
 
         return (config ?
             fromConfig(client, element, source, config, visualization, variables, interactive) :
-            fromQuery(client, element, query, visualization, variables));
+            fromQuery(client, element, query, visualization, variables, interactive));
 
     },
 
@@ -28129,19 +28347,29 @@ Client.prototype = {
         var source = options.source;
         var visType = options.visualization.type;
         var origDataAccessors = options.dataAccessors;
+        var interactive = options.interactive;
 
         return prepareDataAccessors(client, element, source, null, visualization, variables, config)
             .then(spread(getQueryFromConfig))
             .then(spread(function(newQuery, nextDataAccessors) {
                 var restConfig = _.omit(config, 'groups', 'metrics', 'fields');
 
+                if(config.pivot.groups){
+                    fromPivotVariables(config, newQuery.config);
+                }
+
                 var inheritedConfig = inheritConfig({
                     currentConfig: config,
                     nextConfig: newQuery.config,
                     nextDataAccessors: nextDataAccessors,
                     origDataAccessors: origDataAccessors,
-                    nextVisType: visType
+                    nextVisType: visType,
+                    source: source
                 });
+
+                if (visType === 'PIVOT_TABLE') {
+                    toPivotVariables(config, variables, nextDataAccessors, inheritedConfig);
+                }
 
                 var newConfig = assign({}, inheritedConfig, restConfig);
                 var inheritedQuery = client.createQuery(source, newConfig);
@@ -28156,7 +28384,7 @@ Client.prototype = {
                 return P.all([client, element, source, query, visualization, variables, nextDataAccessors]);
             }))
             .then(spread(prepareDataThread))
-            .then(spread(launchVisualization));
+            .then(spread(partialRight(launchVisualization, interactive)));
     },
 
     runQuery: function(query, onUpdate, onError) {
@@ -28197,6 +28425,7 @@ function fromConfig(client, element, source, config, visualization, variables, i
 
     return P.all([client, element, source, config, visualization, variables])
         .then(spread(prepareDataAccessors))
+        .then(spread(validateFields))
         .then(spread(function(client, element, source, config,
                 visualization, variables, dataAccessors) {
                 var query = chain(config)
@@ -28215,7 +28444,7 @@ function fromConfig(client, element, source, config, visualization, variables, i
         .then(spread(partialRight(launchVisualization, interactive)));
 }
 
-function fromQuery(client, element, query, visualization, variables) {
+function fromQuery(client, element, query, visualization, variables, interactive) {
     var sourceId = query.getSourceId();
     var sources = client.sources;
     var visualizations = client.visualizations;
@@ -28225,6 +28454,7 @@ function fromQuery(client, element, query, visualization, variables) {
 
     return P.all([client, element, source, query, visualization, variables])
         .then(spread(prepareDataAccessors))
+        .then(spread(validateFields))
         .then(spread(function(client, element, source, query,
             visualization, variables, dataAccessors) {
             AccessorController.queryToAccessors(query, dataAccessors);
@@ -28235,7 +28465,7 @@ function fromQuery(client, element, query, visualization, variables) {
                 loadVisComponents(client, visualization, null, element)]);
         }))
         .then(spread(prepareDataThread))
-        .then(spread(launchVisualization));
+        .then(spread(partialRight(launchVisualization, interactive)));
 }
 
 function prepareDataAccessors(client, element, source, query,
@@ -28245,59 +28475,108 @@ function prepareDataAccessors(client, element, source, query,
         .parse(source, visualization, defaults(variables, variableDefaults));
     var dataAccessors = AccessorParser.configureDataAccessors(dataVariables);
 
-    if (containsUnavailableFields(dataVariables, source)) {
-        return P.reject('no available object field found');
-    }
-
     return P.all([client, element, source, query,
         visualization, variables, dataAccessors, config]);
 }
 
-function containsUnavailableFields(variables, source) {
+function validateFields(client, element, source, query, visualization, variables, dataAccessors) {
+    var variableDefaults = getVisualizationVariables(visualization.id, source);
+    var dataVariables = VariableParser.parse(source, visualization, defaults(variables, variableDefaults));
+    var filters = Array.isArray(query.filters) ? query.filters : query.filters.toJSON();
+    var requiredFieldNames = getRequiredFieldNames(variableDefaults, dataVariables, filters);
+
+    if (containsUnavailableFields(requiredFieldNames, source)) {
+        return P.reject('no available object field found');
+    }
+
+    return P.all([client, element, source, query, visualization, variables, dataAccessors]);
+}
+
+function toPivotVariables(config, variables, nextDataAccessors, inheritedConfig) {
+    variables['Row Attributes'] = [];
+    variables['Column Attributes'] = [];
+
+    config.groups.forEach(function(group, i) {
+
+        variables['Row Sorting'] = [
+            {
+                dir: group.sort.dir,
+                name: group.sort.name
+            }
+        ];
+
+        variables['Row Attributes'][i] =
+            group.form ?
+            {
+                name: group.name,
+                from: group.form
+            } :
+            {
+                name: group.name
+            };
+
+        if (group.type === 'TIME') {
+            variables['Time Attribute'] = {
+                name: group.name,
+                timestampGranularity: group.func
+            }
+        }
+    });
+
+    nextDataAccessors.Metrics.resetMetrics(inheritedConfig.metrics);
+
+}
+
+function fromPivotVariables(currentConfig, nextConfig) {
+
+    var pivotGroups = [
+        currentConfig.pivot.groups.rows[0],
+        currentConfig.pivot.groups.cols[0]
+    ].filter(function(group) {
+        return typeof group !== 'undefined';
+    });
+
+    if (pivotGroups.length > 0) {
+
+        nextConfig.groups.forEach(function(group, i) {
+            if (pivotGroups[i]) {
+                pivotGroups[i].limit = group.limit;
+            }
+        });
+
+        currentConfig.groups = pivotGroups;
+    }
+}
+
+function containsUnavailableFields(requiredFieldNames, source) {
     var formulas = source.formulas || [];
     var volumeMetric = source.volumeMetric || [];
-    var objectFields = source.objectFields
-        .concat(volumeMetric, formulas);
-    var valuePath = 'values[0].value';
+    var availableFields = source.objectFields.concat(volumeMetric, formulas);
+    var availableFieldNames = pluck(availableFields, 'name');
 
-    return chain(variables)
-        .map(partial(getAvailableObjFields, objectFields))
+    return chain(requiredFieldNames)
+        .map(partial(getAvailableFields, availableFieldNames))
+        .uniq()
         .thru(hasUnavailableVariable)
         .value();
 
-    function getAvailableObjFields(objectFields, variable) {
-        var value = _.get(variable, valuePath);
-        var varName = !isNoneColorMetric(variable) && value ? value.name : null;
+    function getAvailableFields(availableFields, requiredField) {
+        var editedFusedFields = map(availableFields, normalizeFusedFieldName);
+        var fields = availableFields.concat(editedFusedFields);
 
-        return filter(objectFields, function(objField) {
-            var objName = objField.name;
-            var fusedFieldName = getFusedFieldName(objName);
-
-            return varName === objName ||
-                varName === fusedFieldName ||
-                varName === null;
-        })[0];
+        if (includes(fields, requiredField) || requiredField === null) {
+            return requiredField;
+        }
     }
 
-    function isNoneColorMetric(variable) {
-        var config = variable.config || {};
-        var isColorMetric = has(variable, 'metricType') &&
-            variable.metricType === 'color';
-        var hasNoneOption = config.displayNoneOption;
-
-        var value = _.get(variable, valuePath);
-
-        return (isColorMetric || hasNoneOption) && value === null;
+    function hasUnavailableVariable(requiredFields) {
+        return _.any(requiredFields, _.isUndefined);
     }
 
-    function hasUnavailableVariable(objFields) {
-        return _.any(objFields, _.isUndefined);
-    }
+    function normalizeFusedFieldName(name) {
+        var splitted = name.split('.');
 
-    function getFusedFieldName(name) {
-        var splited = name.split('.');
-
-        return splited[splited.length - 1];
+        return splitted[splitted.length - 1];
     }
 }
 
@@ -28350,7 +28629,9 @@ function launchVisualization(
                 clear: visAPI.clear,
                 resize: visAPI.resize,
                 setVisualizationName: visAPI.setVisualizationName,
+                getVisualizationType: visAPI.getVisualizationType,
                 initColorAccessorListeners: visAPI.initColorAccessorListeners,
+                removeColorAccessorListeners: visAPI.removeColorAccessorListeners,
                 source: visAPI.source,
                 getSourceId: query.getSourceId,
                 toRequest: query.toRequest,
@@ -28358,6 +28639,7 @@ function launchVisualization(
                 isTimeTrends: visAPI.isTimeTrends,
                 variables: visAPI.variables,
                 variableToString: VariableStringify.stringify,
+                eventDispatcher: visAPI.eventDispatcher,
                 createHandler: visAPI.createHandler,
                 removeHandler: visAPI.removeHandler,
                 remove: function() {
@@ -28371,7 +28653,6 @@ function launchVisualization(
             if (visualization.type === 'PIVOT_TABLE') {
                 _.assign(visOptions, {
                     element: visAPI.element,
-                    eventDispatcher: visAPI.eventDispatcher,
                     trigger: visAPI.trigger
                 });
             }
@@ -28491,6 +28772,60 @@ function getVisualizationVariables(visId, source) {
         .value();
 }
 
+function getRequiredFieldNames(variableDefaults, dataVariables, filters) {
+    variableDefaults = variableDefaults || {};
+
+    return chain(dataVariables)
+        .map(getRequiredVariableNames)
+        .flatten()
+        .thru(flow(
+            partial(enrichWithAttrNames, variableDefaults),
+            partial(enrichWithFilterNames, filters)
+        ))
+        .uniq()
+        .value();
+
+    function enrichWithFilterNames(filters, variableNames) {
+        var filterNames = pluck(filters, 'path');
+
+        return variableNames.concat(filterNames);
+    }
+
+    function enrichWithAttrNames(variableDefaults, variablesNames) {
+        var rowAttrs = variableDefaults['Row Attributes'] || [];
+        var columnAttrs = variableDefaults['Column Attributes'] || [];
+        var attributeNames = pluck(rowAttrs.concat(columnAttrs), 'name');
+
+        return variablesNames.concat(attributeNames);
+    }
+
+    function getRequiredVariableNames(variable) {
+        var valueFields = pluck(variable.values, 'value.name');
+        var sortFields = pluck(variable.values, 'value.sort.name')
+            .filter(isDefined);
+        var requiredVariableNames = union(valueFields, sortFields);
+
+        return map(requiredVariableNames, function(name) {
+            return isNoneColorMetric(variable) ? null : name;
+        });
+
+        function isDefined(value) {
+            return !_.isUndefined(value);
+        }
+    }
+
+    function isNoneColorMetric(variable) {
+        var config = variable.config || {};
+        var isColorMetric = has(variable, 'metricType') &&
+            variable.metricType === 'color';
+        var hasNoneOption = config.displayNoneOption;
+        var requiredValues = pluck(variable.values, 'value');
+
+        return (isColorMetric || hasNoneOption) &&
+            includes(requiredValues, null);
+    }
+}
+
 function assignKey(mode, credentials, params) {
     params = params || {};
 
@@ -28513,11 +28848,10 @@ function onError(reason) {
     console.error(reason.stack || reason.statusText || reason);
 }
 
-},{"../Data":146,"./Accessors/AccessorController":56,"./Accessors/AccessorParser":58,"./QueryInheritanceManager":85,"./Service":89,"./Source":109,"./Source/Query":105,"./ThreadManager":113,"./User":115,"./VariableParser":117,"./VariableStringify":119,"./Visualization":137,"./Visualization/API":131,"./Visualization/Library":135,"lodash":38,"promise":41}],84:[function(require,module,exports){
+},{"../Data":149,"./Accessors/AccessorController":59,"./Accessors/AccessorParser":61,"./QueryInheritanceManager":88,"./Service":92,"./Source":112,"./Source/Query":108,"./ThreadManager":116,"./User":118,"./VariableParser":120,"./VariableStringify":122,"./Visualization":140,"./Visualization/API":134,"./Visualization/Library":138,"lodash":41,"promise":44}],87:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -28555,6 +28889,7 @@ function inheritConfig(options) {
     var nextDataAccessors = options.nextDataAccessors;
     var origDataAccessors = options.origDataAccessors;
     var nextVisType = options.nextVisType;
+    var objectFields = options.source.objectFields;
 
     var currentGroups = clone(currentConfig.groups);
     var nextGroups = clone(nextConfig.groups);
@@ -28585,11 +28920,6 @@ function inheritConfig(options) {
         .pluck('TYPE')
         .contains('MULTI_METRIC')
         .value();
-
-    nextMetrics = skipColorMetric(nextMetrics, nextMetricAccessors);
-    if (!isToMultiMetric) {
-        currentMetrics = skipColorMetric(currentMetrics, origMetricAccessors);
-    }
 
     //Bars -> //Donut
     if (currentGroups.length > nextGroups.length) {
@@ -28661,38 +28991,45 @@ function inheritConfig(options) {
         inheritedMetrics = inheritedMetrics.concat(volumeMetric);
     }
 
+    if (nextVisType === 'BOX_PLOT') {
+        inheritedMetrics = reject(currentMetrics, function (metric) {
+            var isInvalidBoxPlotMetric =    metric.type === 'FORMULA' ||
+                                            metric.name === 'count' ||
+                                            metric.func === 'distinct_count';
+            metric.func = nextMetrics[0].func;
+            metric.args = nextMetrics[0].args;
+            return isInvalidBoxPlotMetric;
+        });
+    } else {
+        inheritedMetrics = reject(currentMetrics, function (metric) {
+            if (metric.func === 'percentiles') {
+                metric.func = _getMetricFuncFromConfig(objectFields, metric.name);
+                delete metric.args;
+            }
+            return !findWhere( nextMetrics, function (m) { return m.name === metric.name } )
+        });
+    }
+    inheritedMetrics = notEmpty(inheritedMetrics) ? inheritedMetrics : nextMetrics;
+
     return assign({}, {groups: inheritedGroups}, {metrics: inheritedMetrics});
 }
 
 module.exports = inheritConfig;
 
-function skipColorMetric(metrics, metricAccessors) {
-    var colorMetricLabel = chain(metricAccessors)
-        .filter('isColor')
-        .invoke('getLabels')
-        .flatten()
-        .get(0)
-        .value();
-
-    var colorMetricIndex = findIndex(metrics, {label: colorMetricLabel});
-
-    pullAt(metrics, colorMetricIndex);
-
-    return metrics;
+function _getMetricFuncFromConfig(objectFields, fieldName) {
+    var field = findWhere(objectFields, {name: fieldName});
+    return  field ? ( field.func && field.func.toLowerCase() ) || null : null;
 }
-
-},{"lodash":38}],85:[function(require,module,exports){
+},{"lodash":41}],88:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./QueryInheritanceManager');
 
-},{"./QueryInheritanceManager":84}],86:[function(require,module,exports){
+},{"./QueryInheritanceManager":87}],89:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -28922,17 +29259,15 @@ function onError(reason) {
     console.error(reason.stack || reason.statusText || reason);
 }
 
-},{"../../../Utilities":153,"events":33,"lodash":38,"promise":41,"ws":47}],87:[function(require,module,exports){
+},{"../../../Utilities":156,"events":36,"lodash":41,"promise":44,"ws":50}],90:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Connection');
-},{"./Connection":86}],88:[function(require,module,exports){
+},{"./Connection":89}],91:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29009,17 +29344,15 @@ var Service = {
 
 module.exports = Service;
 
-},{"../../Web":155,"./Connection":87,"lodash":38,"promise":41}],89:[function(require,module,exports){
+},{"../../Web":158,"./Connection":90,"lodash":41,"promise":44}],92:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Service');
-},{"./Service":88}],90:[function(require,module,exports){
+},{"./Service":91}],93:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29050,17 +29383,15 @@ var Field = {
 };
 
 module.exports = Data.type.construct(Field);
-},{"../../../../Data/index":146,"lodash":38}],91:[function(require,module,exports){
+},{"../../../../Data/index":149,"lodash":41}],94:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Field');
-},{"./Field":90}],92:[function(require,module,exports){
+},{"./Field":93}],95:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29236,6 +29567,18 @@ function changeFilters(api, filter) {
     api.change(filter.path, filter);
 }
 
+function resetFilters(api, filter) {
+    var existing = _.findWhere(api.get(), {
+        path: filter.path
+    });
+    if (existing) {
+      debugger;
+        changeFilters(api, filter);
+    } else {
+        api.add(filter);
+    }
+}
+
 function addFilters(api, filter) {
     var existing = _.findWhere(api.get(), {
         path: filter.path
@@ -29285,6 +29628,13 @@ function createAPI(API, emitter, prefix, data) {
          */
         addFilters: _.partial(maybeCollResolver, addFilters, api),
         /**
+         * finds a filter with the same paths and replaces the filter for any {@link FilterOperations}, otherwise add filter
+         * @function
+         * @memberof FiltersAPI
+         * @param {Filter}
+         */
+        resetFilters: _.partial(maybeCollResolver, resetFilters, api),
+        /**
          * changes existing filter by path
          *
          * @function
@@ -29304,17 +29654,15 @@ function createAPI(API, emitter, prefix, data) {
 }
 
 
-},{"../../../../Data/Notified":145,"../../../../Data/index":146,"lodash":38}],93:[function(require,module,exports){
+},{"../../../../Data/Notified":148,"../../../../Data/index":149,"lodash":41}],96:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Filter');
-},{"./Filter":92}],94:[function(require,module,exports){
+},{"./Filter":95}],97:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29429,17 +29777,15 @@ module.exports = Data.type.construct(Group);
 function validateArgs(group) {
     return group.args ? _.isNumber(group.args) : false;
 }
-},{"../../../../Data":146,"../Sort":102,"../Time":104,"lodash":38}],95:[function(require,module,exports){
+},{"../../../../Data":149,"../Sort":105,"../Time":107,"lodash":41}],98:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Group');
-},{"./Group":94}],96:[function(require,module,exports){
+},{"./Group":97}],99:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29525,17 +29871,15 @@ var Metric = {
 
 module.exports = Data.type.construct(Metric);
 
-},{"../../../../Data":146,"lodash":38}],97:[function(require,module,exports){
+},{"../../../../Data":149,"lodash":41}],100:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Metric');
-},{"./Metric":96}],98:[function(require,module,exports){
+},{"./Metric":99}],101:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29602,17 +29946,15 @@ function isValidTimeFormat(time) {
     return moment(plainTime).format(FORMAT) !== INVALID_DATE;
 }
 
-},{"../../../../Data/index":146,"lodash":38,"moment":39}],99:[function(require,module,exports){
+},{"../../../../Data/index":149,"lodash":41,"moment":42}],102:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Player');
-},{"./Player":98}],100:[function(require,module,exports){
+},{"./Player":101}],103:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -29970,17 +30312,16 @@ function toRequest(instance, config) {
 function requestMetrics(metrics) {
     return chain(metrics)
         .thru(processUniqCountMetric)
-        .map(partial(pick, _, 'name', 'func', 'args', 'script'))
         .map(resolveBoxPlot)
+        .map(partial(pick, _, 'name', 'func', 'script', 'percentiles'))
         .value();
 }
 
 function resolveBoxPlot(metric) {
-    var resolved = pick(metric, 'name', 'func');
     if (metric.func === 'percentiles') {
-        assign(resolved, {'percentiles': metric.args});
+        assign(metric, {'percentiles': metric.args});
     }
-    return resolved;
+    return metric;
 }
 
 function requestFilters(filters) {
@@ -30048,11 +30389,10 @@ function wrapBrackets(text) {
         .value();
 }
 
-},{"../../../Data":146,"../../../Data/Notified":145,"./Field":91,"./Filter":93,"./Group":95,"./Metric":97,"./Player":99,"./Time":104,"events":33,"lodash":38}],101:[function(require,module,exports){
+},{"../../../Data":149,"../../../Data/Notified":148,"./Field":94,"./Filter":96,"./Group":98,"./Metric":100,"./Player":102,"./Time":107,"events":36,"lodash":41}],104:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -30098,17 +30438,15 @@ var Sort = {
 };
 
 module.exports = Data.type.construct(Sort);
-},{"../../../../Data":146,"lodash":38}],102:[function(require,module,exports){
+},{"../../../../Data":149,"lodash":41}],105:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Sort');
-},{"./Sort":101}],103:[function(require,module,exports){
+},{"./Sort":104}],106:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -30163,7 +30501,7 @@ var Time = Data.type.construct({
                 return 'time.from must be a string';
             }
             if (!isValidTimeSyntax(time.from)) {
-                return 'invalid time.from syntax: "$", "-" or "+" expected as first character';
+                return 'invalid time.from syntax: "-" or "+" expected as first character';
             }
             if (!isValidTimeFormat(time.from)) {
                 return 'invalid time.from format: expected ' + FORMAT;
@@ -30175,7 +30513,7 @@ var Time = Data.type.construct({
                 return 'time.to must be a string';
             }
             if (!isValidTimeSyntax(time.to)) {
-                return 'invalid time.to syntax: "$", "-" or "+" expected as first character';
+                return 'invalid time.to syntax: "-" or "+" expected as first character';
             }
             if (!isValidTimeFormat(time.to)) {
                 return 'invalid time.to format: expected formula or ' + FORMAT;
@@ -30191,13 +30529,13 @@ var Time = Data.type.construct({
 module.exports = Time;
 
 function isValidTimeSyntax(time) {
-    return time[0] === '+' || time[0] === '-' || time[0] === '$';
+    return time[0] === '+' || time[0] === '-';
 }
 
 function isValidTimeFormat(time) {
     var plainTime;
 
-    if (time[0] === '$') {
+    if (time[1] === '$') {
         return true;
     } else {
         plainTime = time.substring(1, time.length);
@@ -30206,13 +30544,9 @@ function isValidTimeFormat(time) {
 }
 
 function setPrefixedTime(timeAPI, selector, time, included) {
-    var prefixedTime;
-    if (time[0] === '$') {
-        timeAPI.set(selector, time);
-    } else {
-        prefixedTime = included ? '+' + time : '-' + time;
-        timeAPI.set(selector, prefixedTime);
-    }
+    var prefixedTime = included ? '+' + time : '-' + time;
+
+    timeAPI.set(selector, prefixedTime);
 }
 
 function createAPI(API, emitter, prefix, data) {
@@ -30224,23 +30558,20 @@ function createAPI(API, emitter, prefix, data) {
     });
 }
 
-},{"../../../../Data/Notified":145,"../../../../Data/index":146,"lodash":38,"moment":39}],104:[function(require,module,exports){
+},{"../../../../Data/Notified":148,"../../../../Data/index":149,"lodash":41,"moment":42}],107:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Time');
-},{"./Time":103}],105:[function(require,module,exports){
+},{"./Time":106}],108:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Query');
-},{"./Query":100}],106:[function(require,module,exports){
+},{"./Query":103}],109:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -30497,17 +30828,15 @@ function detectQueryType(config) {
         }
     });
 }
-},{"../Query":105,"../Query/Field":91,"../Query/Filter":93,"../Query/Group":95,"../Query/Metric":97,"../Query/Player":99,"../Query/Time":104,"lodash":38,"promise":41}],107:[function(require,module,exports){
+},{"../Query":108,"../Query/Field":94,"../Query/Filter":96,"../Query/Group":98,"../Query/Metric":100,"../Query/Player":102,"../Query/Time":107,"lodash":41,"promise":44}],110:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./QueryBuilder');
-},{"./QueryBuilder":106}],108:[function(require,module,exports){
+},{"./QueryBuilder":109}],111:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -30549,21 +30878,18 @@ var Source = {
 
 module.exports = Data.type.construct(Source);
 
-},{"../../Data":146,"../Service":89,"./QueryBuilder":107,"lodash":38,"promise":41}],109:[function(require,module,exports){
+},{"../../Data":149,"../Service":92,"./QueryBuilder":110,"lodash":41,"promise":44}],112:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Source');
-},{"./Source":108}],110:[function(require,module,exports){
+},{"./Source":111}],113:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
-var P = require('promise');
 
 var partial = _.partial;
 var bind = _.bind;
@@ -30607,7 +30933,7 @@ var EVENTS = {
     TIMELINE: 'thread:timeline'
 };
 
-var Thread = function (connection, query, options) {
+var Thread = function(connection, query, options) {
     options = defaults(options || {}, DEFAULTS);
     var emitter = new EventEmitter();
     emitter.setMaxListeners(0);
@@ -30622,6 +30948,12 @@ var Thread = function (connection, query, options) {
         .partial(thread, connection, emitter, query)
         .debounce(options.debounceInterval)
         .value();
+
+    var startThreadNotResolve = function() {
+        thread.notResolveTime = true;
+
+        return startThread.apply(this, arguments);
+    };
 
     var pauseThread = partial(pause, thread, connection, emitter);
     var unpauseThread = partial(unpause, thread, connection, emitter);
@@ -30644,10 +30976,10 @@ var Thread = function (connection, query, options) {
     query.on('metrics:remove', startThread);
     query.on('metrics:change', startThread);
 
-    query.time.on('set', startThread);
+    query.time.on('set', startThreadNotResolve);
     query.player.on('set:timeWindowScale', startThread);
     query.player.on('set:speed', speedChangeThread);
-    query.time.on('reset', startThread);
+    query.time.on('reset', startThreadNotResolve);
     query.player.on('reset', startThread);
 
     connection.on('stream:message', partial(onMessage, thread, emitter));
@@ -30681,6 +31013,10 @@ var Thread = function (connection, query, options) {
         EVENTS: EVENTS,
         STATUSES: STATUSES,
 
+        get UUID() {
+            return thread.UUID;
+        },
+
         on: bind(emitter.on, emitter),
         off: bind(emitter.removeListener, emitter),
         start: startThread,
@@ -30688,7 +31024,7 @@ var Thread = function (connection, query, options) {
         getLatest: partial(getLatest, thread),
         getData: partial(getData, thread),
         unpause: unpauseThread,
-        requestData:requestDataThread,
+        requestData: requestDataThread,
         stop: partial(stop, thread, connection, emitter)
     });
 };
@@ -30731,11 +31067,15 @@ function sendStart(thread, connection, emitter, query) {
     var request = {
         type: 'START_VIS',
         cid: thread.UUID,
-        request: query.toRequest()
+        request: getRequest(thread, query)
     };
 
+    delete thread.timeline;
+    delete thread.notResolveTime;
     thread.status = STATUSES.STARTING;
+
     emitter.emit(EVENTS.STARTING, request);
+
     return connection.send(request);
 }
 
@@ -30751,7 +31091,7 @@ function stop(thread, connection, emitter) {
     return connection.send(request);
 }
 
-function pause(thread, connection, emitter){
+function pause(thread, connection, emitter) {
     var request = {
         type: 'PAUSE',
         cid: thread.UUID
@@ -30761,7 +31101,7 @@ function pause(thread, connection, emitter){
     return connection.send(request);
 }
 
-function unpause(thread, connection, emitter){
+function unpause(thread, connection, emitter) {
     var request = {
         type: 'UNPAUSE',
         cid: thread.UUID
@@ -30796,8 +31136,12 @@ function requestData(thread, connection, options) {
 
 function onMessage(thread, emitter, message) {
     if (isMine(thread, message)) {
-        thread._data = message.data;
-        emitter.emit(EVENTS.MESSAGE, message.data);
+        if (message.data.length > 0) {
+            thread._data = message.data;
+            emitter.emit(EVENTS.MESSAGE, message.data);
+        } else {
+            onNoDataFound(thread, emitter, message);
+        }
     }
 }
 
@@ -30886,7 +31230,8 @@ function onTimeline(thread, emitter, message) {
 function generateUUID() {
     /* jshint bitwise: false */
     return 'xxxxxxxxxxxxxxxxyxxxxxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+        var r = Math.random() * 16 | 0;
+        var v = c === 'x' ? r : (r & 0x3 | 0x8);
         return v.toString(16);
     });
 }
@@ -30898,17 +31243,27 @@ function isMine(thread, message) {
     return UUID === cid;
 }
 
-},{"../../../Data":146,"events":33,"lodash":38,"promise":41}],111:[function(require,module,exports){
-/*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
- */
+function getRequest(thread, query) {
+    var lastTimeline = thread.timeline;
+    var request = query.toRequest();
 
+    if (lastTimeline && !thread.notResolveTime) {
+        request.time.from = lastTimeline.queryFrom;
+        request.time.to = lastTimeline.queryTo;
+    }
+
+    return request;
+}
+
+},{"../../../Data":149,"events":36,"lodash":41}],114:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 module.exports = require('./DataThread');
-},{"./DataThread":110}],112:[function(require,module,exports){
+},{"./DataThread":113}],115:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -30941,17 +31296,15 @@ function startThread(connection, query, start) {
         });
 }
 
-},{"../Service":89,"./DataThread":111,"lodash":38,"promise":41}],113:[function(require,module,exports){
+},{"../Service":92,"./DataThread":114,"lodash":41,"promise":44}],116:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./ThreadManager');
-},{"./ThreadManager":112}],114:[function(require,module,exports){
+},{"./ThreadManager":115}],117:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -31002,13 +31355,15 @@ var User = {
 };
 
 module.exports = Data.type.construct(User);
-},{"../../Data":146,"../Service":89,"lodash":38}],115:[function(require,module,exports){
+},{"../../Data":149,"../Service":92,"lodash":41}],118:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./User');
-},{"./User":114}],116:[function(require,module,exports){
+},{"./User":117}],119:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by vokob on 9/16/15.
  */
@@ -31038,10 +31393,12 @@ var compact = _.compact;
 
 var METRIC_MATCH = /[\w\.]*:*\w*:*(?:\{.*\})*/g;
 var GROUP_MATCH = /[{:}\[\]\\\"\w\d\,\.\#\s\|]*/;
+var COLOR_MATCH = /(^\w\S+?):\w*:({\S*.*?autoShowColorLegend.*})/;
 
 var COLOR_FIELDS = {
     SHOW_LEGEND: 'autoShowColorLegend',
     LEGEND_POSITION: 'colorLegendPosition',
+    COLOR_POSITIONS: 'colorPositions',
     LEGEND_TYPE: 'legendType',
     COLOR_NUMB: 'colorNumb',
     COLORS: 'savedColors',
@@ -31062,6 +31419,8 @@ var GROUP_FIELDS = [
     'form', 'func', 'args',
     'defaultGranularity'
 ];
+
+var ALLIGN_TO_DAY = ['MILLISECOND', 'SECOND', 'MINUTE', 'HOUR'];
 
 var GROUP_NUMERIC_TYPES = {
     AUTO: 'auto',
@@ -31195,7 +31554,9 @@ function readMetricValue(pair) {
     var valueParts = value ? value.split(':') : '';
     var defaultValue = pair[1] || '';
     var defaultParts = defaultValue.split(':');
-    var colorConfig = valueParts[2] || defaultParts[2];
+    var valueColor = value.match(COLOR_MATCH) || '';
+    var defaultColor = defaultValue.match(COLOR_MATCH) || '';
+    var colorConfig = valueColor[2] || defaultColor[2];
     var result = chain({});
 
     if (value) {
@@ -31214,7 +31575,7 @@ function readMetricValue(pair) {
 
     if (colorConfig) {
         result = result
-            .set('colorConfig', JSON.parse(colorConfig.replace(/\|/g, ':')));
+            .set('colorConfig', JSON.parse(colorConfig));
     }
 
     return result.value();
@@ -31312,10 +31673,27 @@ function withTimeFunc(fields, variable) {
             var field = find(fields, {name: value.name});
 
             if (field && value.type === 'TIME') {
-                var granularities = resolveGranularity(field.timestampGranularity);
+                var timeFunc;
+                var granularities = values(TIME_GRANULARITIES);
+                if (field.forms) {
+                    var timeIndexes = field.forms[0].mapping
+                        .map(function(mapping) {
+                            return find(fields, {name: mapping});
+                        })
+                        .map(function(mappedField) {
+                            return values(TIME_GRANULARITIES).indexOf(mappedField.timestampGranularity);
+                        });
+                    timeFunc = values(TIME_GRANULARITIES)[_.max(timeIndexes)];
+                    granularities = cutGranularities(timeFunc)
+                } else {
+                    granularities = cutGranularities(field.timestampGranularity);
+                    timeFunc = value.func || value.defaultGranularity ||
+                        setDefaultGranularity(granularities);
+                }
+
                 assign(value, {
                     granularities: granularities,
-                    func: value.func || value.defaultGranularity || granularities[0]
+                    func: timeFunc
                 });
             }
         })
@@ -31457,11 +31835,16 @@ function writeValueToVariable(variableWithValue) {
     return variable.value();
 }
 
-function resolveGranularity(limitGranularity) {
+function cutGranularities(limitGranularity) {
     return _.drop(values(TIME_GRANULARITIES),
         _.findIndex(values(TIME_GRANULARITIES), function(granularity) {
             return granularity === limitGranularity;
         }));
+}
+
+function setDefaultGranularity(granularities) {
+    return (_.includes(ALLIGN_TO_DAY, granularities[0])) ?
+        'DAY':  granularities[0];
 }
 
 module.exports = {
@@ -31469,13 +31852,19 @@ module.exports = {
     parse: parseVariables
 };
 
-},{"../Source/Query/Group":95,"lodash":38}],117:[function(require,module,exports){
+},{"../Source/Query/Group":98,"lodash":41}],120:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by vokob on 9/16/15.
  */
 
 module.exports = require('./VariableParser');
-},{"./VariableParser":116}],118:[function(require,module,exports){
+},{"./VariableParser":119}],121:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by sergeyfilyuk on 12/17/15.
  */
@@ -31507,6 +31896,7 @@ var forOwn = _.forOwn;
 var COLOR_FIELDS = {
     SHOW_LEGEND: 'autoShowColorLegend',
     LEGEND_POSITION: 'colorLegendPosition',
+    COLOR_POSITIONS: 'colorPositions',
     LEGEND_TYPE: 'legendType',
     COLOR_NUMB: 'colorNumb',
     SAVED_COLORS: 'colors',
@@ -31718,7 +32108,9 @@ function boxPlotMetricToString(visualization, accessor) {
 function colorMetricToString(accessor) {
 
     var string = '';
-    var metric = accessor.getMetrics()[0];
+    var metrics = accessor.getMetrics();
+    var metric = metrics[0];
+    metrics.splice(0, 1);
     var isNone = accessor.isNone;
 
     var _tempStringArr = [];
@@ -31732,6 +32124,10 @@ function colorMetricToString(accessor) {
         _tempStringArr.push('none');
     }
 
+    var metricsString = (metrics) ? ' ' + metrics.map(function(metric){
+        return metric.name + ':' + metric.func
+    }).join(' ') : '';
+
     var _tempColorProps = {};
     _tempColorProps[COLOR_FIELDS.COLOR_NUMB] = accessor.getColorNumber();
     _tempColorProps[COLOR_FIELDS.LEGEND_TYPE] = accessor.getColorRangeType();
@@ -31740,19 +32136,20 @@ function colorMetricToString(accessor) {
     _tempColorProps[COLOR_FIELDS.SHOW_LEGEND] = accessor._colorSettings.showLegend;
     _tempColorProps[COLOR_FIELDS.SAVED_COLORS] = accessor._colorSettings.customColors;
     _tempColorProps[COLOR_FIELDS.AUTO_COLOR] = accessor._colorSettings.autoColor;
-    _tempColorProps[COLOR_FIELDS.LEGEND_POSITION] = accessor._colorSettings.colorPositions;
+    _tempColorProps[COLOR_FIELDS.LEGEND_POSITION] = accessor._colorSettings.colorLegendPosition;
+    _tempColorProps[COLOR_FIELDS.COLOR_POSITIONS] = accessor._colorSettings.colorPositions;
     _tempColorProps[COLOR_FIELDS.COLOR_SCALE_TYPE] = accessor.getColorScaleType();
 
     _tempColorProps[COLOR_FIELDS.SAVED_COLORS] =
         _tempColorProps[COLOR_FIELDS.SAVED_COLORS];
 
-    _tempColorProps = JSON.stringify(_tempColorProps).replace(/:/g, '|');
+    _tempColorProps = JSON.stringify(_tempColorProps);
 
     _tempStringArr.push(_tempColorProps);
 
     string = _tempStringArr.join(':');
 
-    return string;
+    return string.concat(metricsString);
 }
 
 function isAttribute(source, sort) {
@@ -31781,16 +32178,19 @@ module.exports = {
     stringify: stringifyVariables
 };
 
-},{"../Source/Query/Group":95,"lodash":38}],119:[function(require,module,exports){
+},{"../Source/Query/Group":98,"lodash":41}],122:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 /**
  * Created by sergeyfilyuk on 12/17/15.
  */
 
 module.exports = require('./VariableStringify');
 
-},{"./VariableStringify":118}],120:[function(require,module,exports){
+},{"./VariableStringify":121}],123:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 'use strict';
 
@@ -32453,15 +32853,15 @@ function clickEvents() {
 
 module.exports = InteractiveElementsController;
 
-},{"../../../../../Utilities":153,"data-set":31,"lodash":38}],121:[function(require,module,exports){
+},{"../../../../../Utilities":156,"data-set":34,"lodash":41}],124:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 module.exports = require('./InteractiveElementsController');
 
-},{"./InteractiveElementsController":120}],122:[function(require,module,exports){
+},{"./InteractiveElementsController":123}],125:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 'use strict';
 
@@ -32603,6 +33003,8 @@ InteractiveElementsManager.prototype = {
             'Trend': addTrendsAction,
             'Exclude': addExcludeAction
         };
+
+        this.UUID = options.UUID;
 
         if (menuConfig) {
             initCustomMenu();
@@ -32780,21 +33182,6 @@ InteractiveElementsManager.prototype = {
                         visualization: this.visualization
                     });
 
-                    /*
-                     in case when we pull filters into options in menu.show step
-                     */
-                    if (data.filters) {
-                        data.filters.map(function(f) {
-                            filter = {
-                                editable: true,
-                                operation: 'IN',
-                                path: f.path,
-                                value: [f.value]
-                            };
-                            filters.push(filter);
-                        });
-                    }
-
                     var filtersHash = this._getFiltersHash(filters);
                     var filteredAll = this._filteredAll === filtersHash;
                     var ltOneVis = this.config.collection.length <= 1;
@@ -32893,7 +33280,7 @@ InteractiveElementsManager.prototype = {
                 label: 'remove-exclude',
                 type: 'icon',
                 disabled: function() {
-                    return isTimeTrend(query, timeFields)
+                    return isTimeTrend(query, timeFields);
                 },
                 action: function() {
                     instance.trigger(
@@ -33020,22 +33407,21 @@ function isTimeTrend(query, timeFields) {
         .intersection(timeFields)
         .size()
         .gt(0)
-        .value()
+        .value();
 }
 
 module.exports = InteractiveElementsManager;
 
-},{"../Controller":121,"events":33,"lodash":38}],123:[function(require,module,exports){
+},{"../Controller":124,"events":36,"lodash":41}],126:[function(require,module,exports){
 /*
- * Copyright (C) Zoomdata, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 module.exports = require('./InteractiveElementsManager');
 
-},{"./InteractiveElementsManager":122}],124:[function(require,module,exports){
+},{"./InteractiveElementsManager":125}],127:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -33081,7 +33467,8 @@ var CustomVariable = {
         return _.assign({}, variables,
             {
                 update: update,
-                initIfEmpty: initIfEmpty
+                initIfEmpty: initIfEmpty,
+                stringify: stringifyCustomVariables
             }
         );
 
@@ -33102,16 +33489,19 @@ var CustomVariable = {
                 variables.add({name: name, value: value}) :
                 null);
         }
+
+        function stringifyCustomVariables() {
+            return JSON.stringify(variables.toJSON());
+        }
     })
 };
 
 module.exports = Data.type.construct(CustomVariable);
 
-},{"../../../../../Data":146,"../../../../../Data/Collection":140,"../../../../../Data/Notified":145,"./CustomVariableModel":126,"lodash":38}],125:[function(require,module,exports){
+},{"../../../../../Data":149,"../../../../../Data/Collection":143,"../../../../../Data/Notified":148,"./CustomVariableModel":129,"lodash":41}],128:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -33150,24 +33540,21 @@ var CustomVariableModel = _.defaults(
 );
 
 module.exports = CustomVariableModel;
-},{"../../../../../../Data":146,"../../../../../../Data/Model":143,"../../../../../../Data/Notified":145,"lodash":38}],126:[function(require,module,exports){
+},{"../../../../../../Data":149,"../../../../../../Data/Model":146,"../../../../../../Data/Notified":148,"lodash":41}],129:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Model');
 
-},{"./Model":125}],127:[function(require,module,exports){
+},{"./Model":128}],130:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./CustomVariable');
-},{"./CustomVariable":124}],128:[function(require,module,exports){
+},{"./CustomVariable":127}],131:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var CUSTOM_VARIABLES_FIELD = '_custom_variables';
@@ -33193,17 +33580,15 @@ module.exports = {
         return customVariables;
     }
 };
-},{"../../../../Data/Notified":145,"./CustomVariable":127,"events":33,"lodash":38}],129:[function(require,module,exports){
+},{"../../../../Data/Notified":148,"./CustomVariable":130,"events":36,"lodash":41}],132:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./State');
-},{"./State":128}],130:[function(require,module,exports){
+},{"./State":131}],133:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 var SOURCE_NAME = '$Source'; // Templates for visualization name
 
@@ -33360,7 +33745,8 @@ function createAPI(client,
                         timeFields: timeFields,
                         getter: options.data,
                         menuConfig: options.menu,
-                        hiddenActions: options.hide
+                        hiddenActions: options.hide,
+                        UUID: thread.UUID
                     }
                 ).actions;
 
@@ -33482,11 +33868,11 @@ function createAPI(client,
         fields: source.fields,
 
         pickAttribute: function(options) {
-            return request(emitter, 'pickAttribute', options)
+            return request(emitter, 'pickAttribute', options);
         },
 
         pickMetric: function(options) {
-            return request(emitter, 'pickMetric', options)
+            return request(emitter, 'pickMetric', options);
         },
 
         //logScaleEnabled: this.logScaleEnabled,
@@ -33725,6 +34111,10 @@ function createAPI(client,
             return _.contains(trendChartsTypes, visualizationType);
         },
 
+        getVisualizationType: function() {
+            return visualizationType;
+        },
+
         teardownListeners: function() {
             var self = this;
             chain(handlers)
@@ -33787,6 +34177,10 @@ function createAPI(client,
                     update
                 ))
                 .assign(createHandler(_colorAccessor,
+                    _colorAccessor.EVENTS.UPDATE_COLOR_POSITIONS,
+                    update
+                ))
+                .assign(createHandler(_colorAccessor,
                     _colorAccessor.EVENTS.UPDATE_COLOR_SCALE_TYPE,
                     update
                 ))
@@ -33799,6 +34193,19 @@ function createAPI(client,
                     update
                 ))
                 .value();
+        },
+
+        removeColorAccessorListeners: function(_colorAccessor) {
+            var self = this;
+            chain(listener.events.colorAccessor)
+                .pairs()
+                .each(function(pair) {
+                    self.removeHandler(_colorAccessor, pair);
+                })
+                .value();
+        },
+        getColorAccessor: function() {
+            return _.find(this.dataAccessors, 'isColor');
         }
     };
 
@@ -33825,17 +34232,15 @@ function updateDomain(dataAccessors, data) {
     return data;
 }
 
-},{"../../../Data":146,"../../../Utilities":153,"../../Accessors/ColorAccessor":64,"../../Source":109,"../../Source/Query/Metric":97,"./InteractiveElements/Manager":123,"./State":129,"events":33,"lodash":38,"promise":41}],131:[function(require,module,exports){
+},{"../../../Data":149,"../../../Utilities":156,"../../Accessors/ColorAccessor":67,"../../Source":112,"../../Source/Query/Metric":100,"./InteractiveElements/Manager":126,"./State":132,"events":36,"lodash":41,"promise":44}],134:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./VisAPI');
-},{"./VisAPI":130}],132:[function(require,module,exports){
+},{"./VisAPI":133}],135:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -33982,17 +34387,15 @@ function initComponent(component, args) {
 function runScript(fn, args) {
     fn.apply(window, args);
 }
-},{"../../../Data":146,"../../../Web":155,"apply-css":1,"lodash":38,"promise":41}],133:[function(require,module,exports){
+},{"../../../Data":149,"../../../Web":158,"apply-css":4,"lodash":41,"promise":44}],136:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Component');
-},{"./Component":132}],134:[function(require,module,exports){
+},{"./Component":135}],137:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -34043,17 +34446,15 @@ function load(home, library, params, root) {
         });
 }
 
-},{"../../../Data":146,"../../../Web":155,"../../Service":89,"lodash":38,"promise":41}],135:[function(require,module,exports){
+},{"../../../Data":149,"../../../Web":158,"../../Service":92,"lodash":41,"promise":44}],138:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Library');
-},{"./Library":134}],136:[function(require,module,exports){
+},{"./Library":137}],139:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -34134,24 +34535,21 @@ function initVisualization(visualization, args) {
         .map(_.partial(Component.init, _, args)));
 }
 
-},{"../../Data":146,"../Service":89,"./Component":133,"lodash":38,"promise":41}],137:[function(require,module,exports){
+},{"../../Data":149,"../Service":92,"./Component":136,"lodash":41,"promise":44}],140:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Visualization');
-},{"./Visualization":136}],138:[function(require,module,exports){
+},{"./Visualization":139}],141:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Client');
 
-},{"./Client":83}],139:[function(require,module,exports){
+},{"./Client":86}],142:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -34321,17 +34719,15 @@ function backbonify(collection) {
         return call.value();
     }
 }
-},{"../Data":141,"../Model":143,"../Notified":145,"lodash":38}],140:[function(require,module,exports){
+},{"../Data":144,"../Model":146,"../Notified":148,"lodash":41}],143:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Collection');
-},{"./Collection":139}],141:[function(require,module,exports){
+},{"./Collection":142}],144:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -34605,11 +35001,10 @@ function createTarget(propertyName, value) {
 function isAccessor(item) {
     return typeof item.id === 'function';
 }
-},{"lodash":38,"promise":41}],142:[function(require,module,exports){
+},{"lodash":41,"promise":44}],145:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -34638,17 +35033,15 @@ var Model = _.defaults(
 );
 
 module.exports = Model;
-},{"../Data":141,"../Notified":145,"lodash":38}],143:[function(require,module,exports){
+},{"../Data":144,"../Notified":148,"lodash":41}],146:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Model');
-},{"./Model":142}],144:[function(require,module,exports){
+},{"./Model":145}],147:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var _ = require('lodash');
@@ -34682,7 +35075,6 @@ var Notified = {
 
     add: curry(function(API, emitter, event, array, type, items) {
         var result = API.add(array, type, items);
-
         if (result) {
             emitter.emit(event, result);
         }
@@ -34880,24 +35272,22 @@ function pipeEmitters(source, destination, events) {
 
     });
 }
-},{"../Data":141,"events":33,"lodash":38}],145:[function(require,module,exports){
+},{"../Data":144,"events":36,"lodash":41}],148:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Notified');
-},{"./Notified":144}],146:[function(require,module,exports){
+},{"./Notified":147}],149:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Data');
-},{"./Data":141}],147:[function(require,module,exports){
-/**
- * Created by vokob on 9/23/15.
+},{"./Data":144}],150:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
 
-"use strict";
+'use strict';
 
 module.exports = function createHandler(subscriber, event, handler) {
     var listener = {};
@@ -34909,26 +35299,19 @@ module.exports = function createHandler(subscriber, event, handler) {
     return listener;
 };
 
-},{}],148:[function(require,module,exports){
+},{}],151:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 var promisify = require('./promisifyEvent');
 var createHandler = require('./createHandler');
 var removeHandler = require('./removeHandler');
+module.exports = { promisify: promisify, createHandler: createHandler, removeHandler: removeHandler };
 
-module.exports = {
-    promisify: promisify,
-    createHandler: createHandler,
-    removeHandler: removeHandler
-};
-
-},{"./createHandler":147,"./promisifyEvent":149,"./removeHandler":150}],149:[function(require,module,exports){
+},{"./createHandler":150,"./promisifyEvent":152,"./removeHandler":153}],152:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var P = require('promise');
@@ -34964,7 +35347,11 @@ module.exports = function promisify(emitter, success, fail) {
     });
 };
 
-},{"events":33,"promise":41}],150:[function(require,module,exports){
+},{"events":36,"promise":44}],153:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
+
 'use strict';
 
 module.exports = function removeHandler(subscriber, eventHandler) {
@@ -34974,11 +35361,10 @@ module.exports = function removeHandler(subscriber, eventHandler) {
     subscriber.off(event, handler);
 };
 
-},{}],151:[function(require,module,exports){
+},{}],154:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var colorbrewer = require('colorbrewer');
@@ -35008,11 +35394,10 @@ colorbrewer.ZoomPalette = {
 
 module.exports = colorbrewer;
 
-},{"colorbrewer":29}],152:[function(require,module,exports){
+},{"colorbrewer":32}],155:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 function detectTouchDevice() {
@@ -35023,14 +35408,13 @@ function detectTouchDevice() {
 }
 
 module.exports = detectTouchDevice;
-},{}],153:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2015. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
-var events = require('./Events');
+var events = require('./Events/index.ts');
 var detectTouchDevice = require('./detectTouchDevice');
 var colorSchemes = require('./colorSchemes');
 
@@ -35039,11 +35423,11 @@ module.exports = {
     detectTouchDevice: detectTouchDevice,
     colorSchemes: colorSchemes
 };
-},{"./Events":148,"./colorSchemes":151,"./detectTouchDevice":152}],154:[function(require,module,exports){
-/*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
- */
 
+},{"./Events/index.ts":151,"./colorSchemes":154,"./detectTouchDevice":155}],157:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 'use strict';
 
 var _ = require('lodash');
@@ -35060,7 +35444,7 @@ var ERRORS = {
 };
 
 var Web = {
-    request: function (xhrOptions, params) {
+    request: function(xhrOptions, params) {
         var opts = _.clone(xhrOptions, true);
         var paramString = (typeof params === 'object' ?
             Web.paramString(params) : '');
@@ -35082,30 +35466,30 @@ var Web = {
         }
 
         return P.denodeify(xhr)(opts)
-            .then(function (response) {
+            .then(function(response) {
                 return (response.statusCode === 200 ?
                     P.resolve(response.body) :
                     P.reject(response.rawRequest));
             });
     },
 
-    loadScript: function (src, parent) {
+    loadScript: function(src, parent) {
         return ensureParent(parent)
             .then(_.partial(loadScript, src));
     },
 
-    loadStyle: function (src, parent) {
+    loadStyle: function(src, parent) {
         return ensureParent(parent)
             .then(_.partial(loadStyle, src));
     },
 
-    paramString: function (params) {
+    paramString: function(params) {
 
         if (typeof params !== 'object') {
             throw Error(ERRORS.INVALID_PARAMS);
         }
 
-        return _.reduce(params, function (paramStr, value, key) {
+        return _.reduce(params, function(paramStr, value, key) {
             var pair = key + '=' + value;
 
             if (paramStr === '') {
@@ -35116,19 +35500,19 @@ var Web = {
         }, '');
     },
 
-    secure: function (application) {
+    secure: function(application) {
         return (typeof application.secure === 'boolean' ?
             application.secure :
             location.protocol === 'https:');
     },
 
-    hostname: function (application) {
+    hostname: function(application) {
         return (typeof application.host === 'string' ?
             application.host :
             location.hostname);
     },
 
-    port: function (application) {
+    port: function(application) {
         return (typeof application.port === 'number' ?
             application.port :
             !isNaN(parseInt(location.port, 10)) ?
@@ -35136,7 +35520,7 @@ var Web = {
                 null);
     },
 
-    path: function (application) {
+    path: function(application) {
         return (typeof application.path === 'string' ?
             application.path :
             location.pathname);
@@ -35146,7 +35530,7 @@ var Web = {
 module.exports = Web;
 
 function ensureParent(parent) {
-    return new P(function (resolve, reject) {
+    return new P(function(resolve, reject) {
         if (document !== 'undefined' && !parent) {
             resolve(document.head);
         } else if (parent instanceof HTMLElement) {
@@ -35158,10 +35542,10 @@ function ensureParent(parent) {
 }
 
 function loadScript(src, parent) {
-    return new P(function (resolve, reject) {
-        if(document !== 'undefined') {
+    return new P(function(resolve, reject) {
+        if (document !== 'undefined') {
             var script = document.createElement('script');
-            script.onload = function () {
+            script.onload = function() {
                 resolve();
             };
             script.onerror = reject;
@@ -35177,21 +35561,20 @@ function loadScript(src, parent) {
 function loadStyle(src, parent) {
     return Web
         .request(src)
-        .then(function (response) {
+        .then(function(response) {
             return response;
         });
 }
-},{"lodash":38,"promise":41,"xhr":48}],155:[function(require,module,exports){
-/*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
- */
 
+},{"lodash":41,"promise":44,"xhr":51}],158:[function(require,module,exports){
+/*
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
+ */
 module.exports = require('./Web');
-},{"./Web":154}],156:[function(require,module,exports){
+},{"./Web":157}],159:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 'use strict';
 
 var INVALID_OPTIONS_MESSAGE = 'Invalid options:' +
@@ -35302,11 +35685,10 @@ module.exports = {
     }
 };
 
-},{"../Client":138,"../Client/Service":89,"../Client/User":115,"lodash":38,"promise":41}],157:[function(require,module,exports){
+},{"../Client":141,"../Client/Service":92,"../Client/User":118,"lodash":41,"promise":44}],160:[function(require,module,exports){
 /*
- * Copyright (C) zoomdata-client, Inc. 2012-2014. All rights reserved.
+ * Copyright (C) Zoomdata, Inc. 2012-2016. All rights reserved.
  */
-
 module.exports = require('./Zoomdata');
-},{"./Zoomdata":156}]},{},[157])(157)
+},{"./Zoomdata":159}]},{},[1,2,3,160])(160)
 });

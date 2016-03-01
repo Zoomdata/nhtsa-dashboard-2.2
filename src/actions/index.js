@@ -52,6 +52,13 @@ export const REQUEST_COMPONENT_DATA = 'REQUEST_COMPONENT_DATA';
 export const RECEIVE_COMPONENT_DATA = 'RECEIVE_COMPONENT_DATA';
 export const CHANGE_COMPONENT_DATA_QUERY = 'CHANGE_COMPONENT_DATA_QUERY';
 
+export const REQUEST_METRIC_TOTALS_DATA = 'REQUEST_METRIC_TOTALS_DATA';
+export const RECEIVE_METRIC_TOTALS_DATA = 'RECEIVE_METRIC_TOTALS_DATA';
+
+export const REQUEST_METRIC_DATA = 'REQUEST_METRIC_DATA';
+export const RECEIVE_METRIC_DATA = 'RECEIVE_METRIC_DATA';
+export const CHANGE_METRIC_DATA_QUERY = 'CHANGE_METRIC_DATA_QUERY';
+
 export function setDashboardDimensions(width, height, offsetLeft) {
     return {
         type: SET_DASHBOARD_DIMENSIONS,
@@ -185,6 +192,40 @@ export function receiveComponentData(data) {
 export function changeComponentDataQuery() {
     return {
         type: CHANGE_COMPONENT_DATA_QUERY
+    }
+}
+
+export function requestMetricTotalsData(source) {
+    return {
+        type: REQUEST_METRIC_TOTALS_DATA,
+        source
+    }
+}
+
+export function receiveMetricTotalsData(data) {
+    return {
+        type: RECEIVE_METRIC_TOTALS_DATA,
+        data
+    }
+}
+
+export function requestMetricData(source) {
+    return {
+        type: REQUEST_METRIC_DATA,
+        source
+    }
+}
+
+export function receiveMetricData(data) {
+    return {
+        type: RECEIVE_METRIC_DATA,
+        data
+    }
+}
+
+export function changeMetricDataQuery() {
+    return {
+        type: CHANGE_METRIC_DATA_QUERY
     }
 }
 

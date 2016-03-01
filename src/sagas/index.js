@@ -4,6 +4,8 @@ import * as makeData from '../config/queries/makeData';
 import * as yearData from '../config/queries/yearData';
 import * as modelData from '../config/queries/modelData';
 import * as componentData from '../config/queries/componentData';
+import * as metricTotalsData from '../config/queries/metricTotalsData';
+import * as metricData from '../config/queries/metricData';
 import { createClient } from '../config';
 
 let queryData = [];
@@ -88,7 +90,6 @@ function* fetchComponentData (client, source, queryConfig) {
         const query = yield call(getQuery, client, source, queryConfig);
         ComponentDataQuery = query;
     }
-
     yield put(actions.requestComponentData(componentData.source));
     if (!ComponentDataThread) {
         const thread = yield call(getThread, client, ComponentDataQuery);
@@ -106,11 +107,50 @@ function* changeComponentDataQuery(getState) {
     }
 }
 
+function* fetchMetricTotalsData (client, source, queryConfig) {
+    if (!MetricTotalsDataQuery) {
+        const query = yield call(getQuery, client, source, queryConfig);
+        MetricTotalsDataQuery = query;
+    }
+    yield put(actions.requestMetricTotalsData(metricTotalsData.source));
+    if (!MetricTotalsDataThread) {
+        const thread = yield call(getThread, client, MetricTotalsDataQuery);
+        MetricTotalsDataThread = thread;
+    }
+    const data = yield call(fetchDataApi, MetricTotalsDataThread);
+    yield put(actions.receiveMetricTotalsData(data));
+}
+
+function* fetchMetricData (client, source, queryConfig) {
+    if (!MetricDataQuery) {
+        const query = yield call(getQuery, client, source, queryConfig);
+        MetricDataQuery = query;
+    }
+    yield put(actions.requestMetricData(metricData.source));
+    if (!MetricDataThread) {
+        const thread = yield call(getThread, client, MetricDataQuery);
+        MetricDataThread = thread;
+    }
+    const data = yield call(fetchDataApi, MetricDataThread);
+
+    yield put(actions.receiveMetricData(data));
+}
+
+function* changeMetricDataQuery(getState) {
+    while(true) {
+        const source = getState().chartData.metricData.source;
+        yield take(actions.CHANGE_METRIC_DATA_QUERY);
+        yield fork(fetchMetricData, MetricDataThread);
+    }
+}
+
 function* startup(client) {
     yield fork(fetchMakeData, client, makeData.source, makeData.queryConfig);
     yield fork(fetchYearData, client, yearData.source, yearData.queryConfig);
     yield fork(fetchModelData, client, modelData.source, modelData.queryConfig);
     yield fork(fetchComponentData, client, componentData.source, componentData.queryConfig);
+    yield fork(fetchMetricTotalsData, client, metricTotalsData.source, metricTotalsData.queryConfig);
+    yield fork(fetchMetricData, client, metricData.source, metricData.queryConfig);
 }
 
 export default function* root(getState) {
@@ -119,6 +159,7 @@ export default function* root(getState) {
     yield fork(startup, ZoomdataClient);
     yield fork(changeModelDataQuery, getState);
     yield fork(changeComponentDataQuery, getState);
+    yield fork(changeMetricDataQuery, getState);
 }
 export let ZoomdataClient = undefined;
 export let MakeDataQuery = undefined;
@@ -129,3 +170,7 @@ export let ModelDataQuery = undefined;
 export let ModelDataThread = undefined;
 export let ComponentDataQuery = undefined;
 export let ComponentDataThread = undefined;
+export let MetricTotalsDataQuery = undefined;
+export let MetricTotalsDataThread = undefined;
+export let MetricDataQuery = undefined;
+export let MetricDataThread = undefined;
