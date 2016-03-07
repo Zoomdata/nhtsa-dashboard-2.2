@@ -3,8 +3,9 @@ import styles from './Trend.css';
 import React from 'react';
 import TrendChart from '../TrendChart/TrendChart';
 import { connect } from 'react-redux';
-import { setYear, setFilterStatus, changeComponentDataQuery, changeMetricDataQuery } from '../../actions';
-import { ComponentDataQuery, MetricDataQuery } from '../../sagas';
+import { setYear, setFilterStatus, changeComponentDataQuery, changeMetricDataQuery, changeGridDataQuery } from '../../actions';
+import { ComponentDataQuery, MetricDataQuery, GridDataQuery } from '../../sagas';
+import baseFindIndex from 'lodash._basefindindex';
 
 const mapStateToProps = (state) => {
     return {
@@ -29,6 +30,12 @@ const mapDispatchToProps = (dispatch) => {
             MetricDataQuery.filters.remove(filter.path);
             MetricDataQuery.filters.add(filter);
             dispatch(changeMetricDataQuery());
+            const yearFilterIndex = baseFindIndex(GridDataQuery.restrictions, function(filter) {
+                return filter.path === 'year_string';
+            });
+            yearFilterIndex >= 0 ? GridDataQuery.restrictions.splice(yearFilterIndex, 1) : null;
+            GridDataQuery.restrictions.push(filter);
+            dispatch(changeGridDataQuery());
             changeFilterStatus ?
                 dispatch(setFilterStatus('FILTERS_APPLIED')) :
                 null

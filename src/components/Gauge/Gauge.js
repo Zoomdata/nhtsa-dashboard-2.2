@@ -1,11 +1,26 @@
 import styles from './Gauge.css';
 
-import React, { Component } from 'react';
+import React from 'react';
+import GaugeChart from '../GaugeChart/GaugeChart';
 
-export default class Gauge extends Component {
-    render() {
-        return <div className={styles.root}>
-
+const Gauge = ({
+    name,
+    id,
+    data,
+    max
+}) => {
+    return (
+        <div
+            className={styles.root}
+            id={id}
+        >
+            <GaugeChart
+                name={name}
+                data={data}
+                max={max}
+            />
         </div>
-    }
-}
+    )
+};
+
+export default Gauge;

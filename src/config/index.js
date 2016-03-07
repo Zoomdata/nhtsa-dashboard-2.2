@@ -51,3 +51,8 @@ function initClient() {
 }
 
 export const createClient = initClient;
+export const secure = application.secure;
+export const host = application.host;
+export const port = application.port;
+export const path = application.path;
+export const access_token = credentials.access_token;

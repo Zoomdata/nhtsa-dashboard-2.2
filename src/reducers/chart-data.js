@@ -18,6 +18,9 @@ const initialState = {
     },
     metricData: {
         isFetching: false
+    },
+    gridData: {
+        isFetching: false
     }
 }
 const data = (state = initialState, action) => {
@@ -34,7 +37,7 @@ const data = (state = initialState, action) => {
                 makeData: {
                     source: state.makeData.source,
                     isFetching: false,
-                    data: action.data || state.makeData.data
+                    data: action.data
                 }
             });
         case actions.REQUEST_YEAR_DATA:
@@ -49,7 +52,7 @@ const data = (state = initialState, action) => {
                 yearData: {
                     source: state.yearData.source,
                     isFetching: false,
-                    data: action.data || state.yearData.data
+                    data: action.data
                 }
             });
         case actions.REQUEST_MODEL_DATA:
@@ -64,7 +67,7 @@ const data = (state = initialState, action) => {
                 modelData: {
                     source: state.modelData.source,
                     isFetching: false,
-                    data: action.data || state.modelData.data
+                    data: action.data
                 }
             });
         case actions.REQUEST_COMPONENT_DATA:
@@ -79,7 +82,7 @@ const data = (state = initialState, action) => {
                 componentData: {
                     source: state.componentData.source,
                     isFetching: false,
-                    data: action.data || state.componentData.data
+                    data: action.data
                 }
             });
         case actions.REQUEST_METRIC_TOTALS_DATA:
@@ -94,7 +97,7 @@ const data = (state = initialState, action) => {
                 metricTotalsData: {
                     source: state.metricTotalsData.source,
                     isFetching: false,
-                    data: action.data || state.metricTotalsData.data
+                    data: action.data
                 }
             });
         case actions.REQUEST_METRIC_DATA:
@@ -109,7 +112,22 @@ const data = (state = initialState, action) => {
                 metricData: {
                     source: state.metricData.source,
                     isFetching: false,
-                    data: action.data || state.metricData.data
+                    data: action.data
+                }
+            });
+        case actions.REQUEST_GRID_DATA:
+            return {
+                ...state, gridData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_GRID_DATA:
+            return Object.assign({}, state, {
+                gridData: {
+                    source: state.gridData.source,
+                    isFetching: false,
+                    data: action.data
                 }
             });
         default:

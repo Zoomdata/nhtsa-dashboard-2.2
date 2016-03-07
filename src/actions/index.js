@@ -59,6 +59,10 @@ export const REQUEST_METRIC_DATA = 'REQUEST_METRIC_DATA';
 export const RECEIVE_METRIC_DATA = 'RECEIVE_METRIC_DATA';
 export const CHANGE_METRIC_DATA_QUERY = 'CHANGE_METRIC_DATA_QUERY';
 
+export const REQUEST_GRID_DATA = 'REQUEST_GRID_DATA';
+export const RECEIVE_GRID_DATA = 'RECEIVE_GRID_DATA';
+export const CHANGE_GRID_DATA_QUERY = 'CHANGE_GRID_DATA_QUERY';
+
 export function setDashboardDimensions(width, height, offsetLeft) {
     return {
         type: SET_DASHBOARD_DIMENSIONS,
@@ -226,6 +230,26 @@ export function receiveMetricData(data) {
 export function changeMetricDataQuery() {
     return {
         type: CHANGE_METRIC_DATA_QUERY
+    }
+}
+
+export function requestGridData(source) {
+    return {
+        type: REQUEST_GRID_DATA,
+        source
+    }
+}
+
+export function receiveGridData(data) {
+    return {
+        type: RECEIVE_GRID_DATA,
+        data
+    }
+}
+
+export function changeGridDataQuery() {
+    return {
+        type: CHANGE_GRID_DATA_QUERY
     }
 }
 

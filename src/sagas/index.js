@@ -1,4 +1,4 @@
-import { take, put, call, fork } from 'redux-saga/effects';
+import { take, put, call, fork, select } from 'redux-saga/effects';
 import * as actions from '../actions';
 import * as makeData from '../config/queries/makeData';
 import * as yearData from '../config/queries/yearData';
@@ -6,9 +6,51 @@ import * as modelData from '../config/queries/modelData';
 import * as componentData from '../config/queries/componentData';
 import * as metricTotalsData from '../config/queries/metricTotalsData';
 import * as metricData from '../config/queries/metricData';
-import { createClient } from '../config';
+import * as gridData from '../config/queries/gridData';
+import { createClient, secure, host, port, path, access_token } from '../config';
+import { gridDetails } from '../config/app-constants';
+import find from 'lodash.find';
+import mapKeys from 'lodash.mapkeys';
+import camelCase from 'lodash.camelcase';
 
 let queryData = [];
+
+function getPreviewEndpointURL() {
+    let endpointURL = secure ? 'https://' : 'http://';
+    endpointURL += host + ':' + port + path + '/service/stream/preview';
+    endpointURL += '?access_token=' + access_token;
+
+    return endpointURL;
+}
+
+function fetchRestDataApi(query, state) {
+    return new Promise(function(resolve, reject) {
+        gridDetails.loadingDetails = true;
+        const url = getPreviewEndpointURL();
+        query.limit = gridDetails.limit;
+        query.offset = gridDetails.offset;
+        fetch(url, {
+            method: 'post',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(query)
+        }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            gridDetails.hasNextDetails = data.hasNext;
+            //console.log(data.documents);
+            resolve(data.documents.map(function(d) { return mapKeys(d, function(v, k) { return camelCase(k)})}));
+            gridDetails.offset += gridDetails.limit;
+            gridDetails.loadingDetails = false;
+        }).catch(function (err) {
+            console.log('Error: ', err);
+            gridDetails.loadingDetails = false;
+            reject(err);
+        });
+    });
+}
 
 function fetchDataApi(thread) {
     return new Promise(function(resolve, reject) {
@@ -132,7 +174,6 @@ function* fetchMetricData (client, source, queryConfig) {
         MetricDataThread = thread;
     }
     const data = yield call(fetchDataApi, MetricDataThread);
-
     yield put(actions.receiveMetricData(data));
 }
 
@@ -144,6 +185,29 @@ function* changeMetricDataQuery(getState) {
     }
 }
 
+function* fetchGridData(client, source, query) {
+    const gridState = yield select(state => state.chartData.gridData);
+    if (!GridDataQuery) {
+        GridDataQuery = query;
+    }
+    if (!GridDataSourceId) {
+        const sources = yield call(client.sources.fetch);
+        GridDataSourceId = find(sources, {name: source}).id;
+        gridData.queryConfig.streamSourceId = GridDataSourceId;
+    }
+    yield put(actions.requestGridData(gridData.source));
+    const data = yield call(fetchRestDataApi, GridDataQuery, gridState);
+    yield put(actions.receiveGridData(data));
+}
+
+function* changeGridDataQuery(getState) {
+    while(true) {
+        const source = getState().chartData.gridData.source;
+        yield take(actions.CHANGE_GRID_DATA_QUERY);
+        yield fork(fetchGridData);
+    }
+}
+
 function* startup(client) {
     yield fork(fetchMakeData, client, makeData.source, makeData.queryConfig);
     yield fork(fetchYearData, client, yearData.source, yearData.queryConfig);
@@ -151,6 +215,8 @@ function* startup(client) {
     yield fork(fetchComponentData, client, componentData.source, componentData.queryConfig);
     yield fork(fetchMetricTotalsData, client, metricTotalsData.source, metricTotalsData.queryConfig);
     yield fork(fetchMetricData, client, metricData.source, metricData.queryConfig);
+    yield take(actions.CHANGE_GRID_DATA_QUERY);
+    yield fork(fetchGridData, client, gridData.source, gridData.queryConfig);
 }
 
 export default function* root(getState) {
@@ -160,6 +226,8 @@ export default function* root(getState) {
     yield fork(changeModelDataQuery, getState);
     yield fork(changeComponentDataQuery, getState);
     yield fork(changeMetricDataQuery, getState);
+    yield take(actions.CHANGE_GRID_DATA_QUERY);
+    yield fork(changeGridDataQuery, getState);
 }
 export let ZoomdataClient = undefined;
 export let MakeDataQuery = undefined;
@@ -174,3 +242,5 @@ export let MetricTotalsDataQuery = undefined;
 export let MetricTotalsDataThread = undefined;
 export let MetricDataQuery = undefined;
 export let MetricDataThread = undefined;
+export let GridDataSourceId = undefined;
+export let GridDataQuery = gridData.queryConfig;

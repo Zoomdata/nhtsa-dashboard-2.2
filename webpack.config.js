@@ -12,7 +12,8 @@ const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
     app: path.join(__dirname, 'src'),
     build: path.join(__dirname, 'build'),
-    test: path.join(__dirname, 'test')
+    test: path.join(__dirname, 'test'),
+    agGrid: path.join(__dirname, 'node_modules', 'ag-grid')
 };
 
 process.env.BABEL_ENV = TARGET;
@@ -59,7 +60,7 @@ if(TARGET === 'start' || !TARGET) {
                 {
                     test: /\.css$/,
                     loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css')]
+                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css'), PATHS.agGrid]
                 }
             ]
         },
@@ -99,7 +100,7 @@ if(TARGET === 'build' || TARGET === 'stats' || TARGET === 'deploy') {
                 {
                     test: /\.css$/,
                     loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
-                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css')]
+                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css'), PATHS.agGrid]
                 }
             ]
         },
