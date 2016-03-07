@@ -6,6 +6,7 @@ import * as modelData from '../config/queries/modelData';
 import * as componentData from '../config/queries/componentData';
 import * as metricTotalsData from '../config/queries/metricTotalsData';
 import * as metricData from '../config/queries/metricData';
+import * as stateData from '../config/queries/stateData';
 import * as gridData from '../config/queries/gridData';
 import { createClient, secure, host, port, path, access_token } from '../config';
 import { gridDetails } from '../config/app-constants';
@@ -185,6 +186,51 @@ function* changeMetricDataQuery(getState) {
     }
 }
 
+
+function* fetchStateData (client, source, queryConfig) {
+    if (!StateDataQuery) {
+        const query = yield call(getQuery, client, source, queryConfig);
+        StateDataQuery = query;
+        const filterState = yield select(state => state.chartFilters);
+        if (filterState.make) {
+            StateDataQuery.filters.add({
+                path: 'make',
+                operation: 'IN',
+                value: [filterState.make]
+            });
+        }
+        if (filterState.model) {
+            StateDataQuery.filters.add({
+                path: 'model',
+                operation: 'IN',
+                value: [filterState.model]
+            });
+        }
+        if (filterState.year) {
+            StateDataQuery.filters.add({
+                path: 'year',
+                operation: 'IN',
+                value: filterState.year
+            });
+        }
+    }
+    yield put(actions.requestStateData(stateData.source));
+    if (!StateDataThread) {
+        const thread = yield call(getThread, client, StateDataQuery);
+        StateDataThread = thread;
+    }
+    const data = yield call(fetchDataApi, StateDataThread);
+    yield put(actions.receiveStateData(data));
+}
+
+function* changeStateDataQuery(getState) {
+    while(true) {
+        const source = getState().chartData.stateData.source;
+        yield take(actions.CHANGE_STATE_DATA_QUERY);
+        yield fork(fetchStateData, StateDataThread);
+    }
+}
+
 function* fetchGridData(client, source, query) {
     const gridState = yield select(state => state.chartData.gridData);
     if (!GridDataQuery) {
@@ -217,6 +263,8 @@ function* startup(client) {
     yield fork(fetchMetricData, client, metricData.source, metricData.queryConfig);
     yield take(actions.CHANGE_GRID_DATA_QUERY);
     yield fork(fetchGridData, client, gridData.source, gridData.queryConfig);
+    yield take(actions.SET_ACTIVE_TAB);
+    yield fork(fetchStateData, client, stateData.source, stateData.queryConfig);
 }
 
 export default function* root(getState) {
@@ -228,6 +276,8 @@ export default function* root(getState) {
     yield fork(changeMetricDataQuery, getState);
     yield take(actions.CHANGE_GRID_DATA_QUERY);
     yield fork(changeGridDataQuery, getState);
+    yield take(actions.SET_ACTIVE_TAB);
+    yield fork(changeStateDataQuery, getState);
 }
 export let ZoomdataClient = undefined;
 export let MakeDataQuery = undefined;
@@ -242,5 +292,7 @@ export let MetricTotalsDataQuery = undefined;
 export let MetricTotalsDataThread = undefined;
 export let MetricDataQuery = undefined;
 export let MetricDataThread = undefined;
+export let StateDataQuery = undefined;
+export let StateDataThread = undefined;
 export let GridDataSourceId = undefined;
 export let GridDataQuery = gridData.queryConfig;

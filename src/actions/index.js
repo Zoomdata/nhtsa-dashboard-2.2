@@ -59,6 +59,10 @@ export const REQUEST_METRIC_DATA = 'REQUEST_METRIC_DATA';
 export const RECEIVE_METRIC_DATA = 'RECEIVE_METRIC_DATA';
 export const CHANGE_METRIC_DATA_QUERY = 'CHANGE_METRIC_DATA_QUERY';
 
+export const REQUEST_STATE_DATA = 'REQUEST_STATE_DATA';
+export const RECEIVE_STATE_DATA = 'RECEIVE_STATE_DATA';
+export const CHANGE_STATE_DATA_QUERY = 'CHANGE_STATE_DATA_QUERY';
+
 export const REQUEST_GRID_DATA = 'REQUEST_GRID_DATA';
 export const RECEIVE_GRID_DATA = 'RECEIVE_GRID_DATA';
 export const CHANGE_GRID_DATA_QUERY = 'CHANGE_GRID_DATA_QUERY';
@@ -230,6 +234,26 @@ export function receiveMetricData(data) {
 export function changeMetricDataQuery() {
     return {
         type: CHANGE_METRIC_DATA_QUERY
+    }
+}
+
+export function requestStateData(source) {
+    return {
+        type: REQUEST_STATE_DATA,
+        source
+    }
+}
+
+export function receiveStateData(data) {
+    return {
+        type: RECEIVE_STATE_DATA,
+        data
+    }
+}
+
+export function changeStateDataQuery() {
+    return {
+        type: CHANGE_STATE_DATA_QUERY
     }
 }
 

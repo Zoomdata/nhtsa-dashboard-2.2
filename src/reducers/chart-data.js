@@ -19,6 +19,9 @@ const initialState = {
     metricData: {
         isFetching: false
     },
+    stateData: {
+        isFetching: false
+    },
     gridData: {
         isFetching: false
     }
@@ -111,6 +114,21 @@ const data = (state = initialState, action) => {
             return Object.assign({}, state, {
                 metricData: {
                     source: state.metricData.source,
+                    isFetching: false,
+                    data: action.data
+                }
+            });
+        case actions.REQUEST_STATE_DATA:
+            return {
+                ...state, stateData: {
+                    source: action.source,
+                    isFetching: true
+                }
+            }
+        case actions.RECEIVE_STATE_DATA:
+            return Object.assign({}, state, {
+                stateData: {
+                    source: state.stateData.source,
                     isFetching: false,
                     data: action.data
                 }

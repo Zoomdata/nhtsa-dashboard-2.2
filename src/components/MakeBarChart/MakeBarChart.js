@@ -3,8 +3,8 @@ import styles from './MakeBarChart.css';
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { connect } from 'react-redux';
-import { setMake, changeModelDataQuery, changeComponentDataQuery, changeMetricDataQuery, changeGridDataQuery, setHideOverlay } from '../../actions';
-import { ModelDataQuery, ComponentDataQuery, MetricDataQuery, GridDataQuery } from '../../sagas';
+import { setMake, changeModelDataQuery, changeComponentDataQuery, changeMetricDataQuery, changeStateDataQuery, changeGridDataQuery, setHideOverlay } from '../../actions';
+import { ModelDataQuery, ComponentDataQuery, MetricDataQuery, StateDataQuery, GridDataQuery } from '../../sagas';
 import baseFindIndex from 'lodash._basefindindex';
 
 const mapStateToProps = (state) => {
@@ -43,6 +43,13 @@ const mapDispatchToProps = (dispatch) => {
             GridDataQuery.restrictions.push(filter);
             dispatch(changeGridDataQuery());
             hideOverlay ? dispatch(setHideOverlay()) : null;
+            if (!StateDataQuery) {
+                return;
+            }
+            StateDataQuery.filters.remove(filter.path);
+            StateDataQuery.filters.remove('model');
+            StateDataQuery.filters.add(filter);
+            dispatch(changeStateDataQuery());
         }
     }
 };

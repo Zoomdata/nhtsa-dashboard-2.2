@@ -58,6 +58,9 @@ export default class ScatterplotChart extends Component {
                 return d;
             });
 
+            if (getWidth(chartElement) === 0) {
+                return;
+            }
             this.chart
                 .width(getWidth(chartElement))
                 .height(getHeight(chartElement));
