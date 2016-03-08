@@ -1,4 +1,5 @@
 import * as actions from '../actions';
+import { gridDetails } from '../config/app-constants';
 
 const initialState = {
     makeData: {
@@ -137,15 +138,22 @@ const data = (state = initialState, action) => {
             return {
                 ...state, gridData: {
                     source: action.source,
-                    isFetching: true
+                    isFetching: true,
+                    data: state.gridData.data || []
                 }
             }
         case actions.RECEIVE_GRID_DATA:
+            let data;
+            if (gridDetails.offset <= gridDetails.limit) {
+                data = action.data;
+            } else {
+                data = state.gridData.data.concat(action.data);
+            }
             return Object.assign({}, state, {
                 gridData: {
                     source: state.gridData.source,
                     isFetching: false,
-                    data: action.data
+                    data: data
                 }
             });
         default:

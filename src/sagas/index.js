@@ -261,7 +261,7 @@ function* startup(client) {
     yield fork(fetchComponentData, client, componentData.source, componentData.queryConfig);
     yield fork(fetchMetricTotalsData, client, metricTotalsData.source, metricTotalsData.queryConfig);
     yield fork(fetchMetricData, client, metricData.source, metricData.queryConfig);
-    yield take(actions.CHANGE_GRID_DATA_QUERY);
+    yield take(actions.SET_HOOD_ACTION);
     yield fork(fetchGridData, client, gridData.source, gridData.queryConfig);
     yield take(actions.SET_ACTIVE_TAB);
     yield fork(fetchStateData, client, stateData.source, stateData.queryConfig);
@@ -274,7 +274,7 @@ export default function* root(getState) {
     yield fork(changeModelDataQuery, getState);
     yield fork(changeComponentDataQuery, getState);
     yield fork(changeMetricDataQuery, getState);
-    yield take(actions.CHANGE_GRID_DATA_QUERY);
+    yield take(actions.SET_HOOD_ACTION);
     yield fork(changeGridDataQuery, getState);
     yield take(actions.SET_ACTIVE_TAB);
     yield fork(changeStateDataQuery, getState);

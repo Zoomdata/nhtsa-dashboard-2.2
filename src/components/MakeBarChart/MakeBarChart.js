@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { setMake, changeModelDataQuery, changeComponentDataQuery, changeMetricDataQuery, changeStateDataQuery, changeGridDataQuery, setHideOverlay } from '../../actions';
 import { ModelDataQuery, ComponentDataQuery, MetricDataQuery, StateDataQuery, GridDataQuery } from '../../sagas';
 import baseFindIndex from 'lodash._basefindindex';
+import { gridDetails } from '../../config/app-constants';
 
 const mapStateToProps = (state) => {
     return {
@@ -19,6 +20,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onClick: (make, hideOverlay) => {
+            gridDetails.offset = 0;
+            gridDetails.hasNextDetails = true;
             const filter = {
                 path: 'make',
                 operation: 'IN',

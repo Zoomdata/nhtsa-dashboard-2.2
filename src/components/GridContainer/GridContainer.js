@@ -7,6 +7,8 @@ import './src/agGridStyles/ag-grid.css';
 import './src/agGridStyles/theme-dark.css';
 import ColDefFactory from './src/ColDefFactory';
 import { changeGridDataQuery } from '../../actions';
+import { getWidth, getHeight } from '../../utilities';
+import { gridDetails } from '../../config/app-constants';
 
 const mapStateToProps = (state) => {
     return {
@@ -16,14 +18,22 @@ const mapStateToProps = (state) => {
 
 class GridContainer extends Component {
     onGridReady(params) {
+        const { dispatch } = this.props;
         this.api = params.api;
         this.columnApi = params.columnApi;
+        const gridBody = document.getElementsByClassName('ag-body-viewport')[0];
+        gridBody.addEventListener('scroll', function() {
+            if (gridBody.scrollHeight - getHeight(gridBody) - gridBody.scrollTop < 200 && gridDetails.hasNextDetails && !gridDetails.loadingDetails) {
+                dispatch(changeGridDataQuery());
+            }
+        });
     }
-    componentWillUpdate() {
+    componentDidUpdate() {
         if (!this.api) {
             return;
         }
-        this.api.refreshView();
+        const data = this.props.data;
+        this.api.setRowData(data);
     }
     componentWillUnmount() {
         this.api.destroy();
@@ -32,21 +42,8 @@ class GridContainer extends Component {
         this.columnDefs = new ColDefFactory().createColDefs();
     }
     render() {
-        const data = this.props.data || [];
         const gridGroupStyle = {
             height: '100%'
-        };
-        const { dispatch } = this.props;
-        const dataSource = {
-            rowCount: null,
-            pageSize: 50,
-            overflowSize: 50,
-            maxConcurrentRequests: 2,
-            maxPagesInCache: 2,
-            getRows: function(params) {
-                dispatch(changeGridDataQuery());
-                params.successCallback(data);
-            }
         };
         return (
             <div
@@ -65,9 +62,6 @@ class GridContainer extends Component {
                         rowHeight="28"
                         suppressRowClickSelection="true"
                         suppressCellSelection="true"
-                        //virtualPaging="true"
-                        //datasource={dataSource}
-                        rowData={data}
                     />
                 </div>
             </div>
