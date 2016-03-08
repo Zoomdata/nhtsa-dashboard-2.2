@@ -36,13 +36,13 @@ const mapDispatchToProps = (dispatch) => {
             modelFilterIndex >= 0 ? GridDataQuery.restrictions.splice(modelFilterIndex, 1) : null;
             GridDataQuery.restrictions.push(filter);
             dispatch(changeGridDataQuery());
+            dispatch(setFilterStatus('FILTERS_APPLIED'))
             if (!StateDataQuery) {
                 return;
             }
             StateDataQuery.filters.remove(filter.path);
             StateDataQuery.filters.add(filter);
             dispatch(changeStateDataQuery());
-            dispatch(setFilterStatus('FILTERS_APPLIED'))
         }
     }
 };

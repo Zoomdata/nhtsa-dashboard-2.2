@@ -36,15 +36,15 @@ const mapDispatchToProps = (dispatch) => {
             yearFilterIndex >= 0 ? GridDataQuery.restrictions.splice(yearFilterIndex, 1) : null;
             GridDataQuery.restrictions.push(filter);
             dispatch(changeGridDataQuery());
+            changeFilterStatus ?
+                dispatch(setFilterStatus('FILTERS_APPLIED')) :
+                null
             if (!StateDataQuery) {
                 return;
             }
             StateDataQuery.filters.remove(filter.path);
             StateDataQuery.filters.add(filter);
             dispatch(changeStateDataQuery());
-            changeFilterStatus ?
-                dispatch(setFilterStatus('FILTERS_APPLIED')) :
-                null
         }
     }
 }
