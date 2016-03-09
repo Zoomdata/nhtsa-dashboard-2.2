@@ -29,7 +29,7 @@ var common = {
     module: {
         loaders: [
             {
-                test: /\.(eot|woff|woff2|ttf|svg|png|jpg)$/,
+                test: /\.(eot|woff|woff2|ttf|svg|gif|png|jpg)$/,
                 loader: 'url-loader?limit=10000&name=[name]-[hash].[ext]',
                 include: PATHS.app
             },

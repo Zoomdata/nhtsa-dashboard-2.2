@@ -1,6 +1,7 @@
 import styles from './ShowData.css';
 
 import React from 'react';
+import image from '../../images/show-data.png';
 
 const ShowData = ({
     hoodAction,
@@ -24,7 +25,7 @@ const ShowData = ({
             }
             width="104"
             height="77"
-            src="src/images/show-data.png" />
+            src={image} />
     )
 };
 

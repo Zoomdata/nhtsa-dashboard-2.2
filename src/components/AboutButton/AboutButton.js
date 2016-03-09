@@ -3,6 +3,7 @@ import styles from './AboutButton.css';
 import React from 'react';
 import { setAboutVisibilityOption } from '../../actions';
 import { connect } from 'react-redux';
+import image from '../../images/about-button.png';
 
 const AboutButton = ({dispatch}) => {
     return (
@@ -12,7 +13,7 @@ const AboutButton = ({dispatch}) => {
             }
             width="119"
             height="28.5"
-            src="src/images/about-button.png"
+            src={image}
             onClick={
                 (e) => {
                     e.stopPropagation();

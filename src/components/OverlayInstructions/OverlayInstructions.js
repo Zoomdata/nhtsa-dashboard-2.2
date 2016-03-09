@@ -3,6 +3,7 @@ import styles from './OverlayInstructions.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { VelocityComponent } from 'velocity-react';
+import image from '../../images/pick_a_make.png';
 
 const mapStateToProps = (state) => {
     return {
@@ -33,7 +34,7 @@ class OverlayInstructions extends Component {
         return (
             <VelocityComponent {...animationProps}>
                 <img
-                    src="src/images/pick_a_make.png"
+                    src={image}
                     className={styles.root}
                     width="427"
                     height="177"

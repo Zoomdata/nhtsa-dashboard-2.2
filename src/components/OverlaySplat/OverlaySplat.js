@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { getWidth } from '../../utilities';
 import { setOverlaySplatDimensions } from '../../actions';
 import { connect } from 'react-redux';
+import image from '../../images/overlay_splat4.gif';
 
 class OverlaySplat extends Component {
     setDimensions(comp) {
@@ -18,7 +19,6 @@ class OverlaySplat extends Component {
             }
     }
     render() {
-        const image = 'src/images/overlay_splat4.gif';
         const { makeWrapperDimensions, overlaySplatDimensions, aboutVisibility, hideOverlay } = this.props;
         const overlaySplatStyle = {
             width: (makeWrapperDimensions.width * 3) + 'px',
