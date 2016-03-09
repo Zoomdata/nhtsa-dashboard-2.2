@@ -41,7 +41,6 @@ function fetchRestDataApi(query, state) {
             return response.json();
         }).then(function (data) {
             gridDetails.hasNextDetails = data.hasNext;
-            //console.log(data.documents);
             resolve(data.documents.map(function(d) { return mapKeys(d, function(v, k) { return camelCase(k)})}));
             gridDetails.offset += gridDetails.limit;
             gridDetails.loadingDetails = false;
