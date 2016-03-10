@@ -12,8 +12,7 @@ const TARGET = process.env.npm_lifecycle_event;
 const PATHS = {
     app: path.join(__dirname, 'src'),
     build: path.join(__dirname, 'build'),
-    test: path.join(__dirname, 'test'),
-    agGrid: path.join(__dirname, 'node_modules', 'ag-grid')
+    test: path.join(__dirname, 'test')
 };
 
 process.env.BABEL_ENV = TARGET;
@@ -29,8 +28,13 @@ var common = {
     module: {
         loaders: [
             {
-                test: /\.(eot|woff|woff2|ttf|svg|gif|png|jpg)$/,
-                loader: 'url-loader?limit=10000&name=[name]-[hash].[ext]',
+                test: /\.(svg|gif|png|jpg)$/,
+                loader: 'url-loader?limit=10000&name=images/[name]-[hash].[ext]?[hash]',
+                include: PATHS.app
+            },
+            {
+                test: /\.(eot|woff|woff2|ttf)$/,
+                loader: 'url-loader?limit=10000&name=fonts/[name]-[hash].[ext]?[hash]',
                 include: PATHS.app
             },
             {
@@ -45,7 +49,7 @@ var common = {
     },
     plugins: [
         new HtmlwebpackPlugin({
-            title: 'React Template',
+            title: 'NHTSA Dashboard',
             template: './src/index.html',
             inject: true
         })
@@ -60,7 +64,7 @@ if(TARGET === 'start' || !TARGET) {
                 {
                     test: /\.css$/,
                     loader: 'style!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]',
-                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css'), PATHS.agGrid]
+                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css')]
                 }
             ]
         },
@@ -92,7 +96,8 @@ if(TARGET === 'build' || TARGET === 'stats' || TARGET === 'deploy') {
         },
         output: {
             path: PATHS.build,
-            filename: '[name].[chunkhash].js'
+            filename: 'js/[name].[chunkhash].js',
+            chunkFilename: '[chunkhash].js'
         },
         devtool: 'source-map',
         module: {
@@ -100,21 +105,21 @@ if(TARGET === 'build' || TARGET === 'stats' || TARGET === 'deploy') {
                 {
                     test: /\.css$/,
                     loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
-                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css'), PATHS.agGrid]
+                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css')]
                 }
             ]
         },
         plugins: [
             new Clean(['build']),
-            new ExtractTextPlugin('styles.[chunkhash].css'),
-            new webpack.optimize.CommonsChunkPlugin(
-                'vendor',
-                '[name].[chunkhash].js'
-            ),
+            new ExtractTextPlugin('css/styles.[chunkhash].css'),
+            new webpack.optimize.CommonsChunkPlugin({
+                names: ['vendor', 'manifest']
+            }),
             new webpack.DefinePlugin({
                 // This affects react lib size
                 'process.env.NODE_ENV': JSON.stringify('production')
             }),
+            new webpack.optimize.DedupePlugin(),
             new webpack.optimize.UglifyJsPlugin({
                 compress: {
                     warnings: false
