@@ -10,11 +10,12 @@ import * as stateData from '../config/queries/stateData';
 import * as gridData from '../config/queries/gridData';
 import { createClient, secure, host, port, path, access_token } from '../config';
 import { gridDetails } from '../config/app-constants';
-import find from 'lodash.find';
+//import find from 'lodash.find';
 import mapKeys from 'lodash.mapkeys';
 import camelCase from 'lodash.camelcase';
 
 let queryData = [];
+let makeQueryRunning, yearQueryRunning, modelQueryRunning, componentQueryRunning, totalsQueryRunning, metricQueryRunning, stateQueryRunning;
 
 function getPreviewEndpointURL() {
     let endpointURL = secure ? 'https://' : 'http://';
@@ -52,12 +53,29 @@ function fetchRestDataApi(query, state) {
     });
 }
 
-function fetchDataApi(thread) {
+function fetchDataApi(thread, group) {
+    var queryGroup = group;
     return new Promise(function(resolve, reject) {
         thread.on('thread:message', function(data) {
-                queryData = data;
+            queryData = data;
+            resolve(queryData);
         })
         thread.on('thread:notDirtyData', function() {
+            if (queryGroup === 'make') {
+                makeQueryRunning = false;
+            } else if (queryGroup === 'year') {
+                yearQueryRunning = false;
+            } else if (queryGroup === 'model') {
+                modelQueryRunning = false;
+            } else if (queryGroup === 'component') {
+                componentQueryRunning = false;
+            } else if (queryGroup === 'totals') {
+                totalsQueryRunning = false;
+            } else if (queryGroup === 'metric') {
+                metricQueryRunning = false;
+            } else if ( queryGroup === 'state') {
+                stateQueryRunning = false;
+            }
             resolve(queryData);
         });
         thread.on('thread:exeption', function(error) {
@@ -68,7 +86,7 @@ function fetchDataApi(thread) {
 
 function getQuery(client, source, queryConfig) {
     return client.createQuery(
-        source,
+        {name: source},
         queryConfig
     )
 }
@@ -78,6 +96,7 @@ function getThread(client, query) {
 }
 
 function* fetchMakeData (client, source, queryConfig) {
+    makeQueryRunning = true;
     if (!MakeDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         MakeDataQuery = query;
@@ -87,11 +106,16 @@ function* fetchMakeData (client, source, queryConfig) {
         const thread = yield call(getThread, client, MakeDataQuery);
         MakeDataThread = thread;
     }
-    const data = yield call(fetchDataApi, MakeDataThread);
-    yield put(actions.receiveMakeData(data));
+    while (makeQueryRunning) {
+        const data = yield call(fetchDataApi, MakeDataThread, 'make');
+        if (makeQueryRunning) {
+            yield put(actions.receiveMakeData(data));
+        }
+    }
 }
 
 function* fetchYearData (client, source, queryConfig) {
+    yearQueryRunning = true;
     if (!YearDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         YearDataQuery = query;
@@ -101,11 +125,16 @@ function* fetchYearData (client, source, queryConfig) {
         const thread = yield call(getThread, client, YearDataQuery);
         YearDataThread = thread;
     }
-    const data = yield call(fetchDataApi, YearDataThread);
-    yield put(actions.receiveYearData(data));
+    while (yearQueryRunning) {
+        const data = yield call(fetchDataApi, YearDataThread, 'year');
+        if (yearQueryRunning) {
+            yield put(actions.receiveYearData(data));
+        }
+    }
 }
 
 function* fetchModelData (client, source, queryConfig) {
+    modelQueryRunning = true;
     if (!ModelDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         ModelDataQuery = query;
@@ -115,8 +144,12 @@ function* fetchModelData (client, source, queryConfig) {
         const thread = yield call(getThread, client, ModelDataQuery);
         ModelDataThread = thread;
     }
-    const data = yield call(fetchDataApi, ModelDataThread);
-    yield put(actions.receiveModelData(data));
+    while (modelQueryRunning) {
+        const data = yield call(fetchDataApi, ModelDataThread, 'model');
+        if (modelQueryRunning) {
+            yield put(actions.receiveModelData(data));
+        }
+    }
 }
 
 function* changeModelDataQuery(getState) {
@@ -128,6 +161,7 @@ function* changeModelDataQuery(getState) {
 }
 
 function* fetchComponentData (client, source, queryConfig) {
+    componentQueryRunning = true;
     if (!ComponentDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         ComponentDataQuery = query;
@@ -137,8 +171,12 @@ function* fetchComponentData (client, source, queryConfig) {
         const thread = yield call(getThread, client, ComponentDataQuery);
         ComponentDataThread = thread;
     }
-    const data = yield call(fetchDataApi, ComponentDataThread);
-    yield put(actions.receiveComponentData(data));
+    while (componentQueryRunning) {
+        const data = yield call(fetchDataApi, ComponentDataThread, 'component');
+        if (componentQueryRunning) {
+            yield put(actions.receiveComponentData(data));
+        }
+    }
 }
 
 function* changeComponentDataQuery(getState) {
@@ -150,6 +188,7 @@ function* changeComponentDataQuery(getState) {
 }
 
 function* fetchMetricTotalsData (client, source, queryConfig) {
+    totalsQueryRunning = true;
     if (!MetricTotalsDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         MetricTotalsDataQuery = query;
@@ -159,11 +198,16 @@ function* fetchMetricTotalsData (client, source, queryConfig) {
         const thread = yield call(getThread, client, MetricTotalsDataQuery);
         MetricTotalsDataThread = thread;
     }
-    const data = yield call(fetchDataApi, MetricTotalsDataThread);
-    yield put(actions.receiveMetricTotalsData(data));
+    while (totalsQueryRunning) {
+        const data = yield call(fetchDataApi, MetricTotalsDataThread, 'totals');
+        if (totalsQueryRunning) {
+            yield put(actions.receiveMetricTotalsData(data));
+        }
+    }
 }
 
 function* fetchMetricData (client, source, queryConfig) {
+    metricQueryRunning = true;
     if (!MetricDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         MetricDataQuery = query;
@@ -173,8 +217,12 @@ function* fetchMetricData (client, source, queryConfig) {
         const thread = yield call(getThread, client, MetricDataQuery);
         MetricDataThread = thread;
     }
-    const data = yield call(fetchDataApi, MetricDataThread);
-    yield put(actions.receiveMetricData(data));
+    while (metricQueryRunning) {
+        const data = yield call(fetchDataApi, MetricDataThread, 'metric');
+        if (metricQueryRunning) {
+            yield put(actions.receiveMetricData(data));
+        }
+    }
 }
 
 function* changeMetricDataQuery(getState) {
@@ -187,6 +235,7 @@ function* changeMetricDataQuery(getState) {
 
 
 function* fetchStateData (client, source, queryConfig) {
+    stateQueryRunning = true;
     if (!StateDataQuery) {
         const query = yield call(getQuery, client, source, queryConfig);
         StateDataQuery = query;
@@ -218,8 +267,12 @@ function* fetchStateData (client, source, queryConfig) {
         const thread = yield call(getThread, client, StateDataQuery);
         StateDataThread = thread;
     }
-    const data = yield call(fetchDataApi, StateDataThread);
-    yield put(actions.receiveStateData(data));
+    while (stateQueryRunning) {
+        const data = yield call(fetchDataApi, StateDataThread, 'state');
+        if (stateQueryRunning) {
+            yield put(actions.receiveStateData(data));
+        }
+    }
 }
 
 function* changeStateDataQuery(getState) {
@@ -236,8 +289,8 @@ function* fetchGridData(client, source, query) {
         GridDataQuery = query;
     }
     if (!GridDataSourceId) {
-        const sources = yield call(client.sources.fetch);
-        GridDataSourceId = find(sources, {name: source}).id;
+        const querySource = yield call(client.sources.find, {name: source});
+        GridDataSourceId = querySource.id;
         gridData.queryConfig.streamSourceId = GridDataSourceId;
     }
     yield put(actions.requestGridData(gridData.source));
@@ -269,6 +322,7 @@ function* startup(client) {
 export default function* root(getState) {
     const client = yield call(createClient);
     ZoomdataClient = client;
+    yield call(client.sources.update, {name: 'Vehicle Complaints'})
     yield fork(startup, ZoomdataClient);
     yield fork(changeModelDataQuery, getState);
     yield fork(changeComponentDataQuery, getState);
