@@ -6,7 +6,7 @@ import { localhost } from './zoomdata-connections/localhost';
 const {credentials, application} = localhost;
 
 const oauthOptions = {
-    client_id: "bmh0c2FfY2xpZW50MTQ1Mzk5MzY3OTM3MjJiODVjNTUyLWZmZjgtNGEzZi1hYjlmLWU0NzQ1NjUzNTQ1NA==",
+    client_id: "bmh0c2FfY2xpZW50MTQ1NzYzOTkxMjA0MDlmMDM1MDY1LTljMTYtNGIxZC1hNzQwLWJjNjQyZDJlOTNmYg==",
     redirect_uri: "http://localhost:3000/index.html",
     auth_uri: "http://localhost:8080/zoomdata/oauth/authorize",
     scope: ['read']
