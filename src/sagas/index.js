@@ -10,7 +10,6 @@ import * as stateData from '../config/queries/stateData';
 import * as gridData from '../config/queries/gridData';
 import { createClient, secure, host, port, path, access_token } from '../config';
 import { gridDetails } from '../config/app-constants';
-//import find from 'lodash.find';
 import mapKeys from 'lodash.mapkeys';
 import camelCase from 'lodash.camelcase';
 
@@ -256,7 +255,7 @@ function* fetchStateData (client, source, queryConfig) {
         }
         if (filterState.year) {
             StateDataQuery.filters.add({
-                path: 'year',
+                path: 'year_string',
                 operation: 'IN',
                 value: filterState.year
             });
@@ -283,6 +282,10 @@ function* changeStateDataQuery(getState) {
     }
 }
 
+function* initGridData(client) {
+    yield take(actions.SET_HOOD_ACTION);
+    yield fork(fetchGridData, client, gridData.source, gridData.queryConfig);
+}
 function* fetchGridData(client, source, query) {
     const gridState = yield select(state => state.chartData.gridData);
     if (!GridDataQuery) {
@@ -296,6 +299,11 @@ function* fetchGridData(client, source, query) {
     yield put(actions.requestGridData(gridData.source));
     const data = yield call(fetchRestDataApi, GridDataQuery, gridState);
     yield put(actions.receiveGridData(data));
+}
+
+function* initChangeGridDataQuery(getState) {
+    yield take(actions.SET_HOOD_ACTION);
+    yield fork(changeGridDataQuery, getState);
 }
 
 function* changeGridDataQuery(getState) {
@@ -313,8 +321,7 @@ function* startup(client) {
     yield fork(fetchComponentData, client, componentData.source, componentData.queryConfig);
     yield fork(fetchMetricTotalsData, client, metricTotalsData.source, metricTotalsData.queryConfig);
     yield fork(fetchMetricData, client, metricData.source, metricData.queryConfig);
-    yield take(actions.SET_HOOD_ACTION);
-    yield fork(fetchGridData, client, gridData.source, gridData.queryConfig);
+    yield fork(initGridData, client);
     yield take(actions.SET_ACTIVE_TAB);
     yield fork(fetchStateData, client, stateData.source, stateData.queryConfig);
 }
@@ -327,8 +334,7 @@ export default function* root(getState) {
     yield fork(changeModelDataQuery, getState);
     yield fork(changeComponentDataQuery, getState);
     yield fork(changeMetricDataQuery, getState);
-    yield take(actions.SET_HOOD_ACTION);
-    yield fork(changeGridDataQuery, getState);
+    yield fork(initChangeGridDataQuery, getState);
     yield take(actions.SET_ACTIVE_TAB);
     yield fork(changeStateDataQuery, getState);
 }
