@@ -1,16 +1,9 @@
 import { start as oauthStart, parseCredentials } from 'oauth2-implicit'
 import { tapValue, clearLocationHash } from 'oauth2-implicit/build/utils';
 import ZoomdataSDK from 'ZoomdataSDK';
-import { localhost } from './zoomdata-connections/localhost';
+import { server } from './zoomdata-connections/development';
 
-const {credentials, application} = localhost;
-
-const oauthOptions = {
-    client_id: "bmh0c2FfY2xpZW50MTQ1NzYzOTkxMjA0MDlmMDM1MDY1LTljMTYtNGIxZC1hNzQwLWJjNjQyZDJlOTNmYg==",
-    redirect_uri: "http://localhost:3000/index.html",
-    auth_uri: "http://localhost:8080/zoomdata/oauth/authorize",
-    scope: ['read']
-};
+const {credentials, application, oauthOptions} = server;
 
 const oauthFinish = () => {
     // isOauthRedirect :: String -> Bool
