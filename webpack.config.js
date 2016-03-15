@@ -110,8 +110,13 @@ if(TARGET === 'build' || TARGET === 'stats' || TARGET === 'deploy') {
             loaders: [
                 {
                     test: /\.css$/,
+                    loader: ExtractTextPlugin.extract('style-loader', 'css-loader'),
+                    include: [PATHS.agGrid, path.join(__dirname, 'node_modules', 'normalize.css')]
+                },
+                {
+                    test: /\.css$/,
                     loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
-                    include: [PATHS.app, path.join(__dirname, 'node_modules', 'normalize.css')]
+                    include: [PATHS.app]
                 }
             ]
         },
