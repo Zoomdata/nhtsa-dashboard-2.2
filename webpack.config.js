@@ -45,9 +45,6 @@ var common = {
             }
         ]
     },
-    postcss: function () {
-        return [autoprefixer({ browsers: ['last 2 versions'] })];
-    },
     plugins: [
         new HtmlwebpackPlugin({
             title: 'NHTSA Dashboard',
@@ -116,17 +113,26 @@ if(TARGET === 'build' || TARGET === 'stats' || TARGET === 'deploy') {
                 },
                 {
                     test: /\.css$/,
-                    loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]'),
+                    loader: ExtractTextPlugin.extract('style-loader', 'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader', {publicPath: '../'}),
                     include: [PATHS.app]
                 }
             ]
         },
+        postcss: function () {
+            return [
+                autoprefixer(
+                    {
+                        browsers: ['last 2 versions']
+                    }
+                )
+            ];
+        },
         plugins: [
             new Clean(['build']),
-            new ExtractTextPlugin('css/styles.[chunkhash].css'),
             new webpack.optimize.CommonsChunkPlugin({
                 names: ['vendor', 'manifest']
             }),
+            new ExtractTextPlugin('css/[name].[chunkhash].css'),
             new webpack.DefinePlugin({
                 // This affects react lib size
                 'process.env.NODE_ENV': JSON.stringify('production')
