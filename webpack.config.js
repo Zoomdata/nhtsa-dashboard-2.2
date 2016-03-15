@@ -30,12 +30,12 @@ var common = {
         loaders: [
             {
                 test: /\.(svg|gif|png|jpg)$/,
-                loader: 'url-loader?limit=10000&name=images/[name]-[hash].[ext]?[hash]',
+                loader: 'url-loader?limit=10000&name=images/[name]-[hash].[ext]',
                 include: PATHS.app
             },
             {
                 test: /\.(eot|woff|woff2|ttf)$/,
-                loader: 'url-loader?limit=10000&name=fonts/[name]-[hash].[ext]?[hash]',
+                loader: 'url-loader?limit=10000&name=fonts/[name]-[hash].[ext]',
                 include: PATHS.app
             },
             {
@@ -52,7 +52,8 @@ var common = {
         new HtmlwebpackPlugin({
             title: 'NHTSA Dashboard',
             template: './src/index.html',
-            inject: true
+            inject: true,
+            favicon: './zd.favicon.ico'
         })
     ]
 };
