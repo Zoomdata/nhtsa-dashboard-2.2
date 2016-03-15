@@ -1,7 +1,7 @@
 import { start as oauthStart, parseCredentials } from 'oauth2-implicit'
 import { tapValue, clearLocationHash } from 'oauth2-implicit/build/utils';
 import ZoomdataSDK from 'ZoomdataSDK';
-import { server } from './zoomdata-connections/development';
+import { server } from './zoomdata-connections/production';
 
 const {credentials, application, oauthOptions} = server;
 
