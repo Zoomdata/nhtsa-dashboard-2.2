@@ -3,7 +3,7 @@ import styles from './GridContainer.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {AgGridReact} from 'ag-grid-react';
-import './src/agGridStyles/ag-grid.css';
+import 'ag-grid/dist/styles/ag-grid.css';
 import './src/agGridStyles/theme-dark.css';
 import ColDefFactory from './src/ColDefFactory';
 import { changeGridDataQuery } from '../../actions';
@@ -34,6 +34,7 @@ class GridContainer extends Component {
         }
         const data = this.props.data;
         this.api.setRowData(data);
+        this.api.sizeColumnsToFit()
     }
     componentWillUnmount() {
         this.api.destroy();
