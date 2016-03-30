@@ -51,6 +51,9 @@ var common = {
             template: './src/index.html',
             inject: true,
             favicon: './zd.favicon.ico'
+        }),
+        new webpack.ProvidePlugin({
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
         })
     ]
 };
