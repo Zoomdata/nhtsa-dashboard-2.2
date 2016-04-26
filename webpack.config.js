@@ -23,9 +23,6 @@ var common = {
     resolve: {
         extensions: ['', '.js', '.jsx']
     },
-    externals: {
-        "ZoomdataSDK": "ZoomdataSDK"
-    },
     module: {
         loaders: [
             {
@@ -43,6 +40,9 @@ var common = {
                 loaders: ['babel?cacheDirectory'],
                 include: PATHS.app
             }
+        ],
+        noParse: [
+            /[\/\\]node_modules[\/\\]zoomdata-client[\/\\]distribute[\/\\]sdk[\/\\]2\.0[\/\\]zoomdata-client\.js$/
         ]
     },
     plugins: [
