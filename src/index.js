@@ -4,7 +4,7 @@ import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
-import sagaMiddleware from 'redux-saga';
+import createSagaMiddleware from 'redux-saga';
 import {responsiveStoreEnhancer} from 'redux-responsive';
 import { runSaga } from 'redux-saga';
 import { Provider } from 'react-redux';
@@ -12,9 +12,10 @@ import NhtsaApp from './containers/NhtsaApp/NhtsaApp';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
+const sagaMiddleware = createSagaMiddleware();
 const createStoreWithMiddleware = compose(
     responsiveStoreEnhancer,
-    applyMiddleware(sagaMiddleware(rootSaga)),
+    applyMiddleware(sagaMiddleware),
     window.devToolsExtension ? window.devToolsExtension() : f => f
 )(createStore);
 
@@ -25,6 +26,8 @@ function configureStore(initialState) {
 }
 
 const store = configureStore();
+
+sagaMiddleware.run(rootSaga);
 
 const root = document.getElementById('root');
 

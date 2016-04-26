@@ -151,9 +151,9 @@ function* fetchModelData (client, source, queryConfig) {
     }
 }
 
-function* changeModelDataQuery(getState) {
+function* changeModelDataQuery() {
     while(true) {
-        const source = getState().chartData.modelData.source;
+        const source = select(state => state.chartData.modelData.source);
         yield take(actions.CHANGE_MODEL_DATA_QUERY);
         yield fork(fetchModelData, ModelDataThread);
     }
@@ -178,9 +178,9 @@ function* fetchComponentData (client, source, queryConfig) {
     }
 }
 
-function* changeComponentDataQuery(getState) {
+function* changeComponentDataQuery() {
     while(true) {
-        const source = getState().chartData.componentData.source;
+        const source = select(state => state.chartData.componentData.source);
         yield take(actions.CHANGE_COMPONENT_DATA_QUERY);
         yield fork(fetchComponentData, ComponentDataThread);
     }
@@ -224,9 +224,9 @@ function* fetchMetricData (client, source, queryConfig) {
     }
 }
 
-function* changeMetricDataQuery(getState) {
+function* changeMetricDataQuery() {
     while(true) {
-        const source = getState().chartData.metricData.source;
+        const source = select(state => state.chartData.metricData.source);
         yield take(actions.CHANGE_METRIC_DATA_QUERY);
         yield fork(fetchMetricData, MetricDataThread);
     }
@@ -274,9 +274,9 @@ function* fetchStateData (client, source, queryConfig) {
     }
 }
 
-function* changeStateDataQuery(getState) {
+function* changeStateDataQuery() {
     while(true) {
-        const source = getState().chartData.stateData.source;
+        const source = select(state => state.chartData.stateData.source);
         yield take(actions.CHANGE_STATE_DATA_QUERY);
         yield fork(fetchStateData, StateDataThread);
     }
@@ -301,14 +301,14 @@ function* fetchGridData(client, source, query) {
     yield put(actions.receiveGridData(data));
 }
 
-function* initChangeGridDataQuery(getState) {
+function* initChangeGridDataQuery() {
     yield take(actions.SET_HOOD_ACTION);
-    yield fork(changeGridDataQuery, getState);
+    yield fork(changeGridDataQuery);
 }
 
-function* changeGridDataQuery(getState) {
+function* changeGridDataQuery() {
     while(true) {
-        const source = getState().chartData.gridData.source;
+        const source = select(state => state.chartData.gridData.source);
         yield take(actions.CHANGE_GRID_DATA_QUERY);
         yield fork(fetchGridData);
     }
@@ -326,17 +326,17 @@ function* startup(client) {
     yield fork(fetchStateData, client, stateData.source, stateData.queryConfig);
 }
 
-export default function* root(getState) {
+export default function* root() {
     const client = yield call(createClient);
     ZoomdataClient = client;
     yield call(client.sources.update, {name: 'Vehicle Complaints'})
     yield fork(startup, ZoomdataClient);
-    yield fork(changeModelDataQuery, getState);
-    yield fork(changeComponentDataQuery, getState);
-    yield fork(changeMetricDataQuery, getState);
-    yield fork(initChangeGridDataQuery, getState);
+    yield fork(changeModelDataQuery);
+    yield fork(changeComponentDataQuery);
+    yield fork(changeMetricDataQuery);
+    yield fork(initChangeGridDataQuery);
     yield take(actions.SET_ACTIVE_TAB);
-    yield fork(changeStateDataQuery, getState);
+    yield fork(changeStateDataQuery);
 }
 export let ZoomdataClient = undefined;
 export let MakeDataQuery = undefined;

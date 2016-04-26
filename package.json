@@ -36,7 +36,7 @@
     "url-loader": "^0.5.7",
     "webpack": "^1.12.14",
     "webpack-dev-server": "^1.14.0",
-    "webpack-merge": "^0.8.3"
+    "webpack-merge": "^0.12.0"
   },
   "dependencies": {
     "ag-grid": "^4.0.0",
@@ -48,14 +48,14 @@
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
     "lodash.mapkeys": "^4.2.0",
-    "normalize.css": "^3.0.3",
+    "normalize.css": "^4.1.1",
     "oauth2-implicit": "^0.7.0",
-    "react": "^0.14.3",
-    "react-dom": "^0.14.3",
-    "react-redux": "^4.4.0",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1",
+    "react-redux": "^4.4.5",
     "redux": "^3.3.1",
-    "redux-responsive": "^1.1.0",
-    "redux-saga": "^0.9.4",
+    "redux-responsive": "^2.0.0",
+    "redux-saga": "^0.10.0",
     "velocity-react": "^1.1.4",
     "whatwg-fetch": "^0.11.0"
   }
