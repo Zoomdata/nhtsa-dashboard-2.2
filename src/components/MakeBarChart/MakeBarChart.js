@@ -7,7 +7,6 @@ import store from '../../stores/UiState';
 import baseFindIndex from 'lodash._basefindindex';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
-import { extendObservable } from 'mobx';
 
 const onClick = (make, hideOverlay) => {
     gridDetails.offset = 0;
@@ -63,7 +62,7 @@ function MakeBarChart(props, { store }) {
             />
         </div>
     )
-};
+}
 
 MakeBarChart.contextTypes = {
     store: React.PropTypes.object

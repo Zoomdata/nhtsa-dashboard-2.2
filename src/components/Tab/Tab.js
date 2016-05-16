@@ -1,7 +1,5 @@
 import styles from './Tab.css';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
-
 import React from 'react';
 import ComponentScatterplot from '../ComponentScatterplot/ComponentScatterplot';
 import Map from '../Map/Map';

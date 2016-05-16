@@ -1,12 +1,11 @@
 import styles from './GridContainer.css';
 
 import React, { Component } from 'react';
-import store from '../../stores/UiState';
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid/dist/styles/ag-grid.css';
 import './src/agGridStyles/theme-dark.css';
 import ColDefFactory from './src/ColDefFactory';
-import { getWidth, getHeight } from '../../utilities';
+import { getHeight } from '../../utilities';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
 import { fetchGridData, controller } from '../../zoomdata';
@@ -37,7 +36,9 @@ import { fetchGridData, controller } from '../../zoomdata';
         this.columnDefs = new ColDefFactory().createColDefs();
     }
     render() {
+        /* eslint-disable no-unused-vars */
         const data = this.context.store.chartData.gridData.get('data');
+        /* eslint-enable no-unused-vars */
         const gridGroupStyle = {
             height: '100%'
         };
@@ -63,7 +64,7 @@ import { fetchGridData, controller } from '../../zoomdata';
             </div>
         )
     }
-};
+}
 
 GridContainer.contextTypes = {
     store: React.PropTypes.object

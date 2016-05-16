@@ -21,7 +21,7 @@ export default class ScatterplotChart extends Component {
         d3.select(this.refs.scatterplotChart).remove();
     }
     render() {
-        return <div className={styles.root} ref='scatterplotChart'>
+        return <div className={styles.root} ref="scatterplotChart">
 
         </div>
     }
@@ -74,13 +74,11 @@ export default class ScatterplotChart extends Component {
             let svg = null;
             let widgetHeight = 500;
             let widgetWidth = 500;
-            let widgetSize = 'large';
             let transitioning = false;
             let brushDomainX = [];
             let brushDomainY = [];
             let xDomainOrig = [];
             let yDomainOrig = [];
-            let fontSize = 14;
             let margin = {top: 15, right: 0, bottom: 35, left: 50};
             let width = widgetWidth - margin.left - margin.right;
             let height = widgetHeight - margin.top - margin.bottom;
@@ -92,7 +90,6 @@ export default class ScatterplotChart extends Component {
             let yValue = function(d) { return d; };
             let xValue = function(d) { return d; };
             let yAxis = d3.svg.axis().scale(y).orient('left').outerTickSize(0).ticks(6).tickFormat(yValue);
-            let color = d3.scale.category20c();
             let groupKey = function(d) {
                 return d.group;
             };
@@ -123,7 +120,6 @@ export default class ScatterplotChart extends Component {
                     if(!data) {
                         return;
                     }
-                    makeResponsive();
                     width = widgetWidth - margin.left - margin.right;
                     height = widgetHeight - margin.top - margin.bottom;
 
@@ -173,7 +169,7 @@ export default class ScatterplotChart extends Component {
                         .style('stroke', 'none')
                         .style('fill', '#505050');
 
-                    const titleLine = svgEnter.append('line')
+                    svgEnter.append('line')
                         .attr('x1', margin.left)
                         .attr('y1', 0)
                         .attr('x2', margin.left)
@@ -182,13 +178,13 @@ export default class ScatterplotChart extends Component {
                         .style('stroke', 'black')
                         .style('shape-rendering', 'crispEdges');
 
-                    const titleRect = svgEnter.append('rect')
+                    svgEnter.append('rect')
                         .attr('height', margin.top)
                         .attr('width', '100%')
                         .attr('x', margin.left + 1)
                         .attr('fill', '#bababa');
 
-                    const title = svgEnter.append('text')
+                    svgEnter.append('text')
                         .attr('class', 'title')
                         .attr('x', margin.left + 5)
                         .attr('y', '8')
@@ -201,7 +197,7 @@ export default class ScatterplotChart extends Component {
                         .style('text-transform', 'uppercase')
                         .style('font-weight', 700);
 
-                    const yAxisLabel = svgEnter.append('text')
+                    svgEnter.append('text')
                         .attr('class', 'label')
                         .attr('x', '-25%')
                         .attr('y', '9')
@@ -213,7 +209,7 @@ export default class ScatterplotChart extends Component {
                         .style('text-transform', 'uppercase')
                         .style('font-weight', 600);
 
-                    const xAxisLabel = svgEnter.append('text')
+                    svgEnter.append('text')
                         .attr('class', 'label')
                         .attr('x', '40%')
                         .attr('y', '99%')
@@ -239,7 +235,7 @@ export default class ScatterplotChart extends Component {
                     gEnter.select('rect.background')
                         .style('visibility', null);
 
-                    const scatterplotGroup = gEnter.append('g')
+                    gEnter.append('g')
                         .attr('class', 'scatterplot-area')
                         .append('g')
                         .attr('class', 'scatterplot-group');
@@ -309,9 +305,6 @@ export default class ScatterplotChart extends Component {
                 widgetContent.selectAll(`.${styles.tooltips}`).remove();
                 const elementColor = d3.select(this).select('circle').style('fill');
                 const absoluteMousePos = d3.mouse(widgetContentNode);
-                let valueFormatSize;
-                let valueFormatX;
-                const valueFormatY = d3.format(',.0f');
                 tooltip = d3.select(chartElement).append('div').attr('class', styles.tooltips).style('opacity', 0);
                 tooltip.style('opacity', 0.9)
                     .style('background', 'white')
@@ -342,7 +335,7 @@ export default class ScatterplotChart extends Component {
                 tooltip.html(html);
             }
 
-            function mousemove(d) {
+            function mousemove() {
                 var absoluteMousePos = d3.mouse(widgetContentNode);
                 tooltip.style('left', (absoluteMousePos[0] + 10)+'px')
                     .style('top', (absoluteMousePos[1] - 40)+'px');
@@ -367,7 +360,7 @@ export default class ScatterplotChart extends Component {
             }
 
             // Mouseleave Handler
-            function mouseleave(d) {
+            function mouseleave() {
                 tooltip.style('opacity', 0)
                 tooltip.remove();
             }
@@ -379,9 +372,6 @@ export default class ScatterplotChart extends Component {
                 });
                 const minMetricValueY = d3.min(data, function(d) {
                     return d.current.metrics.crashed.sum;
-                });
-                const minMetricValueSize = d3.min(data, function(d) {
-                    return d.current.count;
                 });
 
                 const absMaxMetricValueX = d3.max(data, function(d) {
@@ -465,12 +455,12 @@ export default class ScatterplotChart extends Component {
 
             // Draw the X and Y Axis for the first time
             function drawAxis() {
-                var xAxisGroup = this.append('g')
+                this.append('g')
                     .attr('class', styles.x)
                     .attr('transform', 'translate(0, ' + y(0) + ')')
                     .call(xAxis);
 
-                var yAxisGroup = this.append('g')
+                this.append('g')
                     .attr('class', styles.y)
                     .attr('transform', 'translate(' + x(0) + ', 0)')
                     .call(yAxis);
@@ -515,19 +505,7 @@ export default class ScatterplotChart extends Component {
                     .each(function() { ++n; })
                     .each('end', function() { if (!--n) callback.apply(this, arguments); });
             }
-
-            function makeResponsive() {
-                if(widgetWidth < 500 || widgetHeight < 380) {
-                    //medium
-                    widgetSize = 'medium';
-                    fontSize = 11;
-                } else {
-                    //large
-                    widgetSize = 'large';
-                    fontSize = 14;
-                }
-            }
-
+            
             chart.margin = function (_) {
                 if (!arguments.length) return margin;
                 margin = _;

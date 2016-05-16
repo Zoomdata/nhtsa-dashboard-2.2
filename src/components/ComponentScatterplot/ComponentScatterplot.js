@@ -2,7 +2,6 @@ import styles from './ComponentScatterplot.css';
 
 import React from 'react';
 import ScatterplotChart from '../ScatterplotChart/ScatterplotChart';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 
 function ComponentScatterplot(props, { store }) {
@@ -18,7 +17,7 @@ function ComponentScatterplot(props, { store }) {
             />
         </div>
     )
-};
+}
 
 ComponentScatterplot.contextTypes = {
     store: React.PropTypes.object

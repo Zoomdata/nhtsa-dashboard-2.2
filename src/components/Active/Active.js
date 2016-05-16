@@ -1,7 +1,6 @@
 import styles from './Active.css';
 
 import React from 'react';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 import { controller } from '../../zoomdata';
 

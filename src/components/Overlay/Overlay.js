@@ -76,7 +76,7 @@ import { observer } from 'mobx-react';
             </VelocityComponent>
         )
     }
-};
+}
 
 Overlay.contextTypes = {
     store: React.PropTypes.object

@@ -3,7 +3,6 @@ import styles from './LED.css';
 import React from 'react';
 import Background from '../Background/Background';
 import Foreground from '../Foreground/Foreground';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 
 function LED(props, { store }) {
@@ -16,7 +15,7 @@ function LED(props, { store }) {
             <div
                 className={styles.five}>
                 <Background
-                    data='88888'
+                    data="88888"
                 />
                 <Foreground
                     data={data}
@@ -29,7 +28,7 @@ function LED(props, { store }) {
             <div
                 className={styles.six}>
                 <Background
-                    data='888888'
+                    data="888888"
                 />
                 <Foreground
                     data={data}
@@ -37,7 +36,7 @@ function LED(props, { store }) {
             </div>
         )
     }
-};
+}
 
 LED.contextTypes = {
     store: React.PropTypes.object

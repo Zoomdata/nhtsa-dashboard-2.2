@@ -21,7 +21,7 @@ export default class TrendChart extends Component {
         d3.select(this.refs.trendChart).remove();
     }
     render() {
-        return <div className={styles.root} ref='trendChart'>
+        return <div className={styles.root} ref="trendChart">
 
         </div>
     }
@@ -30,7 +30,6 @@ export default class TrendChart extends Component {
         let onBrushEnd;
         let filterStatus;
         const chartElement = this.refs.trendChart;
-        const duration = 1000;
         this.chart = trendChart()
             .width(getWidth(chartElement))
             .height(getHeight(chartElement));
@@ -53,7 +52,7 @@ export default class TrendChart extends Component {
             d3.select(chartElement)
                 .datum(dataset)
                 .call(this.chart);
-        }
+        };
 
         function trendChart() {
             let svg = null;
@@ -67,7 +66,6 @@ export default class TrendChart extends Component {
             let height = widgetHeight - margin.top - margin.bottom;
             let xScale = d3.scale.ordinal();
             let yScale = d3.scale.linear();
-            let yValue = function(d) { return d; };
             let currentBarPadding = 0.1;
             let currentOuterPadding = 0;
             let brush = d3.svg.brush()
@@ -88,7 +86,7 @@ export default class TrendChart extends Component {
                             .transition()
                             .call(brush.extent(brushExtent))
                             .call(brush.event);
-                    };
+                    }
                     width = data.length * barWidth;
                     height = widgetHeight - margin.top - margin.bottom;
 
@@ -139,7 +137,7 @@ export default class TrendChart extends Component {
                         .style('stroke', 'none')
                         .style('fill', '#78C9D1');
 
-                    let barsGroup = gEnter.append('g')
+                    gEnter.append('g')
                         .attr('class', styles.barsGroup);
 
                     const brushEnter = gEnter.append('g')
@@ -157,7 +155,7 @@ export default class TrendChart extends Component {
                         .attr('width', 45)
                         .attr('height', 40);
 
-                    const labelsGroup = gEnter.append('g')
+                    gEnter.append('g')
                         .attr('class', 'labels-group');
 
                     svg.select(`g.${styles.brush}`)
@@ -197,7 +195,7 @@ export default class TrendChart extends Component {
                         .attr('x', function(d) {
                             return xScale(d.group) + 3;
                         })
-                        .attr('y', function(d) {
+                        .attr('y', function() {
                             return yScale(0) - 5;
                         })
                         .text(function(d) {

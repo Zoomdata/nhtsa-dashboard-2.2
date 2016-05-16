@@ -18,7 +18,7 @@ function MakeHeader(props, { store }) {
             Complaints <br /> by <b>Make</b>
         </div>
     )
-};
+}
 
 MakeHeader.contextTypes = {
     store: React.PropTypes.object

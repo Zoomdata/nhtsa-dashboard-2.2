@@ -1,6 +1,6 @@
 import styles from './YearTrendWrapper.css';
 
-import React, { Component } from 'react';
+import React from 'react';
 import TrendHeader from '../TrendHeader/TrendHeader';
 import Trend from '../Trend/Trend';
 import AboutButton from '../AboutButton/AboutButton';

@@ -2,7 +2,6 @@ import styles from './Map.css';
 
 import React from 'react';
 import MapChart from '../MapChart/MapChart';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 
 const Map = observer(function(props, { store }) {

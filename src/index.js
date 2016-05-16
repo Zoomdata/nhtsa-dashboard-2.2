@@ -1,5 +1,6 @@
+/* eslint-disable no-unused-vars */
 import normalize from 'normalize.css'
-
+/* eslint-enable no-unused-vars */
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
@@ -8,8 +9,6 @@ import Provider from './stores/Provider';
 import store from './stores/UiState';
 import { oauthInit } from './config/oauth';
 import { server } from './config/zoomdata-connections/development';
-import { map } from 'mobx';
-import controller from './zoomdata';
 
 const { oauthOptions } = server;
 oauthInit(oauthOptions); // Authenticate against Zoomdata

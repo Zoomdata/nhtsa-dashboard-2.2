@@ -1,6 +1,6 @@
 import styles from './CloseAboutButton.css';
 
-import React, { Component } from 'react';
+import React  from 'react';
 import { observer } from 'mobx-react';
 
 const CloseAboutButton = observer((props, { store }) => {

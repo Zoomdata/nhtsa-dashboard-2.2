@@ -116,7 +116,7 @@ export default class ColDefFactory {
 }
 
 function defaultMetricCellRenderer(params) {
-    if (!params.value || params.value === "" || params.value === "0") {
+    if (!params.value || params.value === '' || params.value === '0') {
         return '•';
     } else {
         return 'Y';
@@ -124,7 +124,7 @@ function defaultMetricCellRenderer(params) {
 }
 
 function speedCellRenderer(params) {
-    if (!params.value || params.value === "" || params.value === "0") {
+    if (!params.value || params.value === '' || params.value === '0') {
         return 'n/a';
     } else {
         return params.value;

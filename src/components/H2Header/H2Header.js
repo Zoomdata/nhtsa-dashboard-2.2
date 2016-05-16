@@ -1,7 +1,6 @@
 import styles from './H2Header.css';
 
 import React from 'react';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 
 const addCommas = (nStr) => {
@@ -28,10 +27,10 @@ function H2Header(props, { store }) {
             <b>Vehicle Complaints:</b> Showing <span>{addCommas(data)}</span> of {addCommas(totalsData)} RECORDS
         </h2>
     )
-};
+}
 
 H2Header.contextTypes = {
     store: React.PropTypes.object
 };
 
-export default H2Header;
+export default observer(H2Header);

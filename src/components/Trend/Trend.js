@@ -7,7 +7,6 @@ import { fetchGridData, controller } from '../../zoomdata/';
 import baseFindIndex from 'lodash._basefindindex';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
-import { extendObservable } from 'mobx';
 
 const onBrushEnd = (selectedYears, changeFilterStatus) => {
     gridDetails.offset = 0;
@@ -50,7 +49,7 @@ function Trend(props, { store }) {
             />
         </div>
     )
-};
+}
 
 Trend.contextTypes = {
     store: React.PropTypes.object

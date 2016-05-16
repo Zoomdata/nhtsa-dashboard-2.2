@@ -6,7 +6,6 @@ import ShowData from '../ShowData/ShowData';
 import ArrowBottom from '../ArrowBottom/ArrowBottom';
 import Bottom from '../Bottom/Bottom';
 import Cover from '../Cover/Cover';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 import { controller } from '../../zoomdata';
 

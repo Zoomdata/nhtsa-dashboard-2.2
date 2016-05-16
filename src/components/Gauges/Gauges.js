@@ -2,7 +2,6 @@ import styles from './Gauges.css';
 
 import React from 'react';
 import Gauge from '../Gauge/Gauge';
-import store from '../../stores/UiState';
 import { observer } from 'mobx-react';
 
 function Gauges(props, { store }) {
@@ -38,7 +37,7 @@ function Gauges(props, { store }) {
             />
         </div>
     )
-};
+}
 
 Gauges.contextTypes = {
     store: React.PropTypes.object

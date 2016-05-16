@@ -42,6 +42,6 @@ import { observer } from 'mobx-react';
             </div>
         )
     }
-};
+}
 
 export default OverlayTitle;

@@ -7,7 +7,6 @@ import store from '../../stores/UiState';
 import baseFindIndex from 'lodash._basefindindex';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
-import { extendObservable } from 'mobx';
 
 const onClick = (model) => {
     gridDetails.offset = 0;
@@ -32,7 +31,7 @@ const onClick = (model) => {
     gridDataQuery.restrictions.push(filter);
     controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
     store.chartFilters.set('filterStatus', 'FILTERS_APPLIED');
-}
+};
 
 function ModelBarChart(props, { store }) {
     const { browser } = store;
@@ -51,7 +50,7 @@ function ModelBarChart(props, { store }) {
             />
         </div>
     )
-};
+}
 
 ModelBarChart.contextTypes = {
     store: React.PropTypes.object

@@ -29,7 +29,7 @@ export default class BarChart extends Component {
         d3.select(this.refs.barChart).remove();
     }
     render() {
-        return <div className={styles.root} ref='barChart'>
+        return <div className={styles.root} ref="barChart">
 
         </div>
     }
@@ -76,8 +76,6 @@ export default class BarChart extends Component {
             let layout = null;
             let widgetHeight = 500;
             let widgetWidth = 500;
-            let widgetSize = 'large';
-            let fontSize = 14;
             let margin = {top: 0, right: 1, bottom: 0, left: 0};
             let width = widgetWidth - margin.left - margin.right;
             let height = widgetHeight - margin.top - margin.bottom;
@@ -123,15 +121,15 @@ export default class BarChart extends Component {
                         .append('div')
                         .attr('class', styles.mainGroup);
 
-                    let barsGroup = divEnter.append("div")
-                        .attr("class", "bar-area")
-                        .append("div")
-                        .attr("class", styles.barsGroup);
+                    let barsGroup = divEnter.append('div')
+                        .attr('class', 'bar-area')
+                        .append('div')
+                        .attr('class', styles.barsGroup);
 
-                    barsGroup.append("div")
-                        .attr("class", "bars-background")
-                        .style("top", 0)
-                        .style("left", 0);
+                    barsGroup.append('div')
+                        .attr('class', 'bars-background')
+                        .style('top', 0)
+                        .style('left', 0);
 
                     // Draw the X and Y Axis for the first time
                     if (!svg.selectAll(`.${styles.axis}`)[0].length) {
@@ -143,46 +141,46 @@ export default class BarChart extends Component {
                         .style('top', margin.top + 'px')
                         .style('left', (margin.left + 1) + 'px');
 
-                    mainGroup.select(".bars-background")
-                        .style("width", (width - margin.right) + "px")
-                        .style("height", height - margin.top - margin.bottom + "px");
+                    mainGroup.select('.bars-background')
+                        .style('width', (width - margin.right) + 'px')
+                        .style('height', height - margin.top - margin.bottom + 'px');
 
                     // Refresh the Axis position and text labels
                     svg.select('g').call(redrawAxis);
 
                     // Update the bars background width
-                    mainGroup.select("div.bar-background")
-                        .style("width", (width < widgetWidth ? widgetWidth - margin.left - margin.right : width) + "px")
-                        .style("height", height + "px");
+                    mainGroup.select('div.bar-background')
+                        .style('width', (width < widgetWidth ? widgetWidth - margin.left - margin.right : width) + 'px')
+                        .style('height', height + 'px');
 
                     let bars = mainGroup.select(`.${styles.barsGroup}`).selectAll(`div.${styles.barGroup}`)
                         .data(data, groupKey);
 
                     let barsEnterGroup = bars.enter()
-                        .append("div")
-                        .attr("class", function(d, i) {
+                        .append('div')
+                        .attr('class', function(d, i) {
                             return (i % 2) === 0 ? styles.barGroupEven : styles.barGroupOdd;
                         })
-                        .style(vendorPrefix + "transform", function(d) {
-                            return "translate3d(0, " + (yScale(d.group) - 1) + "px, 0)";
+                        .style(vendorPrefix + 'transform', function(d) {
+                            return 'translate3d(0, ' + (yScale(d.group) - 1) + 'px, 0)';
                         });
 
                     barsEnterGroup
-                        .append("div")
-                        .attr("class", styles.bar)
-                        .style("height", (yScale.rangeBand() - currentBarPadding) + "px")
-                        .style("width", 0);
+                        .append('div')
+                        .attr('class', styles.bar)
+                        .style('height', (yScale.rangeBand() - currentBarPadding) + 'px')
+                        .style('width', 0);
 
                     // Append the bar text label
                     barsEnterGroup
-                        .append("div")
-                        .attr("class", styles.label)
+                        .append('div')
+                        .attr('class', styles.label)
                         .text(groupKey);
 
                     // Append the bar text label
                     barsEnterGroup
-                        .append("div")
-                        .attr("class", styles.value)
+                        .append('div')
+                        .attr('class', styles.value)
                         .text(function(d) {
                             return addCommas(d.current.count);
                         });
@@ -199,9 +197,9 @@ export default class BarChart extends Component {
                     }
 
                     bars
-                        .style("height", (yScale.rangeBand() - currentBarPadding) + "px")
-                        .style(vendorPrefix + "transform", function(d) {
-                            return "translate3d(0, " + yScale(d.group) + "px, 0)";
+                        .style('height', (yScale.rangeBand() - currentBarPadding) + 'px')
+                        .style(vendorPrefix + 'transform', function(d) {
+                            return 'translate3d(0, ' + yScale(d.group) + 'px, 0)';
                         })
                         .on('click', function(d) {
                             if (activeBar === d.group) {
@@ -215,11 +213,11 @@ export default class BarChart extends Component {
                         });
 
                     bars.select(`div.${styles.bar}`)
-                        .style("height", "100%")
+                        .style('height', '100%')
                         .transition()
                         .delay(function(d, i) { return i / data.length * duration; })
-                        .style("width", function(d) {
-                            return xScale(d.current.count) + "px";
+                        .style('width', function(d) {
+                            return xScale(d.current.count) + 'px';
                         });
 
                     bars.select(`div.${styles.label}`)
@@ -272,7 +270,7 @@ export default class BarChart extends Component {
             function redrawAxis() {
                 // Update the x-axis based on the updated xScale range
                 this.select(`.${styles.axis}`)
-                    .attr("transform", "translate(0, 0)")
+                    .attr('transform', 'translate(0, 0)')
                     .call(xAxis);
 
                 let $el = d3.select(chartElement);
@@ -285,16 +283,6 @@ export default class BarChart extends Component {
             }
 
             function makeResponsive() {
-                if(widgetWidth < 500 || widgetHeight < 380) {
-                    //medium
-                    widgetSize = 'medium';
-                    fontSize = 11;
-                } else {
-                    //large
-                    widgetSize = 'large';
-                    fontSize = 14;
-                }
-
                 minBarHeight = 25;
                 var newBarHeight = Math.round((widgetHeight - margin.top - margin.bottom) / (datasetLength || 1));
                 newBarHeight = newBarHeight > maxBarHeight ? maxBarHeight : newBarHeight;

@@ -18,17 +18,17 @@ export default class GaugeChart extends Component {
         this.createChart();
     }
     componentWillUnmount() {
-        d3.select(this.refs.gaugeChart).remove();
+        this.chart.dispose();
     }
     render() {
-        return <div className={styles.root} ref='gaugeChart'>
+        return <div className={styles.root} ref="gaugeChart">
 
         </div>
     }
 
     createChart() {
         const chartElement = this.refs.gaugeChart;
-        const myChart = echarts.init(chartElement);
+        this.chart = echarts.init(chartElement);
         const { chartName } = this.props;
         const option = {
             series: [
@@ -83,7 +83,7 @@ export default class GaugeChart extends Component {
                 }
             ]
         };
-        myChart.setOption(option, false);
+        this.chart.setOption(option, false);
         this.updateChart = function(nextProps) {
             const data = nextProps.data || [];
             const max = nextProps.max || [];
@@ -120,7 +120,7 @@ export default class GaugeChart extends Component {
             }
             option.series[0].data = [{value: dataset, name: chartName}];
             option.series[0].max = maxDataset;
-            myChart.setOption(option, false);
+            this.chart.setOption(option, false);
             const unit = new echarts.graphic.Text({
                 style: {
                     text: metricName === 'speed' ? 'MPH' : percentValue + '%',
@@ -132,7 +132,7 @@ export default class GaugeChart extends Component {
                 },
                 z: 3
             });
-            myChart._chartsViews[0].group.add(unit);
+            this.chart._chartsViews[0].group.add(unit);
         }
 
         function addCommas(nStr) {

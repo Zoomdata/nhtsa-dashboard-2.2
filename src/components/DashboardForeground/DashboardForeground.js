@@ -18,7 +18,7 @@ import { observer } from 'mobx-react';
 const DashboardForeground = observer((props, { store }) => {
     let animationProps;
     const liftDuration = 2000;
-    let { hoodAction, arrowVisibility } = store.controls;
+    let { hoodAction } = store.controls;
     if (hoodAction === 'CLOSE_HOOD') {
         animationProps = {
             duration: liftDuration,

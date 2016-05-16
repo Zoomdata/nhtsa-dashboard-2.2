@@ -22,7 +22,9 @@ import { observer } from 'mobx-react';
         const { browser } = this.context.store;
         browser.width;
         browser.height;
+        /* eslint-disable no-unused-vars */
         const { hideOverlay } = this.context.store.controls;
+        /* eslint-enable no-unused-vars */
         return (
             <div
                 className={styles.root}
