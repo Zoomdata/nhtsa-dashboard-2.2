@@ -3,21 +3,15 @@ import styles from './LED.css';
 import React from 'react';
 import Background from '../Background/Background';
 import Foreground from '../Foreground/Foreground';
-import { connect } from 'react-redux';
+import store from '../../stores/UiState';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        metricTotalsData: state.chartData.metricTotalsData,
-        metricData: state.chartData.metricData
-    }
-}
-const LED = ({
-    metricTotalsData,
-    metricData,
-    position
-}) => {
+function LED(props, { store }) {
+    const { metricData } = store.chartData;
+    const { metricTotalsData } = store.chartData;
+    const { position } = props;
     if (position === '5') {
-        const data = !metricData.data ? 0 : metricData.data[0].current.count;
+        const data = !metricData.get('data') ? 0 : metricData.get('data')[0].current.count;
         return (
             <div
                 className={styles.five}>
@@ -30,7 +24,7 @@ const LED = ({
             </div>
         )
     } else {
-        const data = !metricTotalsData.data ? 888888 : metricTotalsData.data[0].current.count;
+        const data = !metricTotalsData.get('data') ? 888888 : metricTotalsData.get('data')[0].current.count;
         return (
             <div
                 className={styles.six}>
@@ -43,6 +37,10 @@ const LED = ({
             </div>
         )
     }
+};
+
+LED.contextTypes = {
+    store: React.PropTypes.object
 }
 
-export default connect(mapStateToProps)(LED);
+export default observer(LED);

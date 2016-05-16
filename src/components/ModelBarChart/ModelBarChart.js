@@ -2,59 +2,44 @@ import styles from './ModelBarChart.css';
 
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
-import { connect } from 'react-redux';
-import { setModel, setFilterStatus, changeComponentDataQuery, changeMetricDataQuery, changeStateDataQuery, changeGridDataQuery } from '../../actions';
-import { ComponentDataQuery, MetricDataQuery, StateDataQuery, GridDataQuery } from '../../sagas';
+import { fetchGridData, controller } from '../../zoomdata/';
+import store from '../../stores/UiState';
 import baseFindIndex from 'lodash._basefindindex';
 import { gridDetails } from '../../config/app-constants';
+import { observer } from 'mobx-react';
+import { extendObservable } from 'mobx';
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.chartData.modelData.data,
-        model: state.chartFilters.model,
-        browser: state.browser
-    }
-};
+const onClick = (model) => {
+    gridDetails.offset = 0;
+    gridDetails.hasNextDetails = true;
+    const filter = {
+        path: 'model',
+        operation: 'IN',
+        value: [model]
+    };
+    store.chartFilters.set('model', model);
+    controller.get('componentDataQuery').filters.remove(filter.path);
+    controller.get('componentDataQuery').filters.add(filter);
+    controller.get('metricDataQuery').filters.remove(filter.path);
+    controller.get('metricDataQuery').filters.add(filter);
+    controller.get('stateDataQuery').filters.remove(filter.path);
+    controller.get('stateDataQuery').filters.add(filter);
+    const gridDataQuery = controller.get('gridDataQuery').queryConfig;
+    const modelFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+        return filter.path === 'model';
+    });
+    modelFilterIndex >= 0 ? gridDataQuery.restrictions.splice(modelFilterIndex, 1) : null;
+    gridDataQuery.restrictions.push(filter);
+    controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
+    store.chartFilters.set('filterStatus', 'FILTERS_APPLIED');
+}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onClick: (model) => {
-            gridDetails.offset = 0;
-            gridDetails.hasNextDetails = true;
-            const filter = {
-                path: 'model',
-                operation: 'IN',
-                value: [model]
-            };
-            dispatch(setModel(model));
-            ComponentDataQuery.filters.remove(filter.path);
-            ComponentDataQuery.filters.add(filter);
-            dispatch(changeComponentDataQuery());
-            MetricDataQuery.filters.remove(filter.path);
-            MetricDataQuery.filters.add(filter);
-            dispatch(changeMetricDataQuery());
-            const modelFilterIndex = baseFindIndex(GridDataQuery.restrictions, function(filter) {
-                return filter.path === 'model';
-            });
-            modelFilterIndex >= 0 ? GridDataQuery.restrictions.splice(modelFilterIndex, 1) : null;
-            GridDataQuery.restrictions.push(filter);
-            dispatch(changeGridDataQuery());
-            dispatch(setFilterStatus('FILTERS_APPLIED'))
-            if (!StateDataQuery) {
-                return;
-            }
-            StateDataQuery.filters.remove(filter.path);
-            StateDataQuery.filters.add(filter);
-            dispatch(changeStateDataQuery());
-        }
-    }
-};
-
-const ModelBarChart = ({
-    data,
-    model,
-    onClick
-    }) => {
+function ModelBarChart(props, { store }) {
+    const { browser } = store;
+    browser.height;
+    browser.width;
+    const data = store.chartData.modelData.get('data');
+    const model = store.chartFilters.get('model');
     return (
         <div
             className={styles.root}
@@ -68,4 +53,10 @@ const ModelBarChart = ({
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModelBarChart);
+ModelBarChart.contextTypes = {
+    store: React.PropTypes.object
+};
+
+export default observer(ModelBarChart);
+
+

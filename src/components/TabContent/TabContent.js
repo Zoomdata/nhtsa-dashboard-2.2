@@ -1,13 +1,13 @@
 import styles from './TabContent.css';
 
 import React from 'react';
-import TabContainer from '../../containers/Tab/Tab';
+import Tab from '../../components/Tab/Tab';
 
 const TabContent = () => {
     return (
         <div className={styles.root}>
-            <TabContainer chart="scatterplot" />
-            <TabContainer chart="map" />
+            <Tab chart="scatterplot" />
+            <Tab chart="map" />
         </div>
     )
 };

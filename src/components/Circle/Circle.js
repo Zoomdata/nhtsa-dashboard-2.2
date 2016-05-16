@@ -1,31 +1,20 @@
 import styles from './Circle.css';
 
 import React from 'react';
-import { connect } from 'react-redux';
-import { setFilterStatus, changeComponentDataQuery } from '../../actions';
-import { ComponentDataQuery } from '../../sagas';
+import { observer } from 'mobx-react';
+import { controller } from '../../zoomdata';
+import store from '../../stores/UiState';
 
-const mapStateToProps = (state) => {
-    return {
-        filterStatus: state.chartFilters.filterStatus
-    }
-}
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onClick: () => {
-            dispatch(setFilterStatus('FILTERS_RESET'));
-            ComponentDataQuery.filters.remove('model');
-            dispatch(changeComponentDataQuery());
-        }
-    }
+const onClick = () => {
+    store.chartFilters.set('filterStatus', 'FILTERS_RESET');
+    store.chartFilters.delete('model');
+    controller.get('componentDataQuery').filters.remove('model');
+    controller.get('metricDataQuery').filters.remove('model');
+    controller.get('stateDataQuery').filters.remove('model');
 };
 
-const Circle  = ({
-    filterStatus,
-    onClick
-}) => {
-
+const Circle  = observer((props, { store }) => {
+    const filterStatus = store.chartFilters.get('filterStatus');
     return (
         <div
             className={
@@ -37,6 +26,10 @@ const Circle  = ({
         >↺
         </div>
     )
-};
+});
 
-export default connect(mapStateToProps, mapDispatchToProps)(Circle);
+export default Circle;
+
+Circle.contextTypes = {
+    store: React.PropTypes.object
+}

@@ -1,7 +1,6 @@
+import { map } from 'mobx';
+
 export const server = {
-    credentials: {
-        access_token: ''
-    },
     application: {
         secure: true,
         host: 'localhost',
@@ -15,3 +14,5 @@ export const server = {
         scope: ['read']
     }
 };
+
+server.credentials = map();

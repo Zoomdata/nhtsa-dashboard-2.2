@@ -1,19 +1,13 @@
 import styles from './OverlayInstructions.css';
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { VelocityComponent } from 'velocity-react';
 import image from '../../images/pick_a_make.png';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        hideOverlay: state.hideOverlay
-    }
-};
-
-class OverlayInstructions extends Component {
+@observer class OverlayInstructions extends Component {
     render() {
-        const { hideOverlay } = this.props;
+        const { hideOverlay } = this.context.store.controls;
         let animationProps;
         if (hideOverlay) {
             animationProps = {
@@ -45,4 +39,8 @@ class OverlayInstructions extends Component {
     }
 }
 
-export default connect(mapStateToProps)(OverlayInstructions);
+export default OverlayInstructions;
+
+OverlayInstructions.contextTypes = {
+    store: React.PropTypes.object
+};

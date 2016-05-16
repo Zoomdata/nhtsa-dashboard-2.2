@@ -1,11 +1,11 @@
 import styles from './CloseHood.css';
 
 import React from 'react';
-import { setHoodAction } from '../../actions';
-import { connect } from 'react-redux';
+import store from '../../stores/UiState';
+import { observer } from 'mobx-react';
 import image from '../../images/close-hood.png';
 
-const CloseHood = ({dispatch}) => {
+const CloseHood = observer(function(props, { store }) {
     return (
         <img
             className={styles.root}
@@ -14,13 +14,17 @@ const CloseHood = ({dispatch}) => {
             src={image}
             onClick={
                 () => {
-                    dispatch(setHoodAction('CLOSE_HOOD'));
+                    store.controls.hoodAction = 'CLOSE_HOOD';
                 }
             }
         >
 
         </img>
     )
-};
+});
 
-export default connect()(CloseHood);
+export default CloseHood;
+
+CloseHood.contextTypes = {
+    store: React.PropTypes.object
+};

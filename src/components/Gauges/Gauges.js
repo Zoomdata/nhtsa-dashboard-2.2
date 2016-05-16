@@ -2,19 +2,12 @@ import styles from './Gauges.css';
 
 import React from 'react';
 import Gauge from '../Gauge/Gauge';
-import { connect } from 'react-redux';
+import store from '../../stores/UiState';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        metricData: state.chartData.metricData.data,
-        metricTotalsData: state.chartData.metricTotalsData.data
-    }
-};
-
-const Gauges = ({
-    metricData,
-    metricTotalsData,
-}) => {
+function Gauges(props, { store }) {
+    const metricData = store.chartData.metricData.get('data');
+    const metricTotalsData = store.chartData.metricTotalsData.get('data');
     return (
         <div
             className={styles.root}
@@ -47,4 +40,9 @@ const Gauges = ({
     )
 };
 
-export default connect(mapStateToProps)(Gauges);
+Gauges.contextTypes = {
+    store: React.PropTypes.object
+};
+
+export default observer(Gauges);
+

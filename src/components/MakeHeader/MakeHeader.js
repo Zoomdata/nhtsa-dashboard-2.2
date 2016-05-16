@@ -1,18 +1,13 @@
 import styles from './MakeHeader.css';
 
 import React from 'react';
-import { connect } from 'react-redux';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        hideOverlay: state.hideOverlay
-    }
-};
-
-const MakeHeader = ({hideOverlay}) => {
+function MakeHeader(props, { store }) {
     const makeHeaderStyle = {
         zIndex: 1
     };
+    const { hideOverlay } = store.controls;
     return (
         <div
             className={styles.root}
@@ -25,4 +20,9 @@ const MakeHeader = ({hideOverlay}) => {
     )
 };
 
-export default connect(mapStateToProps)(MakeHeader);
+MakeHeader.contextTypes = {
+    store: React.PropTypes.object
+};
+
+export default observer(MakeHeader);
+

@@ -1,7 +1,7 @@
 import styles from './DashboardForeground.css';
 
 import React from 'react';
-import { AboutBlockContainer } from '../../containers/AboutBlock/AboutBlock';
+import AboutBlock from '../AboutBlock/AboutBlock';
 import BackgroundImage from '../BackgroundImage/BackgroundImage';
 import YearTrendWrapper from '../YearTrendWrapper/YearTrendWrapper';
 import MakeWrapper from '../MakeWrapper/MakeWrapper';
@@ -12,22 +12,13 @@ import ModelWrapper from '../ModelWrapper/ModelWrapper';
 import Gauges from '../Gauges/Gauges';
 import Tabs from '../Tabs/Tabs';
 import Annotation from '../Annotation/Annotation';
-import { connect } from 'react-redux';
 import { VelocityComponent } from 'velocity-react';
-import { setArrowVisibilityOption } from '../../actions';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        hoodAction: state.hoodAction
-    }
-};
-
-const DashboardForeground = ({
-    hoodAction,
-    dispatch
-}) => {
+const DashboardForeground = observer((props, { store }) => {
     let animationProps;
     const liftDuration = 2000;
+    let { hoodAction, arrowVisibility } = store.controls;
     if (hoodAction === 'CLOSE_HOOD') {
         animationProps = {
             duration: liftDuration,
@@ -35,7 +26,7 @@ const DashboardForeground = ({
                 rotateX: 0
             },
             complete: function() {
-                dispatch(setArrowVisibilityOption('SHOW_ARROW'));
+                store.controls.arrowVisibility = 'SHOW_ARROW';
             }
         }
     } else {
@@ -46,7 +37,7 @@ const DashboardForeground = ({
                 rotateX: 90
             },
             complete: function() {
-                dispatch(setArrowVisibilityOption('HIDE_ARROW'));
+                store.controls.arrowVisibility = 'HIDE_ARROW';
             }
         }
     }
@@ -54,7 +45,7 @@ const DashboardForeground = ({
         <VelocityComponent {...animationProps}>
             <div
                 className={styles.root}>
-                <AboutBlockContainer />
+                <AboutBlock />
                 <BackgroundImage />
                 <YearTrendWrapper />
                 <MakeWrapper />
@@ -68,6 +59,10 @@ const DashboardForeground = ({
             </div>
         </VelocityComponent>
     )
-}
+})
 
-export default connect(mapStateToProps)(DashboardForeground);
+export default DashboardForeground;
+
+DashboardForeground.contextTypes = {
+    store: React.PropTypes.object
+};

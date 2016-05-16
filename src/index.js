@@ -3,31 +3,16 @@ import normalize from 'normalize.css'
 import 'babel-polyfill';
 import React from 'react';
 import { render } from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import {responsiveStoreEnhancer} from 'redux-responsive';
-import { runSaga } from 'redux-saga';
-import { Provider } from 'react-redux';
-import NhtsaApp from './containers/NhtsaApp/NhtsaApp';
-import rootReducer from './reducers';
-import rootSaga from './sagas';
+import NhtsaApp from './components/NhtsaApp/NhtsaApp';
+import Provider from './stores/Provider';
+import store from './stores/UiState';
+import { oauthInit } from './config/oauth';
+import { server } from './config/zoomdata-connections/development';
+import { map } from 'mobx';
+import controller from './zoomdata';
 
-const sagaMiddleware = createSagaMiddleware();
-const createStoreWithMiddleware = compose(
-    responsiveStoreEnhancer,
-    applyMiddleware(sagaMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
-)(createStore);
-
-function configureStore(initialState) {
-    const store = createStoreWithMiddleware(rootReducer, initialState);
-
-    return store;
-}
-
-const store = configureStore();
-
-sagaMiddleware.run(rootSaga);
+const { oauthOptions } = server;
+oauthInit(oauthOptions); // Authenticate against Zoomdata
 
 const root = document.getElementById('root');
 
@@ -37,3 +22,5 @@ render(
     </Provider>,
     root
 );
+
+

@@ -1,9 +1,8 @@
 import { start as oauthStart, parseCredentials } from 'oauth2-implicit'
 import { tapValue, clearLocationHash } from 'oauth2-implicit/build/utils';
-import ZoomdataSDK from 'ZoomdataSDK';
-import { server } from './zoomdata-connections/production';
+import { server } from '../zoomdata-connections/development';
 
-const {credentials, application, oauthOptions} = server;
+const { credentials, application } = server;
 
 const oauthFinish = () => {
     // isOauthRedirect :: String -> Bool
@@ -23,29 +22,18 @@ const oauthFinish = () => {
 
     if (isOauthRedirect(location.hash)) {
         const oauthCredentials = extractCredentials(location.hash.slice(1));
-        credentials.access_token = oauthCredentials.accessToken;
+        credentials.set('access_token', oauthCredentials.accessToken);
         return oauthCredentials;
     } else {
         return null;
     }
 };
 
-const oauthInit = (options) => {
+export const oauthInit = (options) => {
     oauthFinish() || oauthStart(options);
 };
 
-oauthInit(oauthOptions);
-
-function initClient() {
-    return ZoomdataSDK.createClient({
-        credentials: credentials,
-        application: application
-    });
-}
-
-export const createClient = initClient;
 export const secure = application.secure;
 export const host = application.host;
 export const port = application.port;
 export const path = application.path;
-export const access_token = credentials.access_token;

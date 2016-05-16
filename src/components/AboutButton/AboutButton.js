@@ -1,11 +1,10 @@
 import styles from './AboutButton.css';
 
 import React from 'react';
-import { setAboutVisibilityOption } from '../../actions';
-import { connect } from 'react-redux';
+import { observer } from 'mobx-react';
 import image from '../../images/about-button.png';
 
-const AboutButton = ({dispatch}) => {
+const AboutButton = observer((props, { store }) => {
     return (
         <img
             className={
@@ -17,11 +16,15 @@ const AboutButton = ({dispatch}) => {
             onClick={
                 (e) => {
                     e.stopPropagation();
-                    dispatch(setAboutVisibilityOption('OPEN_ABOUT'));
+                    store.controls.aboutVisibility = 'OPEN_ABOUT';
                 }
             }
         />
     )
-};
+});
 
-export default connect()(AboutButton);
+export default AboutButton;
+
+AboutButton.contextTypes = {
+    store: React.PropTypes.object
+};

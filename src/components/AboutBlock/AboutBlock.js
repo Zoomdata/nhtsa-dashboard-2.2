@@ -6,9 +6,11 @@ import AboutDescription from '../AboutDescription/AboutDescription';
 import ZDWebsiteButton from '../ZDWebsiteButton/ZDWebsiteButton';
 import CloseAboutButton from '../CloseAboutButton/CloseAboutButton';
 import { VelocityComponent } from 'velocity-react';
+import { observer } from 'mobx-react';
 
-const AboutBlock = ({aboutVisibility}) => {
+const AboutBlock = observer((props, { store }) => {
     let animationProps;
+    const { aboutVisibility } = store.controls;
     if (aboutVisibility === 'CLOSE_ABOUT') {
         animationProps = {
             animation: {
@@ -39,6 +41,10 @@ const AboutBlock = ({aboutVisibility}) => {
             </div>
         </VelocityComponent>
     )
-};
+});
 
 export default AboutBlock;
+
+AboutBlock.contextTypes = {
+    store: React.PropTypes.object
+};

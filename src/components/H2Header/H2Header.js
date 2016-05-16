@@ -1,14 +1,8 @@
 import styles from './H2Header.css';
 
 import React from 'react';
-import { connect } from 'react-redux';
-
-const mapStateToProps = (state) => {
-    return {
-        metricData: state.chartData.metricData.data,
-        metricTotalsData: state.chartData.metricTotalsData.data
-    }
-};
+import store from '../../stores/UiState';
+import { observer } from 'mobx-react';
 
 const addCommas = (nStr) => {
     nStr += '';
@@ -22,10 +16,9 @@ const addCommas = (nStr) => {
     return x1 + x2;
 };
 
-const H2Header = ({
-    metricData,
-    metricTotalsData,
-}) => {
+function H2Header(props, { store }) {
+    const metricData = store.chartData.metricData.get('data');
+    const metricTotalsData = store.chartData.metricTotalsData.get('data');
     const data = !metricData ? 0 : metricData[0].current.count;
     const totalsData = !metricTotalsData ? 0 : metricTotalsData[0].current.count;
     return (
@@ -37,4 +30,8 @@ const H2Header = ({
     )
 };
 
-export default connect(mapStateToProps)(H2Header);
+H2Header.contextTypes = {
+    store: React.PropTypes.object
+};
+
+export default H2Header;

@@ -2,8 +2,9 @@ import styles from './OverlayTitle.css';
 
 import React, { Component } from 'react';
 import OverlayDescription from '../OverlayDescription/OverlayDescription';
+import { observer } from 'mobx-react';
 
-class OverlayTitle extends Component {
+@observer class OverlayTitle extends Component {
     render() {
         const { makeWrapperDimensions, aboutVisibility, hideOverlay } = this.props;
         const overlayTitleStyle = {
@@ -37,7 +38,7 @@ class OverlayTitle extends Component {
                 VEHICLE
                 <br />
                 COMPLAINTS
-                <OverlayDescription />
+                <OverlayDescription hideOverlay={hideOverlay} />
             </div>
         )
     }

@@ -3,21 +3,14 @@ import styles from './Overlay.css';
 import React, { Component } from 'react';
 import OverlaySplat from '../OverlaySplat/OverlaySplat';
 import OverlayTitle from '../OverlayTitle/OverlayTitle';
-import { connect } from 'react-redux';
 import { VelocityComponent } from 'velocity-react';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        makeWrapperDimensions: state.layout.makeWrapperDimensions,
-        overlaySplatDimensions: state.layout.overlaySplatDimensions,
-        hideOverlay: state.hideOverlay,
-        aboutVisibility: state.aboutVisibility
-    }
-};
-
-class Overlay extends Component {
+@observer export default class Overlay extends Component {
     render() {
-        const { makeWrapperDimensions, overlaySplatDimensions, aboutVisibility, hideOverlay } = this.props;
+        const { makeWrapperDimensions, overlaySplatDimensions } = this.context.store.layout;
+        const { aboutVisibility }  = this.context.store.controls;
+        const { hideOverlay }  = this.context.store.controls;
         let animationProps;
         if (hideOverlay) {
             animationProps = {
@@ -85,5 +78,6 @@ class Overlay extends Component {
     }
 };
 
-export default connect(mapStateToProps)(Overlay);
-
+Overlay.contextTypes = {
+    store: React.PropTypes.object
+};

@@ -2,61 +2,43 @@ import styles from './Trend.css';
 
 import React from 'react';
 import TrendChart from '../TrendChart/TrendChart';
-import { connect } from 'react-redux';
-import { setYear, setFilterStatus, changeComponentDataQuery, changeMetricDataQuery, changeStateDataQuery, changeGridDataQuery } from '../../actions';
-import { ComponentDataQuery, MetricDataQuery, StateDataQuery, GridDataQuery } from '../../sagas';
+import store from '../../stores/UiState';
+import { fetchGridData, controller } from '../../zoomdata/';
 import baseFindIndex from 'lodash._basefindindex';
 import { gridDetails } from '../../config/app-constants';
+import { observer } from 'mobx-react';
+import { extendObservable } from 'mobx';
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.chartData.yearData.data,
-        filterStatus: state.chartFilters.filterStatus
-    }
-};
-
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onBrushEnd: (selectedYears, changeFilterStatus) => {
-            gridDetails.offset = 0;
-            gridDetails.hasNextDetails = true;
-            const filter = {
-                path: 'year_string',
-                operation: 'IN',
-                value: selectedYears
-            };
-            dispatch(setYear(selectedYears));
-            ComponentDataQuery.filters.remove(filter.path);
-
-            ComponentDataQuery.filters.add(filter);
-            dispatch(changeComponentDataQuery());
-            MetricDataQuery.filters.remove(filter.path);
-            MetricDataQuery.filters.add(filter);
-            dispatch(changeMetricDataQuery());
-            const yearFilterIndex = baseFindIndex(GridDataQuery.restrictions, function(filter) {
-                return filter.path === 'year_string';
-            });
-            yearFilterIndex >= 0 ? GridDataQuery.restrictions.splice(yearFilterIndex, 1) : null;
-            GridDataQuery.restrictions.push(filter);
-            dispatch(changeGridDataQuery());
-            changeFilterStatus ?
-                dispatch(setFilterStatus('FILTERS_APPLIED')) :
-                null
-            if (!StateDataQuery) {
-                return;
-            }
-            StateDataQuery.filters.remove(filter.path);
-            StateDataQuery.filters.add(filter);
-            dispatch(changeStateDataQuery());
-        }
-    }
+const onBrushEnd = (selectedYears, changeFilterStatus) => {
+    gridDetails.offset = 0;
+    gridDetails.hasNextDetails = true;
+    const filter = {
+        path: 'year_string',
+        operation: 'IN',
+        value: selectedYears
+    };
+    store.chartFilters.set('year', selectedYears);
+    controller.get('componentDataQuery').filters.remove(filter.path);
+    controller.get('componentDataQuery').filters.add(filter);
+    controller.get('metricDataQuery').filters.remove(filter.path);
+    controller.get('metricDataQuery').filters.add(filter);
+    controller.get('stateDataQuery').filters.remove(filter.path);
+    controller.get('stateDataQuery').filters.add(filter);
+    const gridDataQuery = controller.get('gridDataQuery').queryConfig;
+    const yearFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+        return filter.path === 'year_string';
+    });
+    yearFilterIndex >= 0 ? gridDataQuery.restrictions.splice(yearFilterIndex, 1) : null;
+    gridDataQuery.restrictions.push(filter);
+    controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
+    changeFilterStatus ?
+        (store.chartFilters.set('filterStatus', 'FILTERS_APPLIED')) :
+        null
 }
 
-const Trend = ({
-    data,
-    filterStatus,
-    onBrushEnd
-}) => {
+function Trend(props, { store }) {
+    const data = store.chartData.yearData.get('data');
+    const filterStatus = store.chartFilters.get('filterStatus');
     return (
         <div
             className={styles.root}
@@ -70,4 +52,7 @@ const Trend = ({
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Trend);
+Trend.contextTypes = {
+    store: React.PropTypes.object
+};
+export default observer(Trend);

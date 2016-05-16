@@ -1,13 +1,13 @@
 import styles from './TabLinks.css';
 
 import React from 'react';
-import ActiveContainer from '../../containers/Active/Active';
+import Active from '../../components/Active/Active';
 
 const TabLinks = () => {
     return (
         <ul className={styles.root}>
-            <ActiveContainer chart="scatterplot" />
-            <ActiveContainer chart="map" />
+            <Active chart="scatterplot" />
+            <Active chart="map" />
         </ul>
     )
 }

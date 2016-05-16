@@ -1,16 +1,10 @@
 import styles from './OverlayDescription.css';
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { VelocityComponent } from 'velocity-react';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        hideOverlay: state.hideOverlay
-    }
-};
-
-class OverlayDescription extends Component {
+@observer export default class OverlayDescription extends Component {
     render() {
         const { hideOverlay } = this.props;
         let animationProps;
@@ -43,5 +37,3 @@ class OverlayDescription extends Component {
         )
     }
 };
-
-export default connect(mapStateToProps)(OverlayDescription);

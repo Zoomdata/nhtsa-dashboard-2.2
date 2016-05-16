@@ -2,16 +2,14 @@ import styles from './Map.css';
 
 import React from 'react';
 import MapChart from '../MapChart/MapChart';
-import { connect } from 'react-redux';
+import store from '../../stores/UiState';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.chartData.stateData.data,
-        browser: state.browser
-    }
-};
-
-const Map = ({data}) => {
+const Map = observer(function(props, { store }) {
+    const data = store.chartData.stateData.get('data');
+    store.browser.width;
+    store.browser.height;
+    store.controls.activeTab;
     return (
         <div
             className={styles.root}
@@ -21,6 +19,10 @@ const Map = ({data}) => {
             />
         </div>
     )
-};
+});
 
-export default connect(mapStateToProps)(Map);
+export default Map;
+
+Map.contextTypes = {
+    store: React.PropTypes.object
+};

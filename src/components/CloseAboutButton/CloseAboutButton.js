@@ -1,10 +1,9 @@
 import styles from './CloseAboutButton.css';
 
 import React, { Component } from 'react';
-import { setAboutVisibilityOption } from '../../actions';
-import { connect } from 'react-redux';
+import { observer } from 'mobx-react';
 
-const CloseAboutButton = ({dispatch}) => {
+const CloseAboutButton = observer((props, { store }) => {
     return (
         <div
             className={
@@ -13,12 +12,16 @@ const CloseAboutButton = ({dispatch}) => {
             onClick={
                 (e) => {
                     e.stopPropagation();
-                    dispatch(setAboutVisibilityOption('CLOSE_ABOUT'));
+                    store.controls.aboutVisibility = 'CLOSE_ABOUT';
                 }
             }
         >Return
         </div>
     )
-};
+});
 
-export default connect()(CloseAboutButton);
+export default CloseAboutButton;
+
+CloseAboutButton.contextTypes = {
+    store: React.PropTypes.object
+};

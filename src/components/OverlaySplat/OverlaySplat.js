@@ -2,19 +2,18 @@ import styles from './OverlaySplat.css'
 
 import React, { Component } from 'react';
 import { getWidth } from '../../utilities';
-import { setOverlaySplatDimensions } from '../../actions';
-import { connect } from 'react-redux';
 import image from '../../images/overlay_splat4.gif';
+import { observer } from 'mobx-react';
 
-class OverlaySplat extends Component {
+@observer export default class OverlaySplat extends Component {
     setDimensions(comp) {
             if (comp !== null) {
                 const el = comp;
                 const width = getWidth(el);
-                const { overlaySplatDimensions, dispatch } = this.props;
+                const { overlaySplatDimensions } = this.props;
 
                 if (overlaySplatDimensions.width !== width) {
-                    dispatch(setOverlaySplatDimensions(width));
+                    overlaySplatDimensions.width = width;
                 }
             }
     }
@@ -63,5 +62,3 @@ class OverlaySplat extends Component {
         )
     }
 }
-
-export default connect()(OverlaySplat);

@@ -2,16 +2,14 @@ import styles from './ComponentScatterplot.css';
 
 import React from 'react';
 import ScatterplotChart from '../ScatterplotChart/ScatterplotChart';
-import { connect } from 'react-redux';
+import store from '../../stores/UiState';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.chartData.componentData.data,
-        browser: state.browser
-    }
-};
-
-const ComponentScatterplot = ({data}) => {
+function ComponentScatterplot(props, { store }) {
+    const data = store.chartData.componentData.get('data');
+    store.browser.width;
+    store.browser.height;
+    store.controls.activeTab;
     return (
         <div className={styles.root}
         >
@@ -22,4 +20,9 @@ const ComponentScatterplot = ({data}) => {
     )
 };
 
-export default connect(mapStateToProps)(ComponentScatterplot);
+ComponentScatterplot.contextTypes = {
+    store: React.PropTypes.object
+};
+
+export default observer(ComponentScatterplot);
+

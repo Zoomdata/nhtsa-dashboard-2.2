@@ -1,30 +1,24 @@
 import styles from './GridContainer.css';
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import store from '../../stores/UiState';
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid/dist/styles/ag-grid.css';
 import './src/agGridStyles/theme-dark.css';
 import ColDefFactory from './src/ColDefFactory';
-import { changeGridDataQuery } from '../../actions';
 import { getWidth, getHeight } from '../../utilities';
 import { gridDetails } from '../../config/app-constants';
+import { observer } from 'mobx-react';
+import { fetchGridData, controller } from '../../zoomdata';
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.chartData.gridData.data
-    }
-};
-
-class GridContainer extends Component {
+@observer export default class GridContainer extends Component {
     onGridReady(params) {
-        const { dispatch } = this.props;
         this.api = params.api;
         this.columnApi = params.columnApi;
         const gridBody = document.getElementsByClassName('ag-body-viewport')[0];
         gridBody.addEventListener('scroll', function() {
             if (gridBody.scrollHeight - getHeight(gridBody) - gridBody.scrollTop < 200 && gridDetails.hasNextDetails && !gridDetails.loadingDetails) {
-                dispatch(changeGridDataQuery());
+                fetchGridData(controller.get('gridDataQuery').queryConfig);
             }
         });
     }
@@ -32,7 +26,7 @@ class GridContainer extends Component {
         if (!this.api) {
             return;
         }
-        const data = this.props.data;
+        const data = this.context.store.chartData.gridData.get('data');
         this.api.setRowData(data);
         this.api.sizeColumnsToFit()
     }
@@ -43,6 +37,7 @@ class GridContainer extends Component {
         this.columnDefs = new ColDefFactory().createColDefs();
     }
     render() {
+        const data = this.context.store.chartData.gridData.get('data');
         const gridGroupStyle = {
             height: '100%'
         };
@@ -70,4 +65,6 @@ class GridContainer extends Component {
     }
 };
 
-export default connect(mapStateToProps)(GridContainer);
+GridContainer.contextTypes = {
+    store: React.PropTypes.object
+};

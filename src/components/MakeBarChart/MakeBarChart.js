@@ -2,70 +2,53 @@ import styles from './MakeBarChart.css';
 
 import React from 'react';
 import BarChart from '../BarChart/BarChart';
-import { connect } from 'react-redux';
-import { setMake, changeModelDataQuery, changeComponentDataQuery, changeMetricDataQuery, changeStateDataQuery, changeGridDataQuery, setHideOverlay } from '../../actions';
-import { ModelDataQuery, ComponentDataQuery, MetricDataQuery, StateDataQuery, GridDataQuery } from '../../sagas';
+import { fetchGridData, controller } from '../../zoomdata/';
+import store from '../../stores/UiState';
 import baseFindIndex from 'lodash._basefindindex';
 import { gridDetails } from '../../config/app-constants';
+import { observer } from 'mobx-react';
+import { extendObservable } from 'mobx';
 
-const mapStateToProps = (state) => {
-    return {
-        data: state.chartData.makeData.data,
-        make: state.chartFilters.make,
-        hideOverlay: state.hideOverlay,
-        browser: state.browser
-    }
-};
+const onClick = (make, hideOverlay) => {
+    gridDetails.offset = 0;
+    gridDetails.hasNextDetails = true;
+    const filter = {
+        path: 'make',
+        operation: 'IN',
+        value: [make]
+    };
+    store.chartFilters.set('make', make);
+    controller.get('modelDataQuery').filters.remove(filter.path);
+    controller.get('modelDataQuery').filters.add(filter);
+    controller.get('componentDataQuery').filters.remove(filter.path);
+    controller.get('componentDataQuery').filters.remove('model');
+    controller.get('componentDataQuery').filters.add(filter);
+    controller.get('metricDataQuery').filters.remove(filter.path);
+    controller.get('metricDataQuery').filters.remove('model');
+    controller.get('metricDataQuery').filters.add(filter);
+    controller.get('stateDataQuery').filters.remove(filter.path);
+    controller.get('stateDataQuery').filters.remove('model');
+    controller.get('stateDataQuery').filters.add(filter);
+    const gridDataQuery = controller.get('gridDataQuery').queryConfig;
+    const makeFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+        return filter.path === 'make';
+    });
+    makeFilterIndex >= 0 ? gridDataQuery.restrictions.splice(makeFilterIndex, 1) : null;
+    gridDataQuery.restrictions.push(filter);
+    controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
+    hideOverlay ? (store.controls.hideOverlay = true) : null;
+}
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        onClick: (make, hideOverlay) => {
-            gridDetails.offset = 0;
-            gridDetails.hasNextDetails = true;
-            const filter = {
-                path: 'make',
-                operation: 'IN',
-                value: [make]
-            };
-            dispatch(setMake(make));
-            ModelDataQuery.filters.remove(filter.path);
-            ModelDataQuery.filters.add(filter);
-            dispatch(changeModelDataQuery());
-            ComponentDataQuery.filters.remove(filter.path);
-            ComponentDataQuery.filters.remove('model');
-            ComponentDataQuery.filters.add(filter);
-            dispatch(changeComponentDataQuery());
-            MetricDataQuery.filters.remove(filter.path);
-            MetricDataQuery.filters.remove('model');
-            MetricDataQuery.filters.add(filter);
-            dispatch(changeMetricDataQuery());
-            const makeFilterIndex = baseFindIndex(GridDataQuery.restrictions, function(filter) {
-                return filter.path === 'make';
-            });
-            makeFilterIndex >= 0 ? GridDataQuery.restrictions.splice(makeFilterIndex, 1) : null;
-            GridDataQuery.restrictions.push(filter);
-            dispatch(changeGridDataQuery());
-            hideOverlay ? dispatch(setHideOverlay()) : null;
-            if (!StateDataQuery) {
-                return;
-            }
-            StateDataQuery.filters.remove(filter.path);
-            StateDataQuery.filters.remove('model');
-            StateDataQuery.filters.add(filter);
-            dispatch(changeStateDataQuery());
-        }
-    }
-};
-
-const MakeBarChart = ({
-    data,
-    make,
-    hideOverlay,
-    onClick
-}) => {
+function MakeBarChart(props, { store }) {
     const makeBarChartStyle = {
         zIndex: 1
     };
+    const { browser } = store;
+    const { hideOverlay } = store.controls;
+    browser.height;
+    browser.width;
+    const data = store.chartData.makeData.get('data');
+    const make = store.chartFilters.get('make');
     return (
         <div
             className={styles.root}
@@ -82,4 +65,11 @@ const MakeBarChart = ({
     )
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MakeBarChart);
+MakeBarChart.contextTypes = {
+    store: React.PropTypes.object
+};
+
+export default observer(MakeBarChart);
+
+
+

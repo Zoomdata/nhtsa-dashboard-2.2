@@ -9,7 +9,7 @@ export default class GaugeChart extends Component {
         return false;
     }
     componentWillReceiveProps(nextProps) {
-        if (!nextProps.data) {
+        if (!nextProps.data || !nextProps.max) {
             return;
         }
         this.updateChart(nextProps);

@@ -4,33 +4,25 @@ import React , { Component } from 'react';
 import MakeHeader from '../MakeHeader/MakeHeader';
 import MakeBarChart from '../MakeBarChart/MakeBarChart';
 import { getWidth, getHeight } from '../../utilities';
-import { setMakeWrapperDimensions } from '../../actions';
-import { connect } from 'react-redux';
+import { observer } from 'mobx-react';
 
-const mapStateToProps = (state) => {
-    return {
-        browser: state.browser
-    }
-};
-
-class MakeWrapper extends Component {
+@observer export default class MakeWrapper extends Component {
     setDimensions(comp) {
         if (comp !== null) {
-            const { dispatch } = this.props;
             const el = comp;
             const rect = el.getBoundingClientRect();
-            const makeWrapperDimensions = {
-                width: getWidth(el),
-                height: getHeight(el),
-                offsetTop: rect.top + document.body.scrollTop,
-                offsetLeft: rect.left + document.body.scrollLeft
-            }
-            const { width, height, offsetTop, offsetLeft } = makeWrapperDimensions;
-            dispatch(setMakeWrapperDimensions(width, height, offsetTop, offsetLeft));
+            const { makeWrapperDimensions } = this.context.store.layout;
+            makeWrapperDimensions.width =  getWidth(el),
+            makeWrapperDimensions.height = getHeight(el),
+            makeWrapperDimensions.offsetTop = rect.top + document.body.scrollTop,
+            makeWrapperDimensions.offsetLeft = rect.left + document.body.scrollLeft
         }
     }
     render() {
-        const { hideOverlay } = this.props;
+        const { browser } = this.context.store;
+        browser.width;
+        browser.height;
+        const { hideOverlay } = this.context.store.controls;
         return (
             <div
                 className={styles.root}
@@ -45,4 +37,7 @@ class MakeWrapper extends Component {
     }
 }
 
-export default connect(mapStateToProps)(MakeWrapper);
+MakeWrapper.contextTypes = {
+    store: React.PropTypes.object
+};
+
