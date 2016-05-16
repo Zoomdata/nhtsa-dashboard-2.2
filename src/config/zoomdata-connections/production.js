@@ -1,6 +1,7 @@
 import { map } from 'mobx';
 
 export const server = {
+    credentials: map(),
     application: {
         secure: true,
         host: 'preview.zoomdata.com',
@@ -14,5 +15,3 @@ export const server = {
         scope: ['read']
     }
 };
-
-server.credentials = map();

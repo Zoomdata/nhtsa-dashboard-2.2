@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import normalize from 'normalize.css'
+import normalize from 'normalize.css';
 /* eslint-enable no-unused-vars */
 import 'babel-polyfill';
 import React from 'react';
