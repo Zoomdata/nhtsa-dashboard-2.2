@@ -1,6 +1,6 @@
 import { map } from 'mobx';
 import ZoomdataSDK from 'zoomdata-client';
-import { server } from '../config/zoomdata-connections/development';
+import { server } from '../config/zoomdata-connections/production';
 import * as makeData from '../config/queries/makeData';
 import * as yearData from '../config/queries/yearData';
 import * as modelData from '../config/queries/modelData';
