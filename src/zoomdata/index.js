@@ -99,7 +99,7 @@ controller.observe(function(props) {
 
 function getPreviewEndpointURL() {
     let endpointURL = secure ? 'https://' : 'http://';
-    endpointURL += port ? host + ':' + port + path + '/service/stream/preview' : host + ':' + port + path + '/service/stream/preview';
+    endpointURL += port ? host + ':' + port + path + '/service/stream/preview' : host + port + path + '/service/stream/preview';
     endpointURL += '?access_token=' + credentials.get('access_token');
 
     return endpointURL;
