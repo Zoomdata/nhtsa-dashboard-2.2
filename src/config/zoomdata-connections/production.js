@@ -5,7 +5,6 @@ export const server = {
     application: {
         secure: true,
         host: 'preview.zoomdata.com',
-        port: 8443,
         path: '/zoomdata'
     },
     oauthOptions: {
