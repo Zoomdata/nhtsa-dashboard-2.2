@@ -4,7 +4,7 @@ import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { fetchGridData, controller } from '../../zoomdata/';
 import store from '../../stores/UiState';
-import baseFindIndex from 'lodash._basefindindex';
+import remove from 'lodash.remove';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
 
@@ -17,6 +17,7 @@ const onClick = (make, hideOverlay) => {
         value: [make]
     };
     store.chartFilters.set('make', make);
+    store.chartFilters.delete('model');
     controller.get('modelDataQuery').filters.remove(filter.path);
     controller.get('modelDataQuery').filters.add(filter);
     controller.get('componentDataQuery').filters.remove(filter.path);
@@ -29,14 +30,12 @@ const onClick = (make, hideOverlay) => {
     controller.get('stateDataQuery').filters.remove('model');
     controller.get('stateDataQuery').filters.add(filter);
     const gridDataQuery = controller.get('gridDataQuery').queryConfig;
-    const makeFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+    remove(gridDataQuery.restrictions, function(filter) {
         return filter.path === 'make';
     });
-    const modelFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+    remove(gridDataQuery.restrictions, function(filter) {
         return filter.path === 'model';
     });
-    makeFilterIndex >= 0 ? gridDataQuery.restrictions.splice(makeFilterIndex, 1) : null;
-    modelFilterIndex >= 0 ? gridDataQuery.restrictions.splice(modelFilterIndex, 1) : null;
     gridDataQuery.restrictions.push(filter);
     controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
     hideOverlay ? (store.controls.hideOverlay = true) : null;

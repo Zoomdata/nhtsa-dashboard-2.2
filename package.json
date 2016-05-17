@@ -54,6 +54,7 @@
     "exports-loader": "^0.6.3",
     "imports-loader": "^0.6.5",
     "lodash.mapkeys": "^4.2.0",
+    "lodash.remove": "^4.5.0",
     "mobx": "^2.1.4",
     "mobx-react": "^3.0.5",
     "normalize.css": "^4.1.1",

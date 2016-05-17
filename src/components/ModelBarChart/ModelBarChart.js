@@ -4,7 +4,7 @@ import React from 'react';
 import BarChart from '../BarChart/BarChart';
 import { fetchGridData, controller } from '../../zoomdata/';
 import store from '../../stores/UiState';
-import baseFindIndex from 'lodash._basefindindex';
+import remove from 'lodash.remove';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
 
@@ -24,10 +24,9 @@ const onClick = (model) => {
     controller.get('stateDataQuery').filters.remove(filter.path);
     controller.get('stateDataQuery').filters.add(filter);
     const gridDataQuery = controller.get('gridDataQuery').queryConfig;
-    const modelFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+    remove(gridDataQuery.restrictions, function(filter) {
         return filter.path === 'model';
     });
-    modelFilterIndex >= 0 ? gridDataQuery.restrictions.splice(modelFilterIndex, 1) : null;
     gridDataQuery.restrictions.push(filter);
     controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
     store.chartFilters.set('filterStatus', 'FILTERS_APPLIED');

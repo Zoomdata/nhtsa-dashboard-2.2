@@ -4,7 +4,7 @@ import React from 'react';
 import TrendChart from '../TrendChart/TrendChart';
 import store from '../../stores/UiState';
 import { fetchGridData, controller } from '../../zoomdata/';
-import baseFindIndex from 'lodash._basefindindex';
+import remove from 'lodash.remove';
 import { gridDetails } from '../../config/app-constants';
 import { observer } from 'mobx-react';
 
@@ -24,10 +24,9 @@ const onBrushEnd = (selectedYears, changeFilterStatus) => {
     controller.get('stateDataQuery').filters.remove(filter.path);
     controller.get('stateDataQuery').filters.add(filter);
     const gridDataQuery = controller.get('gridDataQuery').queryConfig;
-    const yearFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+    remove(gridDataQuery.restrictions, function(filter) {
         return filter.path === 'year_string';
     });
-    yearFilterIndex >= 0 ? gridDataQuery.restrictions.splice(yearFilterIndex, 1) : null;
     gridDataQuery.restrictions.push(filter);
     controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
     changeFilterStatus ?
