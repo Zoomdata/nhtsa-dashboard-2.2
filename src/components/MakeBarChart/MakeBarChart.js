@@ -32,7 +32,11 @@ const onClick = (make, hideOverlay) => {
     const makeFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
         return filter.path === 'make';
     });
+    const modelFilterIndex = baseFindIndex(gridDataQuery.restrictions, function(filter) {
+        return filter.path === 'model';
+    });
     makeFilterIndex >= 0 ? gridDataQuery.restrictions.splice(makeFilterIndex, 1) : null;
+    modelFilterIndex >= 0 ? gridDataQuery.restrictions.splice(modelFilterIndex, 1) : null;
     gridDataQuery.restrictions.push(filter);
     controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
     hideOverlay ? (store.controls.hideOverlay = true) : null;
