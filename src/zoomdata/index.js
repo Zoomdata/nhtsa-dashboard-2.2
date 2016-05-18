@@ -50,7 +50,7 @@ controller.observe(function(props) {
         props.object.set('runQuery', function (query, queryStore) {
             this.get('client').run(query).then(function (thread) {
                 thread.on('thread:message', function (data) {
-                    queryStore.set('data', data);
+                    queryStore.set('data', data.slice());
                 })
             })
         }.bind(props.object));
@@ -122,11 +122,11 @@ export function fetchGridData(query) {
     }).then(function (data) {
         gridDetails.hasNextDetails = data.hasNext;
         if (gridDetails.offset < gridDetails.limit) {
-            store.chartData.gridData.set('data', data.documents.map(function(d) { return mapKeys(d, function(v, k) { return camelCase(k)})}));
+            store.chartData.gridData.set('data', data.documents.map(function(d) { return mapKeys(d, function(v, k) { return camelCase(k)})}).slice());
         } else {
             const newData = data.documents.map(function(d) { return mapKeys(d, function(v, k) { return camelCase(k)})})
             const oldData = store.chartData.gridData.get('data');
-            store.chartData.gridData.set('data', oldData.concat(newData));
+            store.chartData.gridData.set('data', oldData.concat(newData).slice());
         }
         gridDetails.offset += gridDetails.limit;
         gridDetails.loadingDetails = false;
