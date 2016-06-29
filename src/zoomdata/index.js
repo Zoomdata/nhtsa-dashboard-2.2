@@ -19,16 +19,13 @@ const { credentials, application } = server;
 
 export let controller = map();
 
-credentials.observe(function(props) {
-    if (props.name === 'access_token' && props.type === 'add') {
-        ZoomdataSDK.createClient({
-            credentials: credentials.toJs(),
-            application: application
-        }).then(function(client) {
-            this.set('client', client)
-        }.bind(controller))
-    }
-});
+ZoomdataSDK.createClient({
+    credentials: credentials.toJs(),
+    application: application
+}).then(function(client) {
+    this.set('client', client)
+}.bind(controller));
+
 
 controller.observe(function(props) {
     if (props.name === 'client' && props.type === 'add') {
@@ -100,7 +97,7 @@ controller.observe(function(props) {
 function getPreviewEndpointURL() {
     let endpointURL = secure ? 'https://' : 'http://';
     endpointURL += port ? host + ':' + port + path + '/service/stream/preview' : host + path + '/service/stream/preview';
-    endpointURL += '?access_token=' + credentials.get('access_token');
+    endpointURL += '?key=' + '57740838e4b0678411040887';
 
     return endpointURL;
 }

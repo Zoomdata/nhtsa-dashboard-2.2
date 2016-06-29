@@ -4,7 +4,7 @@ export const server = {
     credentials: map(),
     application: {
         secure: true,
-        host: 'preview.zoomdata.com',
+        host: 'plive.zoomdata.com',
         path: '/zoomdata'
     },
     oauthOptions: {
@@ -14,3 +14,7 @@ export const server = {
         scope: ['read']
     }
 };
+
+server.credentials = map({
+    key: '57740838e4b0678411040887'
+});

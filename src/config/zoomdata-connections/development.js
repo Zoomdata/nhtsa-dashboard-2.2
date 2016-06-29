@@ -15,4 +15,6 @@ export const server = {
     }
 };
 
-server.credentials = map();
+server.credentials = map({
+    key: '5774014c300451d7fd295f33'
+});
